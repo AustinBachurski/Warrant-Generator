@@ -15,13 +15,13 @@ internal struct OfficerGrammar : IReplacementData
 
     private string CorrectGrammar(char c)
     {
-        switch (c)
+        switch (char.ToUpper(c))
         {
-            case 'a':
-            case 'e':
-            case 'i':
-            case 'o':
-            case 'u':
+            case 'A':
+            case 'E':
+            case 'I':
+            case 'O':
+            case 'U':
                 return "an";
             default:
                 return "a";
