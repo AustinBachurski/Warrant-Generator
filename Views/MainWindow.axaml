@@ -1,0 +1,161 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:WarrantGenerator.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="WarrantGenerator.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico" 
+        Title="WarrantGenerator">
+	<!-- Update the Icon! -->
+
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+	<DockPanel>
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="_File">
+				<MenuItem Header="_New Warrant"/>
+				<Separator/>
+				<MenuItem Header="_Continue Existing Warrant"/>
+				<Separator/>
+				<MenuItem Header="_Exit"/>
+			</MenuItem>
+			<MenuItem Header="_Edit">
+				<MenuItem Header="Copy"/>
+				<MenuItem Header="Cut"/>
+				<MenuItem Header="Paste"/>
+			</MenuItem>
+			<MenuItem Header="_Help">
+				<MenuItem Header="_About"/>
+				<MenuItem Header="_Help"/>
+			</MenuItem>
+		</Menu>
+
+		<ScrollViewer>
+			<StackPanel HorizontalAlignment="Left"
+						Margin="10"
+						Spacing="10">
+
+				<TextBlock FontSize="25" FontWeight="Bold" Text="Structure Warrant" />
+
+				<StackPanel>
+					<TextBlock>Organization</TextBlock>
+					<Border BorderBrush="{Binding OrganizationBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding OrganizationText}" />
+					</Border>
+				</StackPanel>
+
+				<StackPanel>
+					<TextBlock Text="Officer Name" />
+					<Border BorderBrush="{Binding OfficerNameBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding OfficerNameText}" />
+					</Border>
+				</StackPanel>
+
+				<StackPanel>
+					<StackPanel Orientation="Horizontal">
+
+						<StackPanel>
+							<TextBlock Text="Officer Title" />
+							<Border BorderBrush="{Binding OfficerTitleBorder}"
+									BorderThickness="2">
+								<ComboBox ItemsSource="{Binding OfficerTitles}"
+										  SelectedItem="{Binding OfficerTitleSelection}"
+										  PlaceholderText="Select Rank">
+								</ComboBox>
+							</Border>
+						</StackPanel>
+
+						<StackPanel VerticalAlignment="Bottom">
+							<Border BorderBrush="{Binding CustomOfficerTitleBorder}"
+									BorderThickness="2">
+								<TextBox Text="{Binding CustomOfficerTitleText}"
+										 IsVisible="{Binding CustomOfficerTitleVisibility}" />
+							</Border>
+						</StackPanel>
+
+						<StackPanel Margin="10, 0, 0, 0">
+							<TextBlock Text="Time with the Organization" />
+							<StackPanel Orientation="Horizontal">
+								<Border BorderBrush="{Binding EmploymentDurationBorder}"
+										BorderThickness="2">
+									<TextBox Text="{Binding EmploymentDurationText}" />
+								</Border>
+								<ComboBox
+									ItemsSource="{Binding DurationTypes}"
+									SelectedItem="{Binding DurationTypeSelection}"
+									SelectedIndex="0">
+								</ComboBox>
+							</StackPanel>
+						</StackPanel>
+
+					</StackPanel>
+				</StackPanel>
+
+				<StackPanel>
+					<TextBlock Text="Target Address" />
+					<Border BorderBrush="{Binding TargetAddressBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding TargetAddressText}" />
+					</Border>
+				</StackPanel>
+
+				<StackPanel>
+					<TextBlock Text="Target Legal Description" />
+					<Border BorderBrush="{Binding TargetDescriptionBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding TargetDescriptionText}"
+								 AcceptsReturn="True"
+								 TextWrapping="Wrap"
+								 Height="60" />
+					</Border>
+				</StackPanel>
+
+				<StackPanel>
+					<TextBlock Text="Reason for Search Warrant" />
+					<Border BorderBrush="{Binding SearchWarrantReasonBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding SearchWarrantReasonText}"
+								 AcceptsReturn="True"
+								 TextWrapping="Wrap"
+								 Height="200" />
+					</Border>
+				</StackPanel>
+
+				<StackPanel>
+					<TextBlock Text="Searchable Property" />
+					<Border BorderBrush="{Binding SearchWarrantContentBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding SearchWarrantContentText}"
+								 AcceptsReturn="True"
+								 TextWrapping="Wrap"
+								 Height="200" />
+					</Border>
+				</StackPanel>
+
+				<StackPanel>
+					<TextBlock Text="Output File Name" />
+					<Border BorderBrush="{Binding OutputFileNameBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding OutputFileNameText}" />
+					</Border>
+					<!-- Need to bind the button for MVVM. -->
+					<Button Command="{Binding GenerateWarrantDocument}"
+							Margin="0, 10, 0, 0"
+							Content="Generate Warrant Document" />
+				</StackPanel>
+
+			</StackPanel>
+		</ScrollViewer>
+
+	</DockPanel>
+
+</Window>
+
