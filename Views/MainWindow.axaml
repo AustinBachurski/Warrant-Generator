@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="WarrantGenerator.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico" 
+        Icon="/Assets/logo.ico" 
         Title="WarrantGenerator">
 	<!-- Update the Icon! -->
 
@@ -41,7 +41,9 @@
 						Margin="10"
 						Spacing="10">
 
-				<TextBlock FontSize="25" FontWeight="Bold" Text="Structure Warrant" />
+				<TextBlock FontSize="25"
+						   FontWeight="Bold"
+						   Text="Structure Warrant" />
 
 				<StackPanel>
 					<TextBlock>Organization</TextBlock>
@@ -91,7 +93,8 @@
 								<ComboBox
 									ItemsSource="{Binding DurationTypes}"
 									SelectedItem="{Binding DurationTypeSelection}"
-									SelectedIndex="0">
+									SelectedIndex="0"
+									VerticalAlignment="Center">
 								</ComboBox>
 							</StackPanel>
 						</StackPanel>
@@ -103,7 +106,8 @@
 					<TextBlock Text="Target Address" />
 					<Border BorderBrush="{Binding TargetAddressBorder}"
 							BorderThickness="2">
-						<TextBox Text="{Binding TargetAddressText}" />
+						<TextBox Name="TargetAddressTextBox"
+								 Text="{Binding TargetAddressText}" />
 					</Border>
 				</StackPanel>
 
@@ -111,7 +115,8 @@
 					<TextBlock Text="Target Legal Description" />
 					<Border BorderBrush="{Binding TargetDescriptionBorder}"
 							BorderThickness="2">
-						<TextBox Text="{Binding TargetDescriptionText}"
+						<TextBox Name="TargetDescriptionTextBox"
+								 Text="{Binding TargetDescriptionText}"
 								 AcceptsReturn="True"
 								 TextWrapping="Wrap"
 								 Height="60" />
@@ -122,7 +127,8 @@
 					<TextBlock Text="Reason for Search Warrant" />
 					<Border BorderBrush="{Binding SearchWarrantReasonBorder}"
 							BorderThickness="2">
-						<TextBox Text="{Binding SearchWarrantReasonText}"
+						<TextBox Name="WarrantReasonTextBox"
+								 Text="{Binding SearchWarrantReasonText}"
 								 AcceptsReturn="True"
 								 TextWrapping="Wrap"
 								 Height="200" />
@@ -133,7 +139,8 @@
 					<TextBlock Text="Searchable Property" />
 					<Border BorderBrush="{Binding SearchWarrantContentBorder}"
 							BorderThickness="2">
-						<TextBox Text="{Binding SearchWarrantContentText}"
+						<TextBox Name="WarrantContentTextBox"
+								 Text="{Binding SearchWarrantContentText}"
 								 AcceptsReturn="True"
 								 TextWrapping="Wrap"
 								 Height="200" />
@@ -147,7 +154,7 @@
 						<TextBox Text="{Binding OutputFileNameText}" />
 					</Border>
 					<!-- Need to bind the button for MVVM. -->
-					<Button Command="{Binding GenerateWarrantDocument}"
+					<Button Command="{Binding GenerateWarrantDocumentCommand}"
 							Margin="0, 10, 0, 0"
 							Content="Generate Warrant Document" />
 				</StackPanel>

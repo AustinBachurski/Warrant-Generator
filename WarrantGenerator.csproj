@@ -15,6 +15,15 @@
   </ItemGroup>
 
   <ItemGroup>
+	  <None Update="Dictionaries/en_US.aff">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Dictionaries/en_US.dic">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.1.4" />
     <PackageReference Include="Avalonia.Desktop" Version="11.1.4" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.4" />
@@ -23,5 +32,6 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.4" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.3.2" />
     <PackageReference Include="DocX" Version="3.0.1" />
+    <PackageReference Include="GHSoftware.Avalonia.SpellChecker" Version="0.3.0" />
   </ItemGroup>
 </Project>

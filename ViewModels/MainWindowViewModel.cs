@@ -1,6 +1,7 @@
 ﻿using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System;
 using Warrant_Generator.DTOs;
 using WarrantGenerator.Document;
 using WarrantGenerator.DTOs;
@@ -18,7 +19,7 @@ public partial class MainWindowViewModel : ObservableObject
     private IBrush _organizationBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _organizationText = string.Empty;
+    private string _organizationText = Environment.GetEnvironmentVariable("ORGANIZATION") ?? string.Empty;
 
     [ObservableProperty]
     private IBrush _officerNameBorder = Brushes.Transparent;
@@ -137,7 +138,7 @@ public partial class MainWindowViewModel : ObservableObject
         OutputFileNameBorder = Brushes.Transparent;
     }
 
-    public IReplacementData[] AssembleData()
+    private IReplacementData[] AssembleData()
     {
         IReplacementData[] data =
         {

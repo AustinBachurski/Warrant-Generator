@@ -1,12 +1,32 @@
 using Avalonia.Controls;
+using Avalonia.SpellChecker;
 
-namespace WarrantGenerator.Views
+namespace WarrantGenerator.Views;
+
+public partial class MainWindow : Window
 {
-    public partial class MainWindow : Window
+    private readonly TextBoxSpellChecker _spellChecker;
+
+    public MainWindow()
     {
-        public MainWindow()
+        InitializeComponent();
+
+        _spellChecker = new TextBoxSpellChecker(SpellCheckerConfig.Create("en_US"));
+
+        string[] textboxes = {
+            "TargetAddressTextBox", 
+            "TargetDescriptionTextBox",
+            "WarrantReasonTextBox",
+            "WarrantContentTextBox"
+        };
+
+        foreach (string textbox in textboxes)
         {
-            InitializeComponent();
+            var box = this.FindControl<TextBox>(textbox);
+            if (box != null)
+            {
+                _spellChecker.Initialize(box);
+            }
         }
     }
 }
