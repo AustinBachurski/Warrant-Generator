@@ -13,12 +13,12 @@ public partial class MainWindow : Window
 
         _spellChecker = new TextBoxSpellChecker(SpellCheckerConfig.Create("en_US"));
 
-        string[] textboxes = {
+        string[] textboxes = [
             "TargetAddressTextBox", 
             "TargetDescriptionTextBox",
             "WarrantReasonTextBox",
-            "WarrantContentTextBox"
-        };
+            "WarrantContentTextBox",
+        ];
 
         foreach (string textbox in textboxes)
         {

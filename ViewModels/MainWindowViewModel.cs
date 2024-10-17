@@ -1,7 +1,7 @@
-﻿using Avalonia.Media;
+﻿using System;
+using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
 using Warrant_Generator.DTOs;
 using WarrantGenerator.Document;
 using WarrantGenerator.DTOs;
@@ -11,15 +11,21 @@ namespace WarrantGenerator.ViewModels;
 
 public partial class MainWindowViewModel : ObservableObject
 {
-    public string[] DurationTypes { get; set; } = { "years", "year", "months", "month", "days", "day" };
+    public string[] DurationTypes { get; set; } = [
+        "years", "year", "months", "month", "days", "day",
+    ];
     public string DurationTypeSelection { get; set; } = "years";
-    public string[] OfficerTitles { get; set; } = { "Captain", "Chief", "Detective", "Detective Sergeant", "Lieutenant", "Master Patrol Officer", "Officer", "Sergeant", "Other" };
+    public string[] OfficerTitles { get; set; } = [
+        "Captain", "Chief", "Detective", "Detective Sergeant", "Lieutenant",
+        "Master Patrol Officer", "Officer", "Sergeant", "Other",
+    ];
 
     [ObservableProperty]
     private IBrush _organizationBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _organizationText = Environment.GetEnvironmentVariable("ORGANIZATION") ?? string.Empty;
+    private string _organizationText =
+        Environment.GetEnvironmentVariable("ORGANIZATION") ?? string.Empty;
 
     [ObservableProperty]
     private IBrush _officerNameBorder = Brushes.Transparent;
@@ -192,7 +198,8 @@ public partial class MainWindowViewModel : ObservableObject
             OfficerTitleBorder= Brushes.Red;
         }
 
-        if (CustomOfficerTitleVisibility && (CustomOfficerTitleText == "Enter Title" || CustomOfficerTitleText == string.Empty))
+        if (CustomOfficerTitleVisibility
+            && (CustomOfficerTitleText == "Enter Title" || CustomOfficerTitleText == string.Empty))
         {
             result = false;
             CustomOfficerTitleBorder = Brushes.Red;
