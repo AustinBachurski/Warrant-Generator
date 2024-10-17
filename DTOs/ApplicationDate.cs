@@ -1,7 +1,7 @@
 ﻿using System;
 using WarrantGenerator.Interfaces;
 
-namespace Warrant_Generator.DTOs;
+namespace WarrantGenerator.DTOs;
 
 internal struct ApplicationDate : IReplacementData
 {

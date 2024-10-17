@@ -2,7 +2,7 @@
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Warrant_Generator.DTOs;
+using WarrantGenerator.DTOs;
 using WarrantGenerator.Document;
 using WarrantGenerator.DTOs;
 using WarrantGenerator.Interfaces;

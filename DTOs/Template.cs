@@ -2,9 +2,9 @@
 
 namespace WarrantGenerator.DTOs;
 
-internal struct Template : IReplacementData
+internal struct Template() : IReplacementData
 {
-    public string target { get; set; }
+    public string target { get; set; } = "{{}}";
     public string data { get; set; }
 }
 
