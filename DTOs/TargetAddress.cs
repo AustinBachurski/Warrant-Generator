@@ -2,14 +2,9 @@
 
 namespace WarrantGenerator.DTOs;
 
-internal struct TargetAddress : IReplacementData
+internal struct TargetAddress(string address) : IReplacementData
 {
     public string target { get; set; } = "{{TARGET_ADDRESS}}";
-    public string data { get; set; }
-
-    public TargetAddress(string address)
-    {
-        data = address;
-    }
+    public string data { get; set; } = address;
 }
 

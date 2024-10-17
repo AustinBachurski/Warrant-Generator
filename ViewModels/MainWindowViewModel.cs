@@ -31,7 +31,16 @@ public partial class MainWindowViewModel : ObservableObject
     private IBrush _officerNameBorder = Brushes.Transparent;
 
     [ObservableProperty]
+    private IBrush _officerGenderBorder = Brushes.Transparent;
+
+    [ObservableProperty]
     private string _officerNameText = string.Empty;
+
+    [ObservableProperty]
+    private bool _femaleChecked = false;
+
+    [ObservableProperty]
+    private bool _maleChecked = false;
 
     [ObservableProperty]
     private IBrush _officerTitleBorder = Brushes.Transparent;
@@ -94,6 +103,24 @@ public partial class MainWindowViewModel : ObservableObject
         OfficerNameBorder = Brushes.Transparent;
     }
 
+    partial void OnFemaleCheckedChanged(bool value)
+    {
+        if (value)
+        {
+            MaleChecked = false;
+        }
+        OfficerGenderBorder = Brushes.Transparent;
+    }
+
+    partial void OnMaleCheckedChanged(bool value)
+    {
+        if (value)
+        {
+            FemaleChecked = false;
+        }
+        OfficerGenderBorder = Brushes.Transparent;
+    }
+
     partial void OnOfficerTitleSelectionChanged(string value)
     {
         if (value == "Other")
@@ -151,6 +178,7 @@ public partial class MainWindowViewModel : ObservableObject
             new ApplicationDate(),
             new Organization(OrganizationText),
             new OfficerName(OfficerNameText),
+            new OfficerGender(MaleChecked),
             new OfficerTitle(OfficerTitleSelection),
             new OfficerGrammar(OfficerTitleSelection),
             new EmploymentDuration(EmploymentDurationText),
@@ -190,6 +218,12 @@ public partial class MainWindowViewModel : ObservableObject
         {
             result = false;
             OfficerNameBorder = Brushes.Red;
+        }
+
+        if (!MaleChecked && !FemaleChecked)
+        {
+            result = false;
+            OfficerGenderBorder = Brushes.Red;
         }
 
         if (OfficerTitleSelection == string.Empty)

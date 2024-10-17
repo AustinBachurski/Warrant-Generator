@@ -11,7 +11,7 @@ internal struct ApplicationDate : IReplacementData
     public ApplicationDate()
     {
         var now = DateTime.Now;
-        data = $"{now.Day}{GetDayOrdinal(now)} day of {now.ToString("MMMM, yyyy")}";
+        data = $"{now.Day}{GetDayOrdinal(now)} day of {now:MMMM, yyyy}";
     }
 
 

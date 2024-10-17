@@ -2,14 +2,9 @@
 
 namespace WarrantGenerator.DTOs;
 
-internal struct SearchWarrantContent : IReplacementData
+internal struct SearchWarrantContent(string content) : IReplacementData
 {
     public string target { get; set; } = "{{SEARCH_WARRANT_CONTENT}}";
-    public string data { get; set; }
-
-    public SearchWarrantContent(string content)
-    {
-        data = content;
-    }
+    public string data { get; set; } = content;
 }
 

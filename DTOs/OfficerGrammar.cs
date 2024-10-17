@@ -3,29 +3,18 @@ using WarrantGenerator.Interfaces;
 
 namespace WarrantGenerator.DTOs;
 
-internal struct OfficerGrammar : IReplacementData
+internal struct OfficerGrammar(string title) : IReplacementData
 {
     public string target { get; set; } = "{{OFFICER_GRAMMAR}}";
-    public string data { get; set; }
+    public string data { get; set; } = CorrectGrammar(title.First());
 
-    public OfficerGrammar(string title)
+    private static string CorrectGrammar(char c)
     {
-        data = CorrectGrammar(title.First());
-    }
-
-    private string CorrectGrammar(char c)
-    {
-        switch (char.ToUpper(c))
+        return char.ToUpper(c) switch
         {
-            case 'A':
-            case 'E':
-            case 'I':
-            case 'O':
-            case 'U':
-                return "an";
-            default:
-                return "a";
-        }
+            'A' or 'E' or 'I' or 'O' or 'U' => "an",
+            _ => "a",
+        };
     }
 }
 

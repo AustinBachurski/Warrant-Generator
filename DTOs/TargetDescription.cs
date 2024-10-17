@@ -2,14 +2,9 @@
 
 namespace WarrantGenerator.DTOs;
 
-internal struct TargetDescription : IReplacementData
+internal struct TargetDescription(string description) : IReplacementData
 {
     public string target { get; set; } = "{{TARGET_DESCRIPTION}}";
-    public string data { get; set; }
-
-    public TargetDescription(string description)
-    {
-        data = description;
-    }
+    public string data { get; set; } = description;
 }
 

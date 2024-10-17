@@ -2,14 +2,9 @@
 
 namespace WarrantGenerator.DTOs;
 
-internal struct Organization : IReplacementData
+internal struct Organization(string organization) : IReplacementData
 {
     public string target { get; set; } = "{{ORGANIZATION}}";
-    public string data { get; set; }
-
-    public Organization(string organization)
-    {
-        data = organization;
-    }
+    public string data { get; set; } = organization;
 }
 

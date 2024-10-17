@@ -3,7 +3,7 @@
         xmlns:vm="using:WarrantGenerator.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
         x:Class="WarrantGenerator.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/logo.ico" 
@@ -58,6 +58,17 @@
 					<Border BorderBrush="{Binding OfficerNameBorder}"
 							BorderThickness="2">
 						<TextBox Text="{Binding OfficerNameText}" />
+					</Border>
+				</StackPanel>
+
+				<StackPanel>
+					<TextBlock Text="Officer Gender" />
+					<Border BorderBrush="{Binding OfficerGenderBorder}"
+							BorderThickness="2">
+						<StackPanel Orientation="Horizontal" Spacing="10">
+							<CheckBox Content="Female" IsChecked="{Binding FemaleChecked}" />
+							<CheckBox Content="Male" IsChecked="{Binding MaleChecked}" />
+						</StackPanel>
 					</Border>
 				</StackPanel>
 
