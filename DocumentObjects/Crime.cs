@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using WarrantGenerator.Interfaces;
 
-namespace WarrantGenerator.DTOs;
+namespace WarrantGenerator.DocumentObjects;
 
 internal struct Crime(List<string> crimesList) : IReplacementData
 {

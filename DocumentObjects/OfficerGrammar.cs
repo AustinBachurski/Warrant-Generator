@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using WarrantGenerator.Interfaces;
 
-namespace WarrantGenerator.DTOs;
+namespace WarrantGenerator.DocumentObjects;
 
 internal struct OfficerGrammar(string title) : IReplacementData
 {

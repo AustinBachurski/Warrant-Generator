@@ -3,9 +3,14 @@ using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WarrantGenerator.Document;
+using WarrantGenerator.DocumentObjects;
 using WarrantGenerator.DTOs;
 using WarrantGenerator.Interfaces;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using Microsoft.VisualBasic;
+using Avalonia.Controls;
+using Avalonia;
 
 namespace WarrantGenerator.ViewModels;
 
@@ -19,14 +24,6 @@ public partial class MainWindowViewModel : ObservableObject
         "Captain", "Chief", "Detective", "Detective Sergeant", "Lieutenant",
         "Master Patrol Officer", "Officer", "Sergeant", "Other",
     ];
-    public ObservableCollection<MCAs> Crimes { get; set; } = new ObservableCollection<MCAs>
-    {
-        new( "123", "One two three." ),
-        new( "456", "Four five six." ),
-        new( "789", "Seven eight nine." ),
-        new( "789", "Seven eight nine." ),
-        new( "789", "Seven eight nine." ),
-    };
 
     [ObservableProperty]
     private IBrush _organizationBorder = Brushes.Transparent;
@@ -82,6 +79,15 @@ public partial class MainWindowViewModel : ObservableObject
 
     [ObservableProperty]
     private string _targetDescriptionText = string.Empty;
+
+    [ObservableProperty]
+    private MCAs _selectedItem;
+
+    [ObservableProperty]
+    private IBrush _crimesBorder = Brushes.Transparent;
+
+    [ObservableProperty]
+    private ObservableCollection<MCAs> _crimes = [];
 
     [ObservableProperty]
     private IBrush _searchWarrantReasonBorder = Brushes.Transparent;
@@ -179,6 +185,32 @@ public partial class MainWindowViewModel : ObservableObject
         OutputFileNameBorder = Brushes.Transparent;
     }
 
+    [RelayCommand]
+    public void GenerateWarrantDocument()
+    {
+        if (!InputsAreValid())
+        {
+            return;
+        }
+
+        // TODO: Testing only - correct inputs to method call.
+        DocumentGenerator.GenerateDocument("C:/Temp/template.docx", OutputFileNameText, AssembleData());
+    }
+
+    [RelayCommand]
+    public void RemoveCrime()
+    {
+        Crimes.Remove(SelectedItem);
+    }
+
+    [RelayCommand]
+    public void SpawnAddCrimeDialog()
+    {
+        var crimeDialog = new AddCrimeDialog();
+        crimeDialog.DataContext = new AddCrimeDialogViewModel(this, crimeDialog);
+        crimeDialog.Show();
+    }
+
     private IReplacementData[] AssembleData()
     {
         IReplacementData[] data =
@@ -198,18 +230,6 @@ public partial class MainWindowViewModel : ObservableObject
         };
 
         return data;
-    }
-
-    [RelayCommand]
-    public void GenerateWarrantDocument()
-    {
-        if (!InputsAreValid())
-        {
-            return;
-        }
-
-        // TODO: Testing only - correct inputs to method call.
-        DocumentGenerator.GenerateDocument("C:/Temp/template.docx", OutputFileNameText, AssembleData());
     }
 
     private bool InputsAreValid()
@@ -263,6 +283,12 @@ public partial class MainWindowViewModel : ObservableObject
         {
             result = false;
             TargetDescriptionBorder = Brushes.Red;
+        }
+
+        if (Crimes.Count == 0)
+        {
+            result = false;
+            CrimesBorder = Brushes.Red;
         }
 
         if (SearchWarrantReasonText == string.Empty)

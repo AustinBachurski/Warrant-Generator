@@ -1,6 +1,6 @@
 ﻿using WarrantGenerator.Interfaces;
 
-namespace WarrantGenerator.DTOs;
+namespace WarrantGenerator.DocumentObjects;
 
 internal struct OfficerGender(bool maleChecked) : IReplacementData
 {
