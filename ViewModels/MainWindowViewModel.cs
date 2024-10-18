@@ -2,10 +2,10 @@
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using WarrantGenerator.DTOs;
 using WarrantGenerator.Document;
 using WarrantGenerator.DTOs;
 using WarrantGenerator.Interfaces;
+using System.Collections.ObjectModel;
 
 namespace WarrantGenerator.ViewModels;
 
@@ -19,6 +19,14 @@ public partial class MainWindowViewModel : ObservableObject
         "Captain", "Chief", "Detective", "Detective Sergeant", "Lieutenant",
         "Master Patrol Officer", "Officer", "Sergeant", "Other",
     ];
+    public ObservableCollection<MCAs> Crimes { get; set; } = new ObservableCollection<MCAs>
+    {
+        new( "123", "One two three." ),
+        new( "456", "Four five six." ),
+        new( "789", "Seven eight nine." ),
+        new( "789", "Seven eight nine." ),
+        new( "789", "Seven eight nine." ),
+    };
 
     [ObservableProperty]
     private IBrush _organizationBorder = Brushes.Transparent;
