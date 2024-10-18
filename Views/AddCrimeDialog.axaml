@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="80"
-        x:Class="WarrantGenerator.AddCrimeDialog"
+        x:Class="WarrantGenerator.Views.AddCrimeDialog"
         x:DataType="vm:AddCrimeDialogViewModel"
         Icon="/Assets/logo.ico"
-        Title="MCA Crime Dialog"
+        Title="Add MCA Crime"
 		Width="800" Height="80">
 
 	<StackPanel Orientation="Horizontal"

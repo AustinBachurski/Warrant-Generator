@@ -1,0 +1,49 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:WarrantGenerator.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="800"
+        x:Class="WarrantGenerator.Views.CrimeSelectionWindow"
+        x:DataType="vm:CrimeSelectionViewModel"
+        Icon="/Assets/logo.ico"
+        Title="MCA Crime Selection"
+		Width="800" Height="800">
+
+	<TreeView ItemsSource="{Binding RootMCATreeNodes}">
+		<TreeView.ItemTemplate>
+			<TreeDataTemplate ItemsSource="{Binding Children}">
+				<ContentControl>
+					<ContentControl.Content>
+						<StackPanel>
+							<!-- Template for nodes with children -->
+							<StackPanel Orientation="Horizontal"
+									  IsVisible="{Binding HasChildren}">
+								<TextBlock Text="{Binding Prefix}" />
+								<TextBlock Text=" " />
+								<TextBlock Text="{Binding Code}" />
+								<TextBlock Text=". " />
+								<TextBlock Text="{Binding Description}" />
+							</StackPanel>
+
+							<!-- Template for leaf nodes -->
+							<StackPanel Orientation="Horizontal"
+									  IsVisible="{Binding !HasChildren}">
+								<CheckBox IsChecked="{Binding IsChecked}"
+										Content="{Binding Code}" />
+								<TextBlock Text=" " />
+								<TextBlock Text="{Binding Description}" />
+							</StackPanel>
+						</StackPanel>
+					</ContentControl.Content>
+				</ContentControl>
+			</TreeDataTemplate>
+		</TreeView.ItemTemplate>
+	</TreeView>
+
+
+
+
+
+</Window>
+

@@ -6,11 +6,13 @@ using WarrantGenerator.Document;
 using WarrantGenerator.DocumentObjects;
 using WarrantGenerator.DTOs;
 using WarrantGenerator.Interfaces;
+using WarrantGenerator.Views;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Microsoft.VisualBasic;
 using Avalonia.Controls;
 using Avalonia;
+using System.IO;
 
 namespace WarrantGenerator.ViewModels;
 
@@ -81,13 +83,13 @@ public partial class MainWindowViewModel : ObservableObject
     private string _targetDescriptionText = string.Empty;
 
     [ObservableProperty]
-    private MCAs _selectedItem;
+    private MCACrime _selectedItem;
 
     [ObservableProperty]
     private IBrush _crimesBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private ObservableCollection<MCAs> _crimes = [];
+    private ObservableCollection<MCACrime> _crimes = [];
 
     [ObservableProperty]
     private IBrush _searchWarrantReasonBorder = Brushes.Transparent;
@@ -193,8 +195,21 @@ public partial class MainWindowViewModel : ObservableObject
             return;
         }
 
-        // TODO: Testing only - correct inputs to method call.
-        DocumentGenerator.GenerateDocument("C:/Temp/template.docx", OutputFileNameText, AssembleData());
+        try
+        {
+            // TODO: Testing only - correct inputs to method call.
+            DocumentGenerator.GenerateDocument("C:/Temp/template.docx", OutputFileNameText, AssembleData());
+        }
+        catch (FileLoadException ex)
+        {
+            // TODO: Spawn error window.
+            Debug.WriteLine(ex);
+        }
+        catch (Exception ex)
+        {
+            // TODO: Spawn error window.
+            Debug.WriteLine(ex);
+        }
     }
 
     [RelayCommand]
@@ -211,6 +226,14 @@ public partial class MainWindowViewModel : ObservableObject
         crimeDialog.Show();
     }
 
+    [RelayCommand]
+    public void SpawnCrimeSelectionWindow()
+    {
+        var crimesSelectionWindow = new CrimeSelectionWindow();
+        crimesSelectionWindow.DataContext = new CrimeSelectionViewModel(this, crimesSelectionWindow);
+        crimesSelectionWindow.Show();
+    }
+
     private IReplacementData[] AssembleData()
     {
         IReplacementData[] data =
@@ -219,17 +242,28 @@ public partial class MainWindowViewModel : ObservableObject
             new Organization(OrganizationText),
             new OfficerName(OfficerNameText),
             new OfficerGender(MaleChecked),
-            new OfficerTitle(OfficerTitleSelection),
-            new OfficerGrammar(OfficerTitleSelection),
+            new OfficerTitle(GetOfficerTitle()),
+            new OfficerGrammar(GetOfficerTitle()),
             new EmploymentDuration(EmploymentDurationText),
             new DurationType(DurationTypeSelection),
             new TargetAddress(TargetAddressText),
             new TargetDescription(TargetDescriptionText),
+            new Crime(Crimes),
+            new CrimeGrammar(Crimes.Count),
             new SearchWarrantReason(SearchWarrantReasonText),
             new SearchWarrantContent(SearchWarrantContentText),
         };
 
         return data;
+    }
+
+    private string GetOfficerTitle()
+    {
+        if (CustomOfficerTitleVisibility)
+        {
+            return CustomOfficerTitleText;
+        }
+        return OfficerTitleSelection;
     }
 
     private bool InputsAreValid()

@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using WarrantGenerator.ViewModels;
 
-namespace WarrantGenerator;
+namespace WarrantGenerator.Views;
 
 public partial class AddCrimeDialog : Window
 {
@@ -14,5 +14,5 @@ public partial class AddCrimeDialog : Window
     {
         DataContext = new AddCrimeDialogViewModel(mainViewModel, this);
     }
-
 }
+

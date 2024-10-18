@@ -151,6 +151,11 @@
 									FontSize="24"
 									Foreground="Red"
 									Command="{Binding RemoveCrimeCommand}"/>
+							<Button Content=">"
+									Padding="7, 0, 7, 0"
+									FontSize="24"
+									Foreground="Blue"
+									Command="{Binding SpawnCrimeSelectionWindowCommand}"/>
 							<TextBlock Text="Crimes Associated with this Warrant"
 									   VerticalAlignment="Center"
 									   Margin="5, 0, 0, 0"/>
@@ -179,8 +184,9 @@
 											CornerRadius="4">
 										<StackPanel Orientation="Horizontal"
 													Margin="2, 2, 2, 2">
+											<TextBlock Text="MCA " />
 											<TextBlock Text="{Binding Code}" />
-											<TextBlock Text=" - " />
+											<TextBlock Text=": " />
 											<TextBlock Text="{Binding Description}" />
 										</StackPanel>
 									</Border>

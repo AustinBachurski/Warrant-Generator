@@ -32,5 +32,11 @@
     <PackageReference Include="DocX" Version="3.0.1" />
     <PackageReference Include="GHSoftware.Avalonia.SpellChecker" Version="0.3.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\CrimeSelectionWindow.axaml.cs">
+      <DependentUpon>CrimeSelectionWindow.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
 
