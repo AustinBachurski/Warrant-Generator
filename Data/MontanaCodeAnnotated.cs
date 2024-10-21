@@ -95,6 +95,7 @@ public static class MontanaCodeAnnotated
                 _data[1].Children[6].Children.Add(new("45-5-706", "Aggravated sex trafficking"));
                 _data[1].Children[6].Children.Add(new("45-5-707", "Use or possession of property subject to criminal forfeiture for human trafficking"));
                 _data[1].Children[6].Children.Add(new("45-5-711", "Child sex trafficking"));
+
         // Chapter 6: _data[2]
         _data.Add(new(_chapter, "6", "OFFENSES AGAINST PROPERTY"));
             // Criminal Mischief and Arson: Part 1, Children[0]
@@ -135,6 +136,96 @@ public static class MontanaCodeAnnotated
                 _data[2].Children[2].Children.Add(new("45-6-332", "Theft of identity"));
                 _data[2].Children[2].Children.Add(new("45-6-333", "Exploitation of incapacitated person or vulnerable adult"));
                 _data[2].Children[2].Children.Add(new("45-6-341", "Money laundering"));
+
+        // Chapter 7: _data[3]
+        _data.Add(new(_chapter, "7", "OFFENSES AGAINST PUBLIC ADMINISTRATION"));
+            // Bribery and Corrupt Influence: Part 1, Children[0]
+            _data[3].Children.Add(new(_part, "1", "Bribery and Corrupt Influence"));
+                _data[3].Children[0].Children.Add(new("45-7-101", "Bribery in official and political matters"));
+                _data[3].Children[0].Children.Add(new("45-7-102", "Threats and other improper influence in official and political matters"));
+                _data[3].Children[0].Children.Add(new("45-7-103", "Criminal use of office or position"));
+            // Perjury and Other Falsification in Official Matters: Part 2, Children[1]
+            _data[3].Children.Add(new(_part, "2", "Perjury and Other Falsification in Official Matters"));
+                _data[3].Children[1].Children.Add(new("45-7-201", "Perjury"));
+                _data[3].Children[1].Children.Add(new("45-7-202", "False swearing"));
+                _data[3].Children[1].Children.Add(new("45-7-203", "Unsworn falsification to authorities"));
+                _data[3].Children[1].Children.Add(new("45-7-204", "False alarms to agencies of public safety"));
+                _data[3].Children[1].Children.Add(new("45-7-205", "False reports to peace officers"));
+                _data[3].Children[1].Children.Add(new("45-7-206", "Tampering with witnesses and informants"));
+                _data[3].Children[1].Children.Add(new("45-7-207", "Tampering with or fabricating physical evidence"));
+                _data[3].Children[1].Children.Add(new("45-7-210", "Tampering with public records or information"));
+                _data[3].Children[1].Children.Add(new("45-7-211", "Impersonation of public servant"));
+                _data[3].Children[1].Children.Add(new("45-7-212", "False claim to public agency"));
+            // Obstructing Governmental Operations: Part 3, Children[2]
+            _data[3].Children.Add(new(_part, "3", "Obstructing Governmental Operations"));
+                _data[3].Children[2].Children.Add(new("45-7-301", "Resisting arrest"));
+                _data[3].Children[2].Children.Add(new("45-7-302", "Obstructing peace officer or other public servant"));
+                _data[3].Children[2].Children.Add(new("45-7-303", "Obstructing justice"));
+                _data[3].Children[2].Children.Add(new("45-7-304", "Failure to aid peace officer"));
+                _data[3].Children[2].Children.Add(new("45-7-305", "Compounding of felony"));
+                _data[3].Children[2].Children.Add(new("45-7-306", "Escape"));
+                _data[3].Children[2].Children.Add(new("45-7-307", "Transferring illegal articles"));
+                _data[3].Children[2].Children.Add(new("45-7-308", "Bail-jumping"));
+                _data[3].Children[2].Children.Add(new("45-7-309", "Criminal contempt"));
+            // Official Misconduct: Part 4, Children[3]
+            _data[3].Children.Add(new(_part, "4", "Official Misconduct"));
+                _data[3].Children[3].Children.Add(new("45-7-401", "Official misconduct"));
+            // Employer Misconduct: Part 5, Children[4]
+            _data[3].Children.Add(new(_part, "5", "Employer Misconduct"));
+                _data[3].Children[4].Children.Add(new("45-7-501", "Employer misconduct"));
+            // Confidential Criminal Justice Information: Part 6, Children[5]
+            _data[3].Children.Add(new(_part, "6", "Confidential Criminal Justice Information"));
+                _data[3].Children[5].Children.Add(new("45-7-601", "Misuse of confidential criminal justice information"));
+
+        // Chapter 8: _data[4]
+        _data.Add(new(_chapter, "6", "OFFENSES AGAINST PUBLIC ORDER"));
+            // Conduct Disruptive of Public Order: Part 1, Children[0]
+            _data[4].Children.Add(new(_part, "1", "Conduct Disruptive of Public Order"));
+                _data[4].Children[0].Children.Add(new("45-8-101", "Disorderly conduct"));
+                _data[4].Children[0].Children.Add(new("45-8-102", "Failure of disorderly persons to disperse"));
+                _data[4].Children[0].Children.Add(new("45-8-103", "Riot"));
+                _data[4].Children[0].Children.Add(new("45-8-104", "Incitement to riot"));
+                _data[4].Children[0].Children.Add(new("45-8-105", "Criminal incitement"));
+                _data[4].Children[0].Children.Add(new("45-8-106", "Bringing armed individuals into state"));
+                _data[4].Children[0].Children.Add(new("45-8-110", "Obstructing health care facility access"));
+                _data[4].Children[0].Children.Add(new("45-8-111", "Public nuisance"));
+                _data[4].Children[0].Children.Add(new("45-8-113", "Creating hazard"));
+                _data[4].Children[0].Children.Add(new("45-8-114", "Failure to yield party line"));
+                _data[4].Children[0].Children.Add(new("45-8-115", "Illegal posting of state and federal land"));
+                _data[4].Children[0].Children.Add(new("45-8-116", "Funeral picketing"));
+            // Offensive, Indecent, and Inhumane Conduct: Part 2, Children[1]
+            _data[4].Children.Add(new(_part, "2", "Offensive, Indecent, and Inhumane Conduct"));
+                _data[4].Children[1].Children.Add(new("45-8-201", "Obscenity"));
+                _data[4].Children[1].Children.Add(new("45-8-206", "Public display or dissemination of obscene material to minors"));
+                _data[4].Children[1].Children.Add(new("45-8-209", "Harming a police dog"));
+                _data[4].Children[1].Children.Add(new("45-8-210", "Causing animals to fight"));
+                _data[4].Children[1].Children.Add(new("45-8-211", "Cruelty to animals"));
+                _data[4].Children[1].Children.Add(new("45-8-212", "Criminal defamation"));
+                _data[4].Children[1].Children.Add(new("45-8-213", "Privacy in communications"));
+                _data[4].Children[1].Children.Add(new("45-8-214", "Bribery in contests"));
+                _data[4].Children[1].Children.Add(new("45-8-215", "Desecration of flags"));
+                _data[4].Children[1].Children.Add(new("45-8-216", "Unlawful automated telephone solicitation"));
+                _data[4].Children[1].Children.Add(new("45-8-217", "Aggravated animal cruelty"));
+                _data[4].Children[1].Children.Add(new("45-8-218", "Deviate sexual conduct"));
+                _data[4].Children[1].Children.Add(new("45-8-220", "Criminal invasion of personal privacy"));
+                _data[4].Children[1].Children.Add(new("45-8-221", "Predatory loitering by sexual offender"));
+            // Weapons: Part 3, Children[2]
+            _data[4].Children.Add(new(_part, "3", "Weapons"));
+                _data[4].Children[2].Children.Add(new("45-8-303", "Possession or use of machine gun in connection with a crime"));
+                _data[4].Children[2].Children.Add(new("45-8-304", "Possession or use of machine gun for offensive purpose"));
+                _data[4].Children[2].Children.Add(new("45-8-305", "Presumption of offensive or aggressive purpose"));
+                _data[4].Children[2].Children.Add(new("45-8-313", "Unlawful possession of firearm by convicted person"));
+                _data[4].Children[2].Children.Add(new("45-8-316", "Carrying concealed firearms"));
+                _data[4].Children[2].Children.Add(new("45-8-318", "Possession of deadly weapon by prisoner or youth in facility"));
+                _data[4].Children[2].Children.Add(new("45-8-327", "Carrying concealed weapon while under influence"));
+                _data[4].Children[2].Children.Add(new("45-8-328", "Carrying concealed weapon in prohibited place -- penalty"));
+                _data[4].Children[2].Children.Add(new("45-8-333", "Reckless or malicious use of explosives"));
+                _data[4].Children[2].Children.Add(new("45-8-334", "Possession of destructive device"));
+                _data[4].Children[2].Children.Add(new("45-8-335", "Possession of explosives"));
+                _data[4].Children[2].Children.Add(new("45-8-336", "Possession of silencer"));
+                _data[4].Children[2].Children.Add(new("45-8-337", "Possession of unregistered silencer or of bomb or similar device prima facie evidence of unlawful purpose"));
+                _data[4].Children[2].Children.Add(new("45-8-340", "Sawed-off firearm"));
+                _data[4].Children[2].Children.Add(new("45-8-361", "Possession Or Allowing Possession Of Weapon In School Building"));
 #pragma warning restore CS8602
     }
 

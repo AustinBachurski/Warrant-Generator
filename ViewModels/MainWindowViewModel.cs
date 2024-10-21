@@ -92,10 +92,10 @@ public partial class MainWindowViewModel : ObservableObject
     private ObservableCollection<MCACrime> _crimes = [];
 
     [ObservableProperty]
-    private IBrush _searchWarrantReasonBorder = Brushes.Transparent;
+    private IBrush _probableCauseBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _searchWarrantReasonText = string.Empty;
+    private string _probableCauseText = string.Empty;
 
     [ObservableProperty]
     private IBrush _searchWarrantContentBorder = Brushes.Transparent;
@@ -172,9 +172,9 @@ public partial class MainWindowViewModel : ObservableObject
         TargetDescriptionBorder = Brushes.Transparent;
     }
 
-    partial void OnSearchWarrantReasonTextChanged(string value)
+    partial void OnProbableCauseTextChanged(string value)
     {
-        SearchWarrantReasonBorder = Brushes.Transparent;
+        ProbableCauseBorder = Brushes.Transparent;
     }
 
     partial void OnSearchWarrantContentTextChanged(string value)
@@ -210,6 +210,9 @@ public partial class MainWindowViewModel : ObservableObject
             // TODO: Spawn error window.
             Debug.WriteLine(ex);
         }
+
+        var successDialog = new DocumentedGeneratedDialog();
+        successDialog.Show();
     }
 
     [RelayCommand]
@@ -224,14 +227,6 @@ public partial class MainWindowViewModel : ObservableObject
         var crimeDialog = new AddCrimeDialog();
         crimeDialog.DataContext = new AddCrimeDialogViewModel(this, crimeDialog);
         crimeDialog.Show();
-    }
-
-    [RelayCommand]
-    public void SpawnCrimeSelectionWindow()
-    {
-        var crimesSelectionWindow = new CrimeSelectionWindow();
-        crimesSelectionWindow.DataContext = new CrimeSelectionViewModel(this, crimesSelectionWindow);
-        crimesSelectionWindow.Show();
     }
 
     private IReplacementData[] AssembleData()
@@ -250,7 +245,7 @@ public partial class MainWindowViewModel : ObservableObject
             new TargetDescription(TargetDescriptionText),
             new Crime(Crimes),
             new CrimeGrammar(Crimes.Count),
-            new SearchWarrantReason(SearchWarrantReasonText),
+            new ProbableCause(ProbableCauseText),
             new SearchWarrantContent(SearchWarrantContentText),
         };
 
@@ -325,10 +320,10 @@ public partial class MainWindowViewModel : ObservableObject
             CrimesBorder = Brushes.Red;
         }
 
-        if (SearchWarrantReasonText == string.Empty)
+        if (ProbableCauseText == string.Empty)
         {
             result = false;
-            SearchWarrantReasonBorder = Brushes.Red;
+            ProbableCauseBorder = Brushes.Red;
         }
 
         if (SearchWarrantContentText == string.Empty)

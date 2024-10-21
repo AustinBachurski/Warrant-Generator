@@ -151,11 +151,6 @@
 									FontSize="24"
 									Foreground="Red"
 									Command="{Binding RemoveCrimeCommand}"/>
-							<Button Content=">"
-									Padding="7, 0, 7, 0"
-									FontSize="24"
-									Foreground="Blue"
-									Command="{Binding SpawnCrimeSelectionWindowCommand}"/>
 							<TextBlock Text="Crimes Associated with this Warrant"
 									   VerticalAlignment="Center"
 									   Margin="5, 0, 0, 0"/>
@@ -197,11 +192,10 @@
 				</Border>
 
 				<StackPanel>
-					<TextBlock Text="Reason for Search Warrant" />
-					<Border BorderBrush="{Binding SearchWarrantReasonBorder}"
+					<TextBlock Text="Probable Cause" />
+					<Border BorderBrush="{Binding ProbableCauseBorder}"
 							BorderThickness="2">
-						<TextBox Name="WarrantReasonTextBox"
-								 Text="{Binding SearchWarrantReasonText}"
+						<TextBox Text="{Binding ProbableCauseText}"
 								 AcceptsReturn="True"
 								 TextWrapping="Wrap"
 								 Height="200" />
@@ -212,8 +206,7 @@
 					<TextBlock Text="Searchable Property" />
 					<Border BorderBrush="{Binding SearchWarrantContentBorder}"
 							BorderThickness="2">
-						<TextBox Name="WarrantContentTextBox"
-								 Text="{Binding SearchWarrantContentText}"
+						<TextBox Text="{Binding SearchWarrantContentText}"
 								 AcceptsReturn="True"
 								 TextWrapping="Wrap"
 								 Height="200" />
@@ -226,7 +219,6 @@
 							BorderThickness="2">
 						<TextBox Text="{Binding OutputFileNameText}" />
 					</Border>
-					<!-- Need to bind the button for MVVM. -->
 					<Button Command="{Binding GenerateWarrantDocumentCommand}"
 							Margin="0, 10, 0, 0"
 							Content="Generate Warrant Document" />
