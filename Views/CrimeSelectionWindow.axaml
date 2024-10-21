@@ -32,7 +32,8 @@
 								<CheckBox IsChecked="{Binding IsChecked}"
 										Content="{Binding Code}" />
 								<TextBlock Text=" " />
-								<TextBlock Text="{Binding Description}" />
+								<TextBlock Text="{Binding Description}"
+										   VerticalAlignment="Center" />
 							</StackPanel>
 						</StackPanel>
 					</ContentControl.Content>
