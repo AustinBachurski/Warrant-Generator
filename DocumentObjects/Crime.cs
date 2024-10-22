@@ -15,28 +15,35 @@ internal struct Crime(ObservableCollection<MCACrime> crimesList) : IReplacementD
     {
         StringBuilder builder = new();
 
+        const string prefix = "M.C.A. § ";
+        const string space = " (";
+        const string suffix = "), ";
+        int contentLength = prefix.Length + space.Length + suffix.Length;
+
         foreach (MCACrime each in crimesList)
         {
-            builder.Append("MCA ");
+            builder.Append(prefix);
             builder.Append(each.Code);
-            builder.Append(": ");
+            builder.Append(space);
             builder.Append(each.Description);
-            builder.Append(", ");
+            builder.Append(suffix);
         }
 
-        builder.Insert(StartingPositionOfLastEntry(builder, crimesList), "and ");
+        if (crimesList.Count > 1)
+        {
+            builder.Insert(StartingPositionOfLastEntry(builder, contentLength, crimesList), "and ");
+        }
 
         // Trailing ", " is intentional.
         return builder.ToString();
     }
 
-    private static int StartingPositionOfLastEntry(StringBuilder builder, ObservableCollection<MCACrime> crimesList)
+    private static int StartingPositionOfLastEntry(StringBuilder builder, int contentLength, ObservableCollection<MCACrime> crimesList)
     {
-        int contentLength = 8;  // Starting with the length of added content.
-
         contentLength += crimesList.Last().Code.Length;
         contentLength += crimesList.Last().Description.Length;
 
         return builder.Length - contentLength;
     }
 }
+
