@@ -1,9 +1,11 @@
-﻿using System;
+using System;
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WarrantGenerator.DocumentGeneration;
+using WarrantGenerator.DocumentObjects;
 using WarrantGenerator.DTOs;
+using WarrantGenerator.Interfaces;
 using WarrantGenerator.Views;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -31,26 +33,10 @@ public partial class MainWindowViewModel : ObservableObject
     ];
 
     [ObservableProperty]
-    private IBrush _mcaCodeBorder = Brushes.Transparent;
-
-    [ObservableProperty]
-    private string _mcaCodeText = string.Empty;
-
-    [ObservableProperty]
-    private IBrush _mcaDescriptionBorder = Brushes.Transparent;
-
-    [ObservableProperty]
-    private string _mcaDescriptionText = string.Empty;
-
-
-    [ObservableProperty]
-    private string? _flyoutMessage = null;
-
-    [ObservableProperty]
     private IBrush _courtDistrictBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _courtDistrictSelection = "11TH JUDICIAL DISTRICT COURT";
+    private string _courtDistrictSelection = CourtDistrictTypes[0];
 
     [ObservableProperty]
     private IBrush _organizationBorder = Brushes.Transparent;
@@ -133,16 +119,6 @@ public partial class MainWindowViewModel : ObservableObject
 
     [ObservableProperty]
     private string _outputFileNameText = string.Empty;
-
-    partial void OnMcaCodeTextChanged(string value)
-    {
-        McaCodeBorder = Brushes.Transparent;
-    }
-
-    partial void OnMcaDescriptionTextChanged(string value)
-    {
-        McaDescriptionBorder = Brushes.Transparent;
-    }
 
     partial void OnCourtDistrictSelectionChanged(string value)
     {
@@ -232,24 +208,28 @@ public partial class MainWindowViewModel : ObservableObject
     {
         if (!InputsAreValid())
         {
-            FlyoutMessage = "All fields must be filled out first.";
             return;
         }
 
         try
         {
+            // TODO: Testing only - correct inputs to method call.
             var document = new DocumentGenerator(OutputFileNameText);
-            var outfile = document.GenerateDocument(new DataEntryObject(this));
-            FlyoutMessage = $"Warrant has been generated as:\n\t{outfile}";
+            document.GenerateDocument(new DataEntryObject(this));
         }
-        catch (IOException)
+        catch (FileLoadException ex)
         {
-            FlyoutMessage = "Unable to write output file.\nIf the file is open, please close it.";
+            // TODO: Spawn error window.
+            Debug.WriteLine(ex);
         }
         catch (Exception ex)
         {
-            FlyoutMessage = $"Unexpected Error Encountered, Error Details:\n\n{ex}";
+            // TODO: Spawn error window.
+            Debug.WriteLine(ex);
         }
+
+        var successDialog = new DocumentedGeneratedDialog();
+        successDialog.Show();
     }
 
     [RelayCommand]
@@ -259,37 +239,20 @@ public partial class MainWindowViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public void AddCrimeToCrimesList()
+    public void SpawnAddCrimeDialog()
     {
-        if (!ValidateMcaCrimeInput())
-        {
-            return;
-        }
-
-        Crimes.Add(new(McaCodeText, McaDescriptionText));
-        CrimesBorder = Brushes.Transparent;
-
-        McaCodeText = string.Empty;
-        McaDescriptionText = string.Empty;
+        var crimeDialog = new AddCrimeDialog();
+        crimeDialog.DataContext = new AddCrimeDialogViewModel(this, crimeDialog);
+        crimeDialog.Show();
     }
 
-    private bool ValidateMcaCrimeInput()
+    private string GetOfficerTitle()
     {
-        bool result = true;
-
-        if (McaCodeText == string.Empty)
+        if (CustomOfficerTitleVisibility)
         {
-            result = false;
-            McaCodeBorder = Brushes.Red;
+            return CustomOfficerTitleText;
         }
-
-        if (McaDescriptionText == string.Empty)
-        {
-            result = false;
-            McaDescriptionBorder = Brushes.Red;
-        }
-
-        return result;
+        return OfficerTitleSelection;
     }
 
     private bool InputsAreValid()
