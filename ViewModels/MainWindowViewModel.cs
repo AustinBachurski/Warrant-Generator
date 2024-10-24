@@ -16,19 +16,50 @@ namespace WarrantGenerator.ViewModels;
 
 public partial class MainWindowViewModel : ObservableObject
 {
-    public string[] CourtDistrictTypes { get; set; } = [
+    public string[] CourtDistrictTypes { get; } = [
         "11TH JUDICIAL DISTRICT COURT",
         "FLATHEAD COUNTY JUSTICE COURT",
         "KALISPELL MUNICIPAL COURT",
     ];
-    public string[] DurationTypes { get; set; } = [
+    public string[] DurationTypes { get; } = [
         "years", "year", "months", "month", "days", "day",
     ];
     public string DurationTypeSelection { get; set; } = "years";
-    public string[] OfficerTitles { get; set; } = [
+    public string[] OfficerTitles { get; } = [
         "Captain", "Chief", "Detective", "Detective Sergeant", "Lieutenant",
         "Master Patrol Officer", "Officer", "Sergeant", "Other",
     ];
+    public string[] WarrantTypes { get; } = [
+        "DNA Warrant", "GSR Warrant", "Social Media Warrant",
+        "Residence Warrant", "Vehicle Warrant",
+    ];
+
+    [ObservableProperty]
+    private IBrush _warrantTypeBorder = Brushes.Transparent;
+
+    [ObservableProperty]
+    private string _warrantTypeSelection = string.Empty;
+
+    [ObservableProperty]
+    private bool _showVehicleDescription = false;
+
+    [ObservableProperty]
+    private bool _showSuspectDateOfBirth = false;
+
+    [ObservableProperty]
+    private bool _showSuspectDriversLicense = false;
+
+    [ObservableProperty]
+    private bool _showSuspectName = false;
+
+    [ObservableProperty]
+    private bool _showResidenceAddress = false;
+
+    [ObservableProperty]
+    private bool _showResidenceDescription = false;
+
+    [ObservableProperty]
+    private bool _showDnaSampleDescription = false;
 
     [ObservableProperty]
     private IBrush _mcaCodeBorder = Brushes.Transparent;
@@ -41,7 +72,6 @@ public partial class MainWindowViewModel : ObservableObject
 
     [ObservableProperty]
     private string _mcaDescriptionText = string.Empty;
-
 
     [ObservableProperty]
     private string? _flyoutMessage = null;
@@ -96,16 +126,16 @@ public partial class MainWindowViewModel : ObservableObject
     private string _employmentDurationText = string.Empty;
 
     [ObservableProperty]
-    private IBrush _targetAddressBorder = Brushes.Transparent;
+    private IBrush _residenceAddressBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _targetAddressText = string.Empty;
+    private string _residenceAddressText = string.Empty;
 
     [ObservableProperty]
-    private IBrush _targetDescriptionBorder = Brushes.Transparent;
+    private IBrush _residenceDescriptionBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _targetDescriptionText = string.Empty;
+    private string _residenceDescriptionText = string.Empty;
 
     [ObservableProperty]
     private MCACrime _selectedItem;
@@ -133,6 +163,87 @@ public partial class MainWindowViewModel : ObservableObject
 
     [ObservableProperty]
     private string _outputFileNameText = string.Empty;
+
+    [ObservableProperty]
+    private IBrush _vehicleDescriptionBorder = Brushes.Transparent;
+
+    [ObservableProperty]
+    private string _vehicleDescriptionText = string.Empty;
+
+    [ObservableProperty]
+    private IBrush _dnaSampleDescriptionBorder = Brushes.Transparent;
+
+    [ObservableProperty]
+    private string _dnaSampleDescriptionText = string.Empty;
+
+    [ObservableProperty]
+    private IBrush _suspectDateOfBirthBorder = Brushes.Transparent;
+
+    [ObservableProperty]
+    private string _suspectDateOfBirthText = string.Empty;
+
+    [ObservableProperty]
+    private IBrush _suspectDriversLicenseBorder = Brushes.Transparent;
+
+    [ObservableProperty]
+    private string _suspectDriversLicenseText = string.Empty;
+
+    [ObservableProperty]
+    private IBrush _suspectNameBorder = Brushes.Transparent;
+
+    [ObservableProperty]
+    private string _suspectNameText = string.Empty;
+
+    partial void OnWarrantTypeSelectionChanged(string value)
+    {
+        switch (value)
+        {
+            case "DNA Warrant":
+                ShowDNAWarrantContent();
+                break;
+
+            case "GSR Warrant":
+                ShowGSRWarrantContent();
+                break;
+
+            case "Social Media Warrant":
+                ShowSocialMediaWarrantContent();
+                break;
+
+            case "Residence Warrant":
+                ShowResidenceWarrantContent();
+                break;
+
+            case "Vehicle Warrant":
+                ShowVehicleWarrantContent();
+                break;
+        }
+    }
+
+    partial void OnSuspectNameTextChanged(string value)
+    {
+        SuspectNameBorder = Brushes.Transparent;
+    }
+
+    partial void OnSuspectDriversLicenseTextChanged(string value)
+    {
+        SuspectDriversLicenseBorder = Brushes.Transparent;
+    }
+
+    partial void OnSuspectDateOfBirthTextChanged(string value)
+    {
+        SuspectDateOfBirthBorder = Brushes.Transparent;
+    }
+
+    partial void OnDnaSampleDescriptionTextChanged(string value)
+    {
+        DnaSampleDescriptionBorder = Brushes.Transparent;
+    }
+
+    partial void OnVehicleDescriptionTextChanged(string value)
+    {
+        VehicleDescriptionBorder = Brushes.Transparent;
+    }
 
     partial void OnMcaCodeTextChanged(string value)
     {
@@ -202,14 +313,14 @@ public partial class MainWindowViewModel : ObservableObject
         EmploymentDurationBorder = Brushes.Transparent;
     }
 
-    partial void OnTargetAddressTextChanged(string value)
+    partial void OnResidenceAddressTextChanged(string value)
     {
-        TargetAddressBorder = Brushes.Transparent;
+        ResidenceAddressBorder = Brushes.Transparent;
     }
 
-    partial void OnTargetDescriptionTextChanged(string value)
+    partial void OnResidenceDescriptionTextChanged(string value)
     {
-        TargetDescriptionBorder = Brushes.Transparent;
+        ResidenceDescriptionBorder = Brushes.Transparent;
     }
 
     partial void OnProbableCauseTextChanged(string value)
@@ -227,6 +338,65 @@ public partial class MainWindowViewModel : ObservableObject
         OutputFileNameBorder = Brushes.Transparent;
     }
 
+    private void ShowVehicleWarrantContent()
+    {
+        ShowVehicleDescription = true;
+
+        ShowSuspectDateOfBirth = false;
+        ShowSuspectDriversLicense = false;
+        ShowSuspectName = false;
+        ShowResidenceAddress = false;
+        ShowResidenceDescription = false;
+        ShowDnaSampleDescription = false;
+    }
+
+    private void ShowResidenceWarrantContent()
+    {
+        ShowResidenceAddress = true;
+        ShowResidenceDescription = true;
+
+        ShowVehicleDescription = false;
+        ShowSuspectDateOfBirth = false;
+        ShowSuspectDriversLicense = false;
+        ShowSuspectName = false;
+        ShowDnaSampleDescription = false;
+    }
+
+    private void ShowSocialMediaWarrantContent()
+    {
+        ShowVehicleDescription = false;
+        ShowSuspectDateOfBirth = false;
+        ShowSuspectDriversLicense = false;
+        ShowSuspectName = false;
+        ShowResidenceAddress = false;
+        ShowResidenceDescription = false;
+        ShowDnaSampleDescription = false;
+    }
+
+    private void ShowGSRWarrantContent()
+    {
+        ShowSuspectDateOfBirth = true;
+        ShowSuspectDriversLicense = true;
+        ShowSuspectName = true;
+
+        ShowVehicleDescription = false;
+        ShowResidenceAddress = false;
+        ShowResidenceDescription = false;
+        ShowDnaSampleDescription = false;
+    }
+
+    private void ShowDNAWarrantContent()
+    {
+        ShowDnaSampleDescription = true;
+
+        ShowVehicleDescription = false;
+        ShowSuspectDateOfBirth = false;
+        ShowSuspectDriversLicense = false;
+        ShowSuspectName = false;
+        ShowResidenceAddress = false;
+        ShowResidenceDescription = false;
+    }
+
     [RelayCommand]
     public void GenerateWarrantDocument()
     {
@@ -238,7 +408,7 @@ public partial class MainWindowViewModel : ObservableObject
 
         try
         {
-            var document = new DocumentGenerator(OutputFileNameText);
+            var document = new DocumentGenerator(OutputFileNameText.Trim());
             var outfile = document.GenerateDocument(new DataEntryObject(this));
             FlyoutMessage = $"Warrant has been generated as:\n\t{outfile}";
         }
@@ -339,16 +509,16 @@ public partial class MainWindowViewModel : ObservableObject
             EmploymentDurationBorder = Brushes.Red;
         }
 
-        if (TargetAddressText == string.Empty)
+        if (ResidenceAddressText == string.Empty)
         {
             result = false;
-            TargetAddressBorder = Brushes.Red;
+            ResidenceAddressBorder = Brushes.Red;
         }
 
-        if (TargetDescriptionText == string.Empty)
+        if (ResidenceDescriptionText == string.Empty)
         {
             result = false;
-            TargetDescriptionBorder = Brushes.Red;
+            ResidenceDescriptionBorder = Brushes.Red;
         }
 
         if (Crimes.Count == 0)

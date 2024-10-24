@@ -8,7 +8,7 @@ namespace WarrantGenerator.DocumentGeneration;
 public class DocumentGenerator(string fileName)
 {
     private Body _body = new();
-    private readonly string _outputFile = $"C:/Temp/{fileName}.docx";
+    private readonly string _outputFile = $"C:/Temp/{ValidFileName(fileName)}.docx";
 
     public string GenerateDocument(DataEntryObject data)
     {
@@ -27,6 +27,23 @@ public class DocumentGenerator(string fileName)
         document.Document.Append(_body);
         document.Document.Save();
         return _outputFile;
+    }
+
+    private static string ValidFileName(string fileName)
+    {
+        const string docxExtension = ".docx";
+        const string docExtension = ".doc";
+
+        if (fileName.EndsWith(docxExtension))
+        {
+            return fileName.Remove(fileName.Length - docxExtension.Length).Trim();
+        }
+        else if (fileName.EndsWith(docExtension))
+        {
+            return fileName.Remove(fileName.Length - docxExtension.Length).Trim();
+        }
+
+        return fileName;
     }
 
     private void AppendFormattedLine(string line)

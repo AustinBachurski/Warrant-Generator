@@ -8,6 +8,7 @@ namespace WarrantGenerator.DTOs;
 
 public class DataEntryObject(MainWindowViewModel viewModel)
 {
+    // Static Content
     public string ApplicationDate { get; } = FormattedDateString();
     public string Crimes { get; } = CrimesAsString(viewModel.Crimes);
     public string CrimeGrammar { get; } = viewModel.Crimes.Count == 1 ? "crime" : "crimes";
@@ -21,11 +22,16 @@ public class DataEntryObject(MainWindowViewModel viewModel)
     public string Organization { get; } = viewModel.OrganizationText;
     public string ProbableCause { get; } = viewModel.ProbableCauseText;
     public string SeizableProperty { get; } = viewModel.SeizablePropertyText;
-    public string SuspectDateOfBirth { get; } = string.Empty;
-    public string SuspectDriversLicense { get; } = string.Empty;
-    public string SuspectName { get; } = string.Empty;
-    public string TargetAddress { get; } = viewModel.TargetAddressText;
-    public string TargetDescription { get; } = viewModel.TargetDescriptionText;
+    public string WarrantType { get; } = viewModel.WarrantTypeSelection;
+
+    // Dynamic Content
+    public string DnaSampleDescription { get; } = viewModel.DnaSampleDescriptionText;
+    public string SuspectDateOfBirth { get; } = viewModel.SuspectDateOfBirthText;
+    public string SuspectDriversLicense { get; } = viewModel.SuspectDriversLicenseText;
+    public string SuspectName { get; } = viewModel.SuspectNameText;
+    public string ResidenceAddress { get; } = viewModel.ResidenceAddressText;
+    public string ResidenceDescription { get; } = viewModel.ResidenceDescriptionText;
+    public string VehicleDescription { get; } = viewModel.VehicleDescriptionText;
 
     private static string GetOfficerTitle(MainWindowViewModel viewModel)
     {
@@ -53,28 +59,17 @@ public class DataEntryObject(MainWindowViewModel viewModel)
 
     private static string GetDayOrdinal(DateTime date)
     {
-        switch (date.Day)
+        return date.Day switch
         {
-            case 11:
-            case 12:
-            case 13:
-                return "th";
-        }
-
-        switch (date.Day % 10)
-        {
-            case 1:
-                return "st";
-
-            case 2:
-                return "nd";
-
-            case 3:
-                return "rd";
-
-            default:
-                return "th";
-        }
+            11 or 12 or 13 => "th",
+            _ => (date.Day % 10) switch
+            {
+                1 => "st",
+                2 => "nd",
+                3 => "rd",
+                _ => "th",
+            },
+        };
     }
 
     private static string CrimesAsString(ObservableCollection<MCACrime> crimesList)
@@ -112,3 +107,4 @@ public class DataEntryObject(MainWindowViewModel viewModel)
         return builder.Length - contentLength;
     }
 }
+

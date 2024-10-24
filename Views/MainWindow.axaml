@@ -3,12 +3,12 @@
         xmlns:vm="using:WarrantGenerator.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="1000"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
         x:Class="WarrantGenerator.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/logo.ico"
         Title="WarrantGenerator"
-		Width="1200" Height="1000">
+		Width="1200" Height="800">
 
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
@@ -19,20 +19,20 @@
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="_File">
-				<MenuItem Header="_New Warrant"/>
+				<MenuItem Header="_New Warrant" />
 				<Separator/>
-				<MenuItem Header="_Continue Existing Warrant"/>
+				<MenuItem Header="_Continue Existing Warrant" />
 				<Separator/>
-				<MenuItem Header="_Exit"/>
+				<MenuItem Header="_Exit" />
 			</MenuItem>
 			<MenuItem Header="_Edit">
-				<MenuItem Header="Copy"/>
-				<MenuItem Header="Cut"/>
-				<MenuItem Header="Paste"/>
+				<MenuItem Header="Copy" />
+				<MenuItem Header="Cut" />
+				<MenuItem Header="Paste" />
 			</MenuItem>
 			<MenuItem Header="_Help">
-				<MenuItem Header="_About"/>
-				<MenuItem Header="_Help"/>
+				<MenuItem Header="_About" />
+				<MenuItem Header="_Help" />
 			</MenuItem>
 		</Menu>
 
@@ -62,6 +62,7 @@
 								</ComboBox>
 							</Border>
 						</StackPanel>
+						<!-- /Court District -->
 
 						<!-- Organization -->
 						<StackPanel Grid.Column="1"
@@ -75,13 +76,30 @@
 								<TextBox Text="{Binding OrganizationText}" />
 							</Border>
 						</StackPanel>
+						<!-- /Organization -->
+
 					</Grid>
 
 					<Grid ColumnDefinitions="Auto, Auto, Auto">
 
+						<!-- Officer Gender -->
+						<StackPanel Grid.Column="0">
+							<TextBlock Text="Officer Gender"
+									   VerticalAlignment="Center"
+									   Margin="5, 0, 0, 0" />
+							<Border BorderBrush="{Binding OfficerGenderBorder}"
+									BorderThickness="2">
+								<StackPanel Orientation="Horizontal" Spacing="10">
+									<CheckBox Content="Female" IsChecked="{Binding FemaleChecked}" />
+									<CheckBox Content="Male" IsChecked="{Binding MaleChecked}" />
+								</StackPanel>
+							</Border>
+						</StackPanel>
+						<!-- /Officer Gender -->
+
 						<!-- Officer Title -->
 						<StackPanel Grid.Row="1"
-									Grid.Column="0">
+									Grid.Column="1">
 
 							<StackPanel Orientation="Horizontal">
 								<StackPanel>
@@ -106,84 +124,64 @@
 								</StackPanel>
 							</StackPanel>
 						</StackPanel>
+						<!-- /Officer Title -->
 
-					<!-- Officer Gender -->
-					<StackPanel Grid.Column="1">
-						<TextBlock Text="Officer Gender"
-								   VerticalAlignment="Center"
-								   Margin="5, 0, 0, 0" />
-						<Border BorderBrush="{Binding OfficerGenderBorder}"
-								BorderThickness="2">
-							<StackPanel Orientation="Horizontal" Spacing="10">
-								<CheckBox Content="Female" IsChecked="{Binding FemaleChecked}" />
-								<CheckBox Content="Male" IsChecked="{Binding MaleChecked}" />
-							</StackPanel>
-						</Border>
-					</StackPanel>
-
-					<!-- Time with the Organization -->
-					<StackPanel Grid.Column="2"
-								Margin="10, 0, 0, 0">
-						<TextBlock Text="Time with the Organization"
-						   VerticalAlignment="Center"
-						   Margin="5, 0, 0, 0" />
-						<StackPanel Orientation="Horizontal">
-							<Border BorderBrush="{Binding EmploymentDurationBorder}"
-									BorderThickness="2">
-								<TextBox Text="{Binding EmploymentDurationText}" />
-							</Border>
-							<ComboBox
-								ItemsSource="{Binding DurationTypes}"
-								SelectedItem="{Binding DurationTypeSelection}"
-								SelectedIndex="0"
-								VerticalAlignment="Center">
-							</ComboBox>
-						</StackPanel>
-					</StackPanel>
+								<!-- Warrant Type ComboBox -->
+								<StackPanel Grid.Column="2">
+									<TextBlock Text="Warrant Type"
+									   VerticalAlignment="Center"
+									   Margin="5, 0, 0, 0" />
+									<Border BorderBrush="{Binding WarrantTypeBorder}"
+											BorderThickness="2">
+										<ComboBox ItemsSource="{Binding WarrantTypes}"
+												  SelectedItem="{Binding WarrantTypeSelection}"
+												  PlaceholderText="Select Warrant Type">
+										</ComboBox>
+									</Border>
+								</StackPanel>
+								<!-- /Warrant Type ComboBox -->
 
 					</Grid>
 
 					<Grid ColumnDefinitions="*, Auto">
+						<StackPanel Orientation="Horizontal"
+									Grid.Column="0">
 						<!-- Officer Name -->
-						<StackPanel Grid.Column="0">
+						<StackPanel>
 							<TextBlock Text="Officer Name"
 									   VerticalAlignment="Center"
 									   Margin="5, 0, 0, 0" />
 							<Border BorderBrush="{Binding OfficerNameBorder}"
 									BorderThickness="2">
-								<TextBox Text="{Binding OfficerNameText}" />
+								<TextBox Text="{Binding OfficerNameText}"
+										 Width="100"/>
 							</Border>
 						</StackPanel>
+						<!-- /Officer Name -->
 
+						<!-- Time with the Organization -->
+						<StackPanel Margin="10, 0, 0, 0">
+							<TextBlock Text="Time with the Organization"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+							<StackPanel Orientation="Horizontal">
+								<Border BorderBrush="{Binding EmploymentDurationBorder}"
+										BorderThickness="2">
+									<TextBox Text="{Binding EmploymentDurationText}" />
+								</Border>
+								<ComboBox
+									ItemsSource="{Binding DurationTypes}"
+									SelectedItem="{Binding DurationTypeSelection}"
+									SelectedIndex="0"
+									VerticalAlignment="Center">
+								</ComboBox>
+							</StackPanel>
+						</StackPanel>
+						<!-- /Time with the Organization -->
 
-						</Grid>
+						</StackPanel>
 
-					<!-- Target Address -->
-					<StackPanel>
-						<TextBlock Text="Target Address"
-								   VerticalAlignment="Center"
-								   Margin="5, 0, 0, 0" />
-						<Border BorderBrush="{Binding TargetAddressBorder}"
-								BorderThickness="2">
-							<TextBox Name="TargetAddressTextBox"
-									 Text="{Binding TargetAddressText}" />
-						</Border>
-					</StackPanel>
-
-					<!-- Target Legal Description -->
-					<StackPanel>
-						<TextBlock Text="Target Legal Description"
-								   VerticalAlignment="Center"
-								   Margin="5, 0, 0, 0" />
-						<Border BorderBrush="{Binding TargetDescriptionBorder}"
-								BorderThickness="2">
-							<TextBox Name="TargetDescriptionTextBox"
-									 Text="{Binding TargetDescriptionText}"
-									 AcceptsReturn="True"
-									 TextWrapping="Wrap"
-									 Height="60" />
-						</Border>
-					</StackPanel>
+					</Grid>
 
 					<!-- Crimes List -->
 					<StackPanel>
@@ -206,7 +204,7 @@
 								<ListBox.ContextMenu>
 									<ContextMenu>
 										<MenuItem Header="Remove Selected Crime"
-												  Command="{Binding RemoveCrimeCommand}"/>
+												  Command="{Binding RemoveCrimeCommand}" />
 									</ContextMenu>
 								</ListBox.ContextMenu>
 								<ListBox.ItemTemplate>
@@ -227,16 +225,17 @@
 								</ListBox.ItemTemplate>
 							</ListBox>
 						</Border>
+						<!-- /Crimes List -->
 
+							<!-- Crime Entry Group -->
 						<Grid ColumnDefinitions="100, *, Auto" Margin="10">
-
 							<StackPanel Grid.Column="0">
 								<TextBlock Text="M.C.A. Code"
 									   VerticalAlignment="Center"
 									   Margin="5, 0, 0, 0" />
 								<Border BorderBrush="{Binding McaCodeBorder}"
 										BorderThickness="2">
-									<TextBox Text="{Binding McaCodeText}"/>
+									<TextBox Text="{Binding McaCodeText}" />
 								</Border>
 							</StackPanel>
 
@@ -263,13 +262,103 @@
 										FontSize="24"
 										Foreground="Red"
 										VerticalAlignment="Top"
-										Command="{Binding RemoveCrimeCommand}"/>
+										Command="{Binding RemoveCrimeCommand}" />
 							</StackPanel>
 						</Grid>
 					</StackPanel>
+					<!-- /Crime Entry Group -->
+
+<!-- *****DYNAMIC CONTENT***** -->
+
+					<!-- Residence Address -->
+					<StackPanel IsVisible="{Binding ShowResidenceAddress}">
+						<TextBlock Text="Residence Address"
+								   VerticalAlignment="Center"
+								   Margin="5, 0, 0, 0" />
+						<Border BorderBrush="{Binding ResidenceAddressBorder}"
+								BorderThickness="2">
+							<TextBox Text="{Binding ResidenceAddressText}" />
+						</Border>
+					</StackPanel>
+					<!-- /Residence Address -->
+
+					<!-- Residence Legal Description -->
+					<StackPanel IsVisible="{Binding ShowResidenceDescription}">
+						<TextBlock Text="Residence Legal Description"
+								   VerticalAlignment="Center"
+								   Margin="5, 0, 0, 0" />
+						<Border BorderBrush="{Binding ResidenceDescriptionBorder}"
+								BorderThickness="2">
+							<TextBox Text="{Binding ResidenceDescriptionText}"
+									 AcceptsReturn="True"
+									 TextWrapping="Wrap"
+									 Height="60" />
+						</Border>
+					</StackPanel>
+					<!-- /Residence Legal Description -->
+
+					<!-- Vehicle Description -->
+					<StackPanel IsVisible="{Binding ShowVehicleDescription}">
+						<TextBlock Text="Vehicle Description"
+								   VerticalAlignment="Center"
+								   Margin="5, 0, 0, 0" />
+						<Border BorderBrush="{Binding VehicleDescriptionBorder}"
+								BorderThickness="2">
+							<TextBox Text="{Binding VehicleDescriptionText}"
+									 AcceptsReturn="True"
+									 TextWrapping="Wrap"
+									 Height="60" />
+						</Border>
+					</StackPanel>
+					<!-- /Vehicle Description -->
+
+					<!-- Suspect Name -->
+					<StackPanel IsVisible="{Binding ShowSuspectName}">
+						<TextBlock Text="Suspect Name"
+								   VerticalAlignment="Center"
+								   Margin="5, 0, 0, 0" />
+						<Border BorderBrush="{Binding SuspectNameBorder}"
+								BorderThickness="2">
+							<TextBox Text="{Binding SuspectNameText}"
+									 AcceptsReturn="True"
+									 TextWrapping="Wrap"
+									 Height="60" />
+						</Border>
+					</StackPanel>
+					<!-- /Suspect Name -->
+
+					<!-- Suspect Date of Birth -->
+					<StackPanel IsVisible="{Binding ShowSuspectDateOfBirth}">
+						<TextBlock Text="Suspect Suspect Date of Birth"
+								   VerticalAlignment="Center"
+								   Margin="5, 0, 0, 0" />
+						<Border BorderBrush="{Binding SuspectDateOfBirthBorder}"
+								BorderThickness="2">
+							<TextBox Text="{Binding SuspectDateOfBirthText}"
+									 AcceptsReturn="True"
+									 TextWrapping="Wrap"
+									 Height="60" />
+						</Border>
+					</StackPanel>
+					<!-- /Suspect Date of Birth -->
+
+					<!-- Suspect Driver's License Number -->
+					<StackPanel IsVisible="{Binding ShowSuspectDriversLicense}">
+						<TextBlock Text="Suspect Driver's License Number"
+								   VerticalAlignment="Center"
+								   Margin="5, 0, 0, 0" />
+						<Border BorderBrush="{Binding SuspectDriversLicenseBorder}"
+								BorderThickness="2">
+							<TextBox Text="{Binding SuspectDriversLicenseText}"
+									 AcceptsReturn="True"
+									 TextWrapping="Wrap"
+									 Height="60" />
+						</Border>
+					</StackPanel>
+					<!-- /Suspect Driver's License Number -->
 
 					<!-- Output File -->
-					<StackPanel>
+					<StackPanel Grid.Column="0">
 						<TextBlock Text="Output File Name"
 								   VerticalAlignment="Center"
 								   Margin="5, 0, 0, 0" />
@@ -292,11 +381,12 @@
 					<!-- /Output File -->
 
 				</StackPanel>
+				<!-- /Left Column -->
 
 
 				<!-- Right Column -->
-					<Grid Grid.Column="1"
-						  RowDefinitions="Auto, Auto">
+				<Grid Grid.Column="1"
+					  RowDefinitions="Auto, Auto">
 
 					<!-- Probable Cause -->
 					<StackPanel Grid.Row="0">
@@ -310,6 +400,7 @@
 									 TextWrapping="Wrap" />
 						</Border>
 					</StackPanel>
+					<!-- /Probable Cause -->
 
 					<!-- Seizable Property -->
 					<StackPanel Grid.Row="1">
@@ -323,12 +414,16 @@
 									 TextWrapping="Wrap" />
 						</Border>
 					</StackPanel>
-</Grid>
+					<!-- /Seizable Property -->
+
+				</Grid>
+				<!-- /Right Column -->
+
 			</Grid>
 		</ScrollViewer>
-
 	</DockPanel>
 
 </Window>
+
 
 
