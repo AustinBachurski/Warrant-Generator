@@ -4,7 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WarrantGenerator.DocumentGeneration;
 using WarrantGenerator.DTOs;
-using WarrantGenerator.Views;
+using WarrantGenerator.ViewModels;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Microsoft.VisualBasic;
@@ -16,6 +16,10 @@ namespace WarrantGenerator.ViewModels;
 
 public partial class MainWindowViewModel : ObservableObject
 {
+    public AdministrativeContentViewModel AdministrativeTab { get; } = new();
+    public ReturnInventoryContentViewModel ReturnInventoryTab { get; } = new();
+    public StructureContentViewModel StructureTab { get; } = new();
+
     public string[] CourtDistrictTypes { get; } = [
         "11TH JUDICIAL DISTRICT COURT",
         "FLATHEAD COUNTY JUSTICE COURT",

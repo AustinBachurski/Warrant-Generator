@@ -10,6 +10,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        DataContext = this;
 
         _spellChecker = new TextBoxSpellChecker(SpellCheckerConfig.Create("en_US"));
 

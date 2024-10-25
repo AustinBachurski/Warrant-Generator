@@ -32,5 +32,14 @@
     <PackageReference Include="GHSoftware.Avalonia.SpellChecker" Version="0.3.0" />
     <PackageReference Include="Open-XML-SDK" Version="2.9.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\StructureContent.axaml.cs">
+      <DependentUpon>StructureContent.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ReturnInventoryContent.axaml.cs">
+      <DependentUpon>ReturnInventoryContent.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>
 
