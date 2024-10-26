@@ -3,5 +3,116 @@
 			 xmlns:vm="using:WarrantGenerator.ViewModels"
              x:Class="WarrantGenerator.Views.StructureContentTab"
 			 x:DataType="vm:StructureContentViewModel">
-    <TextBlock Text="RETURN INVENTORY" />
+
+	<ScrollViewer>
+		<Grid ColumnDefinitions="*, 10, *">
+
+			<!-- Left Column -->
+			<StackPanel Grid.Column="0"
+						Spacing="15">
+
+				<!-- Officer Name -->
+				<StackPanel>
+					<TextBlock Text="Officer Name"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding OfficerNameBorder}"
+							BorderThickness="2">
+						<TextBox x:Name="OfficerNameTextBox"
+								 Text="{Binding OfficerNameText}" />
+					</Border>
+				</StackPanel>
+				<!-- /Officer Name -->
+
+				<!-- Report Number -->
+				<StackPanel>
+					<TextBlock Text="Report Number"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding ReportNumberBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding ReportNumberText}" />
+					</Border>
+				</StackPanel>
+				<!-- /Report Number -->
+
+				<!-- Pawn Broker -->
+				<StackPanel>
+					<TextBlock Text="Pawn Broker"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding PawnBrokerNameBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding PawnBrokerNameText}" />
+					</Border>
+				</StackPanel>
+				<!-- /Pawn Broker -->
+
+				<!-- Pawn Broker's Address -->
+				<StackPanel>
+					<TextBlock Text="Pawn Broker's Address"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding PawnBrokerAddressBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding PawnBrokerAddressText}" />
+					</Border>
+				</StackPanel>
+				<!-- /Pawn Broker's Address -->
+
+				<!-- Suspect Name -->
+				<StackPanel>
+					<TextBlock Text="Suspect Name"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding SuspectNameBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding SuspectNameText}" />
+					</Border>
+				</StackPanel>
+				<!-- /Suspect Name -->
+
+				<!-- Output File -->
+				<StackPanel>
+					<TextBlock Text="Output File Name"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding OutputFileNameBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding OutputFileNameText}" />
+					</Border>
+					<Button Command="{Binding GenerateDocument}"
+							Margin="0, 10, 0, 0"
+							Content="Generate Document">
+						<Button.Flyout>
+							<Flyout Placement="RightEdgeAlignedTop">
+								<StackPanel>
+									<TextBlock Text="{Binding FlyoutMessage}" />
+								</StackPanel>
+							</Flyout>
+						</Button.Flyout>
+					</Button>
+				</StackPanel>
+				<!-- /Output File -->
+
+			</StackPanel>
+			<!-- /Left Column -->
+
+			<!-- Right Column -->
+			<!-- Items Pawned -->
+			<StackPanel Grid.Column="2">
+				<TextBlock Text="Items Pawned"
+						   Margin="5, 0, 0, 0" />
+				<Border BorderBrush="{Binding ItemsPawnedBorder}"
+						BorderThickness="2">
+					<TextBox Text="{Binding ItemsPawnedText}"
+							 AcceptsReturn="True"
+							 TextWrapping="Wrap" />
+				</Border>
+			</StackPanel>
+			<!-- /Items Pawned -->
+			<!-- /Right Column -->
+
+		</Grid>
+	</ScrollViewer>
 </UserControl>

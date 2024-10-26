@@ -24,6 +24,9 @@
 		<DataTemplate DataType="vm:ReturnInventoryContentViewModel">
 			<views:ReturnInventoryContentTab />
 		</DataTemplate>
+		<DataTemplate DataType="vm:StructureContentViewModel">
+			<views:StructureContentTab />
+		</DataTemplate>
 	</Window.DataTemplates>
 
 	<DockPanel>
