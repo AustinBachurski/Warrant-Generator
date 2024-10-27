@@ -24,8 +24,26 @@
 		<DataTemplate DataType="vm:ReturnInventoryContentViewModel">
 			<views:ReturnInventoryContentTab />
 		</DataTemplate>
+		<DataTemplate DataType="vm:AppOrderContentViewModel">
+			<views:AppOrderContentTab />
+		</DataTemplate>
 		<DataTemplate DataType="vm:StructureContentViewModel">
 			<views:StructureContentTab />
+		</DataTemplate>
+		<DataTemplate DataType="vm:DnaContentViewModel">
+			<views:DnaContentTab />
+		</DataTemplate>
+		<DataTemplate DataType="vm:GsrContentViewModel">
+			<views:GsrContentTab />
+		</DataTemplate>
+		<DataTemplate DataType="vm:SubpoenaContentViewModel">
+			<views:SubpoenaContentTab />
+		</DataTemplate>
+		<DataTemplate DataType="vm:TelephonicContentViewModel">
+			<views:TelephonicContentTab />
+		</DataTemplate>
+		<DataTemplate DataType="vm:SocialMediaContentViewModel">
+			<views:SocialMediaContentTab />
 		</DataTemplate>
 	</Window.DataTemplates>
 
@@ -65,7 +83,7 @@
 
 			<TabItem Header="App and Order"
 					 FontSize="18">
-
+				<ContentControl Content="{Binding AppOrderTab}"/>
 			</TabItem>
 
 
@@ -79,35 +97,35 @@
 
 			<TabItem Header="DNA"
 					 FontSize="18">
-
+				<ContentControl Content="{Binding DnaTab}"/>
 			</TabItem>
 
 
 
 			<TabItem Header="GSR"
 					 FontSize="18">
-
+				<ContentControl Content="{Binding GsrTab}"/>
 			</TabItem>
 
 
 
 			<TabItem Header="Subpoena"
 					 FontSize="18">
-
+				<ContentControl Content="{Binding SubpoenaTab}"/>
 			</TabItem>
 
 
 
 			<TabItem Header="Telephonic"
 					 FontSize="18">
-
+				<ContentControl Content="{Binding TelephonicTab}"/>
 			</TabItem>
 
 
 
 			<TabItem Header="Social Media"
 					 FontSize="18">
-
+				<ContentControl Content="{Binding SocialMediaTab}"/>
 			</TabItem>
 
 
