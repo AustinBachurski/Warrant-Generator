@@ -105,7 +105,8 @@
 						   Margin="5, 0, 0, 0" />
 				<Border BorderBrush="{Binding ItemsPawnedBorder}"
 						BorderThickness="2">
-					<TextBox Text="{Binding ItemsPawnedText}"
+					<TextBox x:Name="ItemsPawnedTextBox"
+						     Text="{Binding ItemsPawnedText}"
 							 AcceptsReturn="True"
 							 TextWrapping="Wrap" />
 				</Border>

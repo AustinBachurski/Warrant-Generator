@@ -6,7 +6,7 @@ using WarrantGenerator.ViewModels;
 
 namespace WarrantGenerator.DTOs;
 
-public class DataEntryObject(MainWindowViewModel viewModel)
+public class DataEntryObject(StructureContentViewModel viewModel)
 {
     // Static Content
     public string ApplicationDate { get; } = FormattedDateString();
@@ -33,7 +33,7 @@ public class DataEntryObject(MainWindowViewModel viewModel)
     public string ResidenceDescription { get; } = viewModel.ResidenceDescriptionText;
     public string VehicleDescription { get; } = viewModel.VehicleDescriptionText;
 
-    private static string GetOfficerTitle(MainWindowViewModel viewModel)
+    private static string GetOfficerTitle(StructureContentViewModel viewModel)
     {
         if (viewModel.CustomOfficerTitleVisibility)
         {
