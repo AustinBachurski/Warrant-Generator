@@ -5,8 +5,7 @@
 			 x:DataType="vm:StructureContentViewModel">
 
 		<ScrollViewer>
-			<Grid ColumnDefinitions="*, *"
-				  Margin="10">
+			<Grid ColumnDefinitions="*, 10, *">
 
 
 				<!-- Left Column -->
@@ -353,7 +352,7 @@
 
 
 				<!-- Right Column -->
-				<Grid Grid.Column="1"
+				<Grid Grid.Column="2"
 					  RowDefinitions="Auto, Auto">
 
 					<!-- Probable Cause -->
