@@ -100,9 +100,9 @@ public partial class AdministrativeContentViewModel : ObservableObject
 
         try
         {
-            var document = new DocumentGenerator(OutputFileNameText.Trim());
-            //var outfile = document.GenerateDocument(new DataEntryObject(this));
-            //FlyoutMessage = $"Warrant has been generated as:\n\t{outfile}";
+            var document = new DocumentGenerator(this);
+            var outfile = document.GenerateDocument();
+            FlyoutMessage = $"Warrant has been generated as:\n\t{outfile}";
         }
         catch (IOException)
         {

@@ -1,60 +1,19 @@
-﻿using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
+﻿using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using WarrantGenerator.ViewModels;
+using System;
 
 namespace WarrantGenerator.DocumentGeneration;
 
 public partial class DocumentGenerator
 {
     private Body _body = new();
+    private string _outputPath = Environment.GetEnvironmentVariable("DOCUMENT_OUTPUT_PATH") ?? "./";
+    
 
     public delegate string DocumentDelegate();
-
     public DocumentDelegate GenerateDocument;
+
     
-    public DocumentGenerator(AdministrativeContentViewModel model)
-    {
-        GenerateDocument = AdministrativeDocument;
-    }
-
-    public DocumentGenerator(DnaContentViewModel model)
-    {
-        GenerateDocument = DnaDocument;
-    }
-
-    private string AdministrativeDocument()
-    {
-        return "";
-    }
-    
-    private string DnaDocument()
-    {
-        return "";
-    }
-    
-    
-    
-    /*
-    public string GenerateDocument(DataEntryObject data)
-    {
-        using var newDocument = WordprocessingDocument.Create(_outputFile, WordprocessingDocumentType.Document);
-
-        var document = newDocument.AddMainDocumentPart();
-        document.Document = new Document();
-        SetDocumentFormatting(document);
-
-        InsertBoilerplate(data.District);
-
-        // Data insertion.
-
-
-        document.Document.Append(_body);
-        document.Document.Save();
-        return _outputFile;
-    }
-    */
-
     private static string ValidFileName(string fileName)
     {
         const string docxExtension = ".docx";
@@ -93,7 +52,7 @@ public partial class DocumentGenerator
         _body.Append(paragraph);
     }
     
-    private void InsertBoilerplate(string district)
+    private void InsertWarrantBoilerplate(string district)
     {
         var boilerplate = new[]
         {

@@ -6,32 +6,33 @@ using WarrantGenerator.ViewModels;
 
 namespace WarrantGenerator.DTOs;
 
-public class DataEntryObject(StructureContentViewModel viewModel)
+// TODO: Remove this class, move methods elsewhere.
+public class DataEntryObject(StructureContentViewModel model)
 {
     // Static Content
     public string ApplicationDate { get; } = FormattedDateString();
-    public string Crimes { get; } = CrimesAsString(viewModel.Crimes);
-    public string CrimeGrammar { get; } = viewModel.Crimes.Count == 1 ? "crime" : "crimes";
-    public string District { get; } = viewModel.CourtDistrictSelection;
-    public string DurationType { get; } = viewModel.DurationTypeSelection;
-    public string EmploymentDuration { get; } = viewModel.EmploymentDurationText;
-    public string OfficerGender { get; } = viewModel.MaleChecked ? "he" : "she";
-    public string OfficerGrammar { get; } = CorrectGrammar(viewModel.OfficerTitleSelection.First());
-    public string OfficerName { get; } = viewModel.OfficerNameText;
-    public string OfficerTitle { get; } = GetOfficerTitle(viewModel);
-    public string Organization { get; } = viewModel.OrganizationText;
-    public string ProbableCause { get; } = viewModel.ProbableCauseText;
-    public string SeizableProperty { get; } = viewModel.SeizablePropertyText;
-    public string WarrantType { get; } = viewModel.WarrantTypeSelection;
+    public string Crimes { get; } = CrimesAsString(model.Crimes);
+    public string CrimeGrammar { get; } = model.Crimes.Count == 1 ? "crime" : "crimes";
+    public string District { get; } = model.CourtDistrictSelection;
+    public string DurationType { get; } = model.DurationTypeSelection;
+    public string EmploymentDuration { get; } = model.EmploymentDurationText;
+    public string OfficerGender { get; } = model.MaleChecked ? "he" : "she";
+    public string OfficerGrammar { get; } = CorrectGrammar(model.OfficerTitleSelection.First());
+    public string OfficerName { get; } = model.OfficerNameText;
+    public string OfficerTitle { get; } = GetOfficerTitle(model);
+    public string Organization { get; } = model.OrganizationText;
+    public string ProbableCause { get; } = model.ProbableCauseText;
+    public string SeizableProperty { get; } = model.SeizablePropertyText;
+    public string WarrantType { get; } = model.WarrantTypeSelection;
 
     // Dynamic Content
-    public string DnaSampleDescription { get; } = viewModel.DnaSampleDescriptionText;
-    public string SuspectDateOfBirth { get; } = viewModel.SuspectDateOfBirthText;
-    public string SuspectDriversLicense { get; } = viewModel.SuspectDriversLicenseText;
-    public string SuspectName { get; } = viewModel.SuspectNameText;
-    public string ResidenceAddress { get; } = viewModel.ResidenceAddressText;
-    public string ResidenceDescription { get; } = viewModel.ResidenceDescriptionText;
-    public string VehicleDescription { get; } = viewModel.VehicleDescriptionText;
+    public string DnaSampleDescription { get; } = model.DnaSampleDescriptionText;
+    public string SuspectDateOfBirth { get; } = model.SuspectDateOfBirthText;
+    public string SuspectDriversLicense { get; } = model.SuspectDriversLicenseText;
+    public string SuspectName { get; } = model.SuspectNameText;
+    public string ResidenceAddress { get; } = model.ResidenceAddressText;
+    public string ResidenceDescription { get; } = model.ResidenceDescriptionText;
+    public string VehicleDescription { get; } = model.VehicleDescriptionText;
 
     private static string GetOfficerTitle(StructureContentViewModel viewModel)
     {
