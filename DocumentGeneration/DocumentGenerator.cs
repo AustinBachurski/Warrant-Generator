@@ -1,19 +1,44 @@
 ﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using WarrantGenerator.DTOs;
+using WarrantGenerator.ViewModels;
 
 namespace WarrantGenerator.DocumentGeneration;
 
-public class DocumentGenerator(string fileName)
+public partial class DocumentGenerator
 {
     private Body _body = new();
-    private readonly string _outputFile = $"C:/Temp/{ValidFileName(fileName)}.docx";
 
+    public delegate string DocumentDelegate();
+
+    public DocumentDelegate GenerateDocument;
+    
+    public DocumentGenerator(AdministrativeContentViewModel model)
+    {
+        GenerateDocument = AdministrativeDocument;
+    }
+
+    public DocumentGenerator(DnaContentViewModel model)
+    {
+        GenerateDocument = DnaDocument;
+    }
+
+    private string AdministrativeDocument()
+    {
+        return "";
+    }
+    
+    private string DnaDocument()
+    {
+        return "";
+    }
+    
+    
+    
+    /*
     public string GenerateDocument(DataEntryObject data)
     {
-        using var newDocument = WordprocessingDocument.Create(
-            _outputFile, DocumentFormat.OpenXml.WordprocessingDocumentType.Document);
+        using var newDocument = WordprocessingDocument.Create(_outputFile, WordprocessingDocumentType.Document);
 
         var document = newDocument.AddMainDocumentPart();
         document.Document = new Document();
@@ -28,6 +53,7 @@ public class DocumentGenerator(string fileName)
         document.Document.Save();
         return _outputFile;
     }
+    */
 
     private static string ValidFileName(string fileName)
     {
