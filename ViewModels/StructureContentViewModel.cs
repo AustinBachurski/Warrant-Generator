@@ -25,37 +25,6 @@ public partial class StructureContentViewModel : ObservableObject
         "Captain", "Chief", "Detective", "Detective Sergeant", "Lieutenant",
         "Master Patrol Officer", "Officer", "Sergeant", "Other",
     ];
-    public string[] WarrantTypes { get; } = [
-        "DNA Warrant", "GSR Warrant", "Social Media Warrant",
-        "Residence Warrant", "Vehicle Warrant",
-    ];
-
-    [ObservableProperty]
-    private IBrush _warrantTypeBorder = Brushes.Transparent;
-
-    [ObservableProperty]
-    private string _warrantTypeSelection = string.Empty;
-
-    [ObservableProperty]
-    private bool _showVehicleDescription = false;
-
-    [ObservableProperty]
-    private bool _showSuspectDateOfBirth = false;
-
-    [ObservableProperty]
-    private bool _showSuspectDriversLicense = false;
-
-    [ObservableProperty]
-    private bool _showSuspectName = false;
-
-    [ObservableProperty]
-    private bool _showResidenceAddress = false;
-
-    [ObservableProperty]
-    private bool _showResidenceDescription = false;
-
-    [ObservableProperty]
-    private bool _showDnaSampleDescription = false;
 
     [ObservableProperty]
     private IBrush _mcaCodeBorder = Brushes.Transparent;
@@ -190,57 +159,6 @@ public partial class StructureContentViewModel : ObservableObject
     [ObservableProperty]
     private string _suspectNameText = string.Empty;
 
-    partial void OnWarrantTypeSelectionChanged(string value)
-    {
-        switch (value)
-        {
-            case "DNA Warrant":
-                ShowDNAWarrantContent();
-                break;
-
-            case "GSR Warrant":
-                ShowGSRWarrantContent();
-                break;
-
-            case "Social Media Warrant":
-                ShowSocialMediaWarrantContent();
-                break;
-
-            case "Residence Warrant":
-                ShowResidenceWarrantContent();
-                break;
-
-            case "Vehicle Warrant":
-                ShowVehicleWarrantContent();
-                break;
-        }
-    }
-
-    partial void OnSuspectNameTextChanged(string value)
-    {
-        SuspectNameBorder = Brushes.Transparent;
-    }
-
-    partial void OnSuspectDriversLicenseTextChanged(string value)
-    {
-        SuspectDriversLicenseBorder = Brushes.Transparent;
-    }
-
-    partial void OnSuspectDateOfBirthTextChanged(string value)
-    {
-        SuspectDateOfBirthBorder = Brushes.Transparent;
-    }
-
-    partial void OnDnaSampleDescriptionTextChanged(string value)
-    {
-        DnaSampleDescriptionBorder = Brushes.Transparent;
-    }
-
-    partial void OnVehicleDescriptionTextChanged(string value)
-    {
-        VehicleDescriptionBorder = Brushes.Transparent;
-    }
-
     partial void OnMcaCodeTextChanged(string value)
     {
         McaCodeBorder = Brushes.Transparent;
@@ -332,65 +250,6 @@ public partial class StructureContentViewModel : ObservableObject
     partial void OnOutputFileNameTextChanged(string value)
     {
         OutputFileNameBorder = Brushes.Transparent;
-    }
-
-    private void ShowVehicleWarrantContent()
-    {
-        ShowVehicleDescription = true;
-
-        ShowSuspectDateOfBirth = false;
-        ShowSuspectDriversLicense = false;
-        ShowSuspectName = false;
-        ShowResidenceAddress = false;
-        ShowResidenceDescription = false;
-        ShowDnaSampleDescription = false;
-    }
-
-    private void ShowResidenceWarrantContent()
-    {
-        ShowResidenceAddress = true;
-        ShowResidenceDescription = true;
-
-        ShowVehicleDescription = false;
-        ShowSuspectDateOfBirth = false;
-        ShowSuspectDriversLicense = false;
-        ShowSuspectName = false;
-        ShowDnaSampleDescription = false;
-    }
-
-    private void ShowSocialMediaWarrantContent()
-    {
-        ShowVehicleDescription = false;
-        ShowSuspectDateOfBirth = false;
-        ShowSuspectDriversLicense = false;
-        ShowSuspectName = false;
-        ShowResidenceAddress = false;
-        ShowResidenceDescription = false;
-        ShowDnaSampleDescription = false;
-    }
-
-    private void ShowGSRWarrantContent()
-    {
-        ShowSuspectDateOfBirth = true;
-        ShowSuspectDriversLicense = true;
-        ShowSuspectName = true;
-
-        ShowVehicleDescription = false;
-        ShowResidenceAddress = false;
-        ShowResidenceDescription = false;
-        ShowDnaSampleDescription = false;
-    }
-
-    private void ShowDNAWarrantContent()
-    {
-        ShowDnaSampleDescription = true;
-
-        ShowVehicleDescription = false;
-        ShowSuspectDateOfBirth = false;
-        ShowSuspectDriversLicense = false;
-        ShowSuspectName = false;
-        ShowResidenceAddress = false;
-        ShowResidenceDescription = false;
     }
 
     [RelayCommand]

@@ -6,12 +6,19 @@ namespace WarrantGenerator.DocumentGeneration;
 
 public partial class DocumentGenerator
 {
-    private Body _body = new();
-    private string _outputPath = Environment.GetEnvironmentVariable("DOCUMENT_OUTPUT_PATH") ?? "./";
-    
-
     public delegate string DocumentDelegate();
     public DocumentDelegate GenerateDocument;
+
+    private Body _body = new();
+
+    private string _outputPath = Environment.GetEnvironmentVariable("DOCUMENT_OUTPUT_PATH") ?? "./";
+    private string _outputFileName = string.Empty;
+    private string _officerName = string.Empty;
+    private string _reportNumber = string.Empty;
+    private string _pawnBrokerName = string.Empty;
+    private string _pawnBrokerAddress = string.Empty;
+    private string _suspectName = string.Empty;
+    private string _itemsPawned = string.Empty;
 
     
     private static string ValidFileName(string fileName)
