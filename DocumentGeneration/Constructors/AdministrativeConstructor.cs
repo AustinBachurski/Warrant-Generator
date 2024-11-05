@@ -8,7 +8,13 @@ public partial class DocumentGenerator
     {
         GenerateDocument = AdministrativeDocument;
 
-        _outputPath += model.OutputFileNameText;
+        _outputPath += ValidFileName(model.OutputFileNameText);
+        _officerName = model.OfficerNameText;
+        _reportNumber = model.ReportNumberText;
+        _pawnBrokerName = model.PawnBrokerNameText;
+        _pawnBrokerAddress = model.PawnBrokerAddressText;
+        _suspectName = model.SuspectNameText;
+        _itemsPawned = model.ItemsPawnedText;
     }
 }
 

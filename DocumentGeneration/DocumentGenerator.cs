@@ -1,6 +1,9 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System;
+using System.Collections.ObjectModel;
+using System.Text;
+using WarrantGenerator.DTOs;
 
 namespace WarrantGenerator.DocumentGeneration;
 
@@ -12,7 +15,7 @@ public partial class DocumentGenerator
     private Body _body = new();
 
     private string _outputPath = Environment.GetEnvironmentVariable("DOCUMENT_OUTPUT_PATH") ?? "./";
-    private string _outputFileName = string.Empty;
+    private string _nthDayOfMonth = FormattedDateString();
     private string _officerName = string.Empty;
     private string _reportNumber = string.Empty;
     private string _pawnBrokerName = string.Empty;
@@ -59,6 +62,58 @@ public partial class DocumentGenerator
         _body.Append(paragraph);
     }
     
+    private static string GetOfficerTitle(StructureContentViewModel viewModel)
+    {
+        if (viewModel.CustomOfficerTitleVisibility)
+        {
+            return viewModel.CustomOfficerTitleText;
+        }
+        return viewModel.OfficerTitleSelection;
+    }
+
+   private static string CorrectGrammar(char c)
+    {
+        return char.ToUpper(c) switch
+        {
+            'A' or 'E' or 'I' or 'O' or 'U' => "an",
+            _ => "a",
+        };
+    }
+
+    private static string CrimesAsString(ObservableCollection<MCACrime> crimesList)
+    {
+        StringBuilder builder = new();
+
+        const string prefix = "M.C.A. § ";
+        const string space = " (";
+        const string suffix = "), ";
+        int contentLength = prefix.Length + space.Length + suffix.Length;
+
+        foreach (MCACrime each in crimesList)
+        {
+            builder.Append(prefix);
+            builder.Append(each.Code);
+            builder.Append(space);
+            builder.Append(each.Description);
+            builder.Append(suffix);
+        }
+
+        if (crimesList.Count > 1)
+        {
+            builder.Insert(StartingPositionOfLastEntry(builder, contentLength, crimesList), "and ");
+        }
+
+        // Trailing ", " is intentional.
+        return builder.ToString();
+    }
+
+    private static int StartingPositionOfLastEntry(StringBuilder builder, int contentLength, ObservableCollection<MCACrime> crimesList)
+    {
+        contentLength += crimesList.Last().Code.Length;
+        contentLength += crimesList.Last().Description.Length;
+
+        return builder.Length - contentLength;
+    }
     private void InsertWarrantBoilerplate(string district)
     {
         var boilerplate = new[]
@@ -100,5 +155,26 @@ public partial class DocumentGenerator
         defaultStyle.Append(paragraphProperties);
         defaultStyle.Append(new StyleRunProperties(runProperties));
         documentStyle.Styles.Append(defaultStyle);
+    }
+
+    private static string FormattedDateString()
+    {
+        var now = DateTime.Now;
+        return $"{now.Day}{GetDayOrdinal(now)} day of {now:MMMM, yyyy}";
+    }
+
+    private static string GetDayOrdinal(DateTime date)
+    {
+        return date.Day switch
+        {
+            11 or 12 or 13 => "th",
+            _ => (date.Day % 10) switch
+            {
+                1 => "st",
+                2 => "nd",
+                3 => "rd",
+                _ => "th",
+            },
+        };
     }
 }
