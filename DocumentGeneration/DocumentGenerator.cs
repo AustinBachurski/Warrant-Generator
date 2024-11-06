@@ -15,7 +15,7 @@ public partial class DocumentGenerator
     private Body _body = new();
 
     private string _outputPath = Environment.GetEnvironmentVariable("DOCUMENT_OUTPUT_PATH") ?? "./";
-    private string _nthDayOfMonth = FormattedDateString();
+    private string _nthDayOfMonthYear = FormattedDateString();
     private string _officerName = string.Empty;
     private string _reportNumber = string.Empty;
     private string _pawnBrokerName = string.Empty;
@@ -41,6 +41,19 @@ public partial class DocumentGenerator
         return fileName;
     }
 
+    private void AppendMultilineText(string text)
+    {
+        foreach (var content in text.Split(Environment.NewLine))
+        {
+            var paragraph = new Paragraph();
+            var run = new Run();
+
+            run.Append(new Text(content));
+            paragraph.Append(run);
+            _body.Append(paragraph);
+        }
+    }
+
     private void AppendFormattedLine(string line)
     {
         var paragraph = new Paragraph();
@@ -61,7 +74,56 @@ public partial class DocumentGenerator
         paragraph.Append(run);
         _body.Append(paragraph);
     }
-    
+
+    private void AppendEmptyLine()
+    {
+        var paragraph = new Paragraph();
+        _body.Append(paragraph);
+    }
+
+    private void AppendText(string text)
+    {
+        var paragraph = new Paragraph();
+        var run = new Run();
+        run.Append(new Text(text));
+
+        paragraph.Append(run);
+        _body.Append(paragraph);
+    }
+
+    private void AppendCenteredText(string text)
+    {
+        var paragraph = new Paragraph();
+        var run = new Run();
+
+        var alignment = new ParagraphProperties();
+        alignment.Justification = new Justification() { Val = JustificationValues.Center };
+        paragraph.ParagraphProperties = alignment;
+
+        run.Append(new Text(text));
+        paragraph.Append(run);
+        _body.Append(paragraph);
+    }
+
+    private void AppendBoldCenteredText(string text)
+    {
+        var paragraph = new Paragraph();
+        var run = new Run();
+
+        var alignment = new ParagraphProperties();
+        alignment.Justification = new Justification() { Val = JustificationValues.Center };
+        paragraph.ParagraphProperties = alignment;
+
+        var format = new RunProperties();
+        format.Bold = new Bold();
+        run.RunProperties = format;
+
+        run.Append(new Text(text));
+        paragraph.Append(run);
+        _body.Append(paragraph);
+    }
+
+    /*
     private static string GetOfficerTitle(StructureContentViewModel viewModel)
     {
         if (viewModel.CustomOfficerTitleVisibility)
@@ -70,6 +132,7 @@ public partial class DocumentGenerator
         }
         return viewModel.OfficerTitleSelection;
     }
+    */
 
    private static string CorrectGrammar(char c)
     {
@@ -80,6 +143,7 @@ public partial class DocumentGenerator
         };
     }
 
+    /*
     private static string CrimesAsString(ObservableCollection<MCACrime> crimesList)
     {
         StringBuilder builder = new();
@@ -114,6 +178,8 @@ public partial class DocumentGenerator
 
         return builder.Length - contentLength;
     }
+    */
+
     private void InsertWarrantBoilerplate(string district)
     {
         var boilerplate = new[]
@@ -132,10 +198,15 @@ public partial class DocumentGenerator
         }
     }
 
-    private void SetDocumentFormatting(MainDocumentPart document)
+    private static void SetDocumentFormatting(MainDocumentPart document)
     {
         var paragraphProperties = new ParagraphProperties();
         paragraphProperties.Append(new Justification() { Val = JustificationValues.Both });
+        paragraphProperties.SpacingBetweenLines = new SpacingBetweenLines
+        {
+            Line = "360",  // "Auto" line is interpreted as 240th's of a line.  240 * 1.5 spacing == 360
+            LineRule = LineSpacingRuleValues.Auto,
+        };
 
         var runProperties = new RunProperties();
         runProperties.Append(new RunFonts() { Ascii = "Courier New", HighAnsi = "Courier New" });
@@ -177,4 +248,6 @@ public partial class DocumentGenerator
             },
         };
     }
+
+
 }

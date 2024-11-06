@@ -108,7 +108,8 @@
 					<TextBox x:Name="ItemsPawnedTextBox"
 						     Text="{Binding ItemsPawnedText}"
 							 AcceptsReturn="True"
-							 TextWrapping="Wrap" />
+							 TextWrapping="Wrap"
+							 MinHeight="200"/>
 				</Border>
 			</StackPanel>
 			<!-- /Items Pawned -->

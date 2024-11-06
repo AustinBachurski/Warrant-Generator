@@ -8,7 +8,7 @@ public partial class DocumentGenerator
     {
         GenerateDocument = AdministrativeDocument;
 
-        _outputPath += ValidFileName(model.OutputFileNameText);
+        _outputPath += (ValidFileName(model.OutputFileNameText) + ".docx");
         _officerName = model.OfficerNameText;
         _reportNumber = model.ReportNumberText;
         _pawnBrokerName = model.PawnBrokerNameText;
