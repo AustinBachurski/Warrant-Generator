@@ -4,6 +4,7 @@ using Avalonia.Media;
 using WarrantGenerator.DocumentGeneration;
 using System.IO;
 using System;
+using WarrantGenerator.Constants;
 
 namespace WarrantGenerator.ViewModels;
 
@@ -94,7 +95,7 @@ public partial class AdministrativeContentViewModel : ObservableObject
     {
         if (!InputsAreValid())
         {
-            FlyoutMessage = "All fields must be filled out first.";
+            FlyoutMessage = ConstantData.MissingField;
             return;
         }
 
@@ -102,25 +103,16 @@ public partial class AdministrativeContentViewModel : ObservableObject
         {
             var document = new DocumentGenerator(this);
             var outfile = document.GenerateDocument();
-            FlyoutMessage = $"Warrant has been generated as:\n\t{outfile}";
+            FlyoutMessage = ConstantData.DocumentGeneratedAs + outfile;
         }
         catch (IOException)
         {
-            FlyoutMessage = "Unable to write output file.\nIf the file is open, please close it.";
+            FlyoutMessage = ConstantData.CloseFile;
         }
         catch (Exception ex)
         {
-            FlyoutMessage = $"Unexpected Error Encountered, Error Details:\n\n{ex}";
+            FlyoutMessage = ConstantData.UnexpectedError + ex;
         }
-    }
-
-    [ObservableProperty]
-    private bool _shouldFocus = false;
-
-    [RelayCommand]
-    public void Focus()
-    {
-        ShouldFocus = true;
     }
 
     private bool InputsAreValid()

@@ -1,6 +1,7 @@
 ﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using WarrantGenerator.Constants;
 
 namespace WarrantGenerator.DocumentGeneration;
 
@@ -38,14 +39,14 @@ public partial class DocumentGenerator
         AppendEmptyLine();
         AppendEmptyLine();
         AppendEmptyLine();
-        AppendCenteredText("_____________________________________");
+        AppendCenteredText(ConstantData.SignHere);
         AppendCenteredText("Issuing Peace Officer");
         AppendEmptyLine();
         AppendText( $"Administrative Warrant received this ______ day of _____________, 20____." );
         AppendEmptyLine();
         AppendEmptyLine();
         AppendEmptyLine();
-        AppendCenteredText("_____________________________________");
+        AppendCenteredText(ConstantData.SignHere);
         AppendCenteredText("Signature of Pawnbroker or Dealer");
         AppendEmptyLine();
         AppendEmptyLine();

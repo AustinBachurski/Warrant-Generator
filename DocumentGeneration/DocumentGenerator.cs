@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Text;
 using WarrantGenerator.DTOs;
+using WarrantGenerator.Interfaces;
 
 namespace WarrantGenerator.DocumentGeneration;
 
@@ -17,11 +18,23 @@ public partial class DocumentGenerator
     private string _outputPath = Environment.GetEnvironmentVariable("DOCUMENT_OUTPUT_PATH") ?? "./";
     private string _nthDayOfMonthYear = FormattedDateString();
     private string _officerName = string.Empty;
+    private string _officerTitle = string.Empty;
+    private string _organization = string.Empty;
+    private string _courtDistrict = string.Empty;
     private string _reportNumber = string.Empty;
     private string _pawnBrokerName = string.Empty;
     private string _pawnBrokerAddress = string.Empty;
     private string _suspectName = string.Empty;
     private string _itemsPawned = string.Empty;
+    private string _warrantSignedBy = string.Empty;
+    private string _searchableProperty = string.Empty;
+    private string _signedDate = string.Empty;
+    private string _servedDate = string.Empty;
+    private string _seizedProperty = string.Empty;
+    private bool _generateReturnAndRequestDocument = false;
+    private bool _generateInventoryDocument = false;
+    private bool _generateOrderDocument = false;
+
 
     
     private static string ValidFileName(string fileName)
@@ -91,6 +104,17 @@ public partial class DocumentGenerator
         _body.Append(paragraph);
     }
 
+    private void AppendIndentedText(string text)
+    {
+        var paragraph = new Paragraph();
+        var run = new Run();
+        run.Append(new TabChar());
+        run.Append(new Text(text));
+
+        paragraph.Append(run);
+        _body.Append(paragraph);
+    }
+
     private void AppendCenteredText(string text)
     {
         var paragraph = new Paragraph();
@@ -123,16 +147,15 @@ public partial class DocumentGenerator
         _body.Append(paragraph);
     }
 
-    /*
-    private static string GetOfficerTitle(StructureContentViewModel viewModel)
+    private static string GetOfficerTitle(IHasOfficerTitle model)
     {
-        if (viewModel.CustomOfficerTitleVisibility)
+        if (model.CustomOfficerTitleVisibility)
         {
-            return viewModel.CustomOfficerTitleText;
+            return model.CustomOfficerTitleText;
         }
-        return viewModel.OfficerTitleSelection;
+
+        return model.OfficerTitleSelection;
     }
-    */
 
    private static string CorrectGrammar(char c)
     {
@@ -180,11 +203,85 @@ public partial class DocumentGenerator
     }
     */
 
-    private void InsertWarrantBoilerplate(string district)
+
+    private void StateOfMontanaCountyOfFlathead()
     {
         var boilerplate = new[]
         {
-            $"IN THE {district}, COUNTY OF FLATHEAD, STATE OF MONTANA",
+            "STATE OF MONTANA\t)",
+            "\t\t\t\t:ss",
+            "COUNTY OF FLATHEAD\t)",
+            "",
+        };
+
+        foreach (var line in boilerplate)
+        {
+            AppendFormattedLine(line);
+        }
+    }
+
+    private void InsertReturnBoilerplate()
+    {
+        var boilerplate = new[]
+        {
+            $"IN THE {_courtDistrict}, COUNTY OF FLATHEAD, STATE OF MONTANA",
+            "STATE OF MONTANA\t\t\t\t\t\t)",
+            "\t\t\tPlaintiff,\t\t\t\t)",
+            "\t\t\t\t-vs-\t\t\t\t\t)\t\tRETURN OF WARRANT",
+            "\t\t\tDefendant,\t\t\t\t)\t\tAND INVENTORY",
+            "",
+            "STATE OF MONTANA\t)",
+            "\t\t\t\t:ss",
+            "COUNTY OF FLATHEAD\t)",
+        };
+
+        foreach (var line in boilerplate)
+        {
+            AppendFormattedLine(line);
+        }
+    }
+
+    private void InsertInventoryBoilerplate()
+    {
+        var boilerplate = new[]
+        {
+            $"IN THE {_courtDistrict}, COUNTY OF FLATHEAD, STATE OF MONTANA",
+            "STATE OF MONTANA\t\t\t\t\t\t)",
+            "\t\t\tPlaintiff,\t\t\t\t)",
+            "\t\t\t\t-vs-\t\t\t\t\t)\t\tINVENTORY",
+            "\t\t\tDefendant,\t\t\t\t)\t\t",
+            "",
+        };
+
+        foreach (var line in boilerplate)
+        {
+            AppendFormattedLine(line);
+        }
+    }
+
+    private void InsertOrderBoilerplate()
+    {
+        var boilerplate = new[]
+        {
+            $"IN THE {_courtDistrict}, COUNTY OF FLATHEAD, STATE OF MONTANA",
+            "STATE OF MONTANA\t\t\t\t\t\t)",
+            "\t\t\tPlaintiff,\t\t\t\t)",
+            "\t\t\t\t-vs-\t\t\t\t\t)\t\tORDER FOR CUSTODY",
+            "\t\t\tDefendant,\t\t\t\t)\t\t",
+            "",
+        };
+
+        foreach (var line in boilerplate)
+        {
+            AppendFormattedLine(line);
+        }
+    }
+
+    private void InsertWarrantBoilerplate()
+    {
+        var boilerplate = new[]
+        {
+            $"IN THE {_courtDistrict}, COUNTY OF FLATHEAD, STATE OF MONTANA",
             "STATE OF MONTANA\t\t\t\t\t\t)",
             "\t\t\tPlaintiff,\t\t\t\t)",
             "\t\t\t\t-vs-\t\t\t\t\t)\t\tAPPLICATION FOR",
@@ -230,11 +327,16 @@ public partial class DocumentGenerator
 
     private static string FormattedDateString()
     {
-        var now = DateTime.Now;
+        DateTimeOffset now = DateTime.Now;
         return $"{now.Day}{GetDayOrdinal(now)} day of {now:MMMM, yyyy}";
     }
 
-    private static string GetDayOrdinal(DateTime date)
+    private static string FormattedDateString(DateTimeOffset date)
+    {
+        return $"{date.Day}{GetDayOrdinal(date)} day of {date:MMMM, yyyy}";
+    }
+
+    private static string GetDayOrdinal(DateTimeOffset date)
     {
         return date.Day switch
         {

@@ -1,30 +1,23 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Avalonia.Media;
+using WarrantGenerator.Constants;
 using WarrantGenerator.DocumentGeneration;
 using WarrantGenerator.DTOs;
 using System.IO;
 using System;
 using System.Collections.ObjectModel;
+using WarrantGenerator.Interfaces;
 
 
 namespace WarrantGenerator.ViewModels;
 
-public partial class AppOrderContentViewModel : ObservableObject
+public partial class AppOrderContentViewModel : ObservableObject, IHasOfficerTitle
 {
-    public string[] CourtDistrictTypes { get; } = [
-        "11TH JUDICIAL DISTRICT COURT",
-        "FLATHEAD COUNTY JUSTICE COURT",
-        "KALISPELL MUNICIPAL COURT",
-    ];
-    public string[] DurationTypes { get; } = [
-        "years", "year", "months", "month", "days", "day",
-    ];
-    public string DurationTypeSelection { get; set; } = "years";
-    public string[] OfficerTitles { get; } = [
-        "Captain", "Chief", "Detective", "Detective Sergeant", "Lieutenant",
-        "Master Patrol Officer", "Officer", "Sergeant", "Other",
-    ];
+    public string[] CourtDistrictTypes { get; } = ConstantData.CourtDistricts;
+    public string[] DurationTypes { get; } = ConstantData.DurationTypes;
+    public string DurationTypeSelection { get; set; } = ConstantData.DefaultDurationTypeSelection;
+    public string[] OfficerTitles { get; } = ConstantData.OfficerTitles;
 
     [ObservableProperty]
     private IBrush _mcaCodeBorder = Brushes.Transparent;
@@ -42,10 +35,7 @@ public partial class AppOrderContentViewModel : ObservableObject
     private string? _flyoutMessage = null;
 
     [ObservableProperty]
-    private IBrush _courtDistrictBorder = Brushes.Transparent;
-
-    [ObservableProperty]
-    private string _courtDistrictSelection = "11TH JUDICIAL DISTRICT COURT";
+    private string _courtDistrictSelection = ConstantData.DefaultCourtSelection;
 
     [ObservableProperty]
     private IBrush _organizationBorder = Brushes.Transparent;
@@ -79,7 +69,7 @@ public partial class AppOrderContentViewModel : ObservableObject
     private IBrush _customOfficerTitleBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _customOfficerTitleText = "Enter Title";
+    private string _customOfficerTitleText = ConstantData.DefaultOfficerTitle;
 
     [ObservableProperty]
     private bool _customOfficerTitleVisibility = false;
@@ -169,11 +159,6 @@ public partial class AppOrderContentViewModel : ObservableObject
         McaDescriptionBorder = Brushes.Transparent;
     }
 
-    partial void OnCourtDistrictSelectionChanged(string value)
-    {
-        CourtDistrictBorder = Brushes.Transparent;
-    }
-
     partial void OnOrganizationTextChanged(string value)
     {
         OrganizationBorder = Brushes.Transparent;
@@ -253,11 +238,11 @@ public partial class AppOrderContentViewModel : ObservableObject
     }
 
     [RelayCommand]
-    public void GenerateWarrantDocument()
+    public void GenerateDocument()
     {
         if (!InputsAreValid())
         {
-            FlyoutMessage = "All fields must be filled out first.";
+            FlyoutMessage = ConstantData.MissingField;
             return;
         }
 
@@ -265,15 +250,15 @@ public partial class AppOrderContentViewModel : ObservableObject
         {
             var document = new DocumentGenerator(this);
             var outfile = document.GenerateDocument();
-            FlyoutMessage = $"Warrant has been generated as:\n\t{outfile}";
+            FlyoutMessage = ConstantData.DocumentGeneratedAs + outfile;
         }
         catch (IOException)
         {
-            FlyoutMessage = "Unable to write output file.\nIf the file is open, please close it.";
+            FlyoutMessage = ConstantData.CloseFile;
         }
         catch (Exception ex)
         {
-            FlyoutMessage = $"Unexpected Error Encountered, Error Details:\n\n{ex}";
+            FlyoutMessage = ConstantData.UnexpectedError + ex;
         }
     }
 
@@ -321,12 +306,6 @@ public partial class AppOrderContentViewModel : ObservableObject
     {
         bool result = true;
 
-        if (CourtDistrictSelection == string.Empty)
-        {
-            result = false;
-            CourtDistrictBorder = Brushes.Red;
-        }
-
         if (OrganizationText == string.Empty)
         {
             result = false;
@@ -352,7 +331,7 @@ public partial class AppOrderContentViewModel : ObservableObject
         }
 
         if (CustomOfficerTitleVisibility
-            && (CustomOfficerTitleText == "Enter Title" || CustomOfficerTitleText == string.Empty))
+            && (CustomOfficerTitleText == ConstantData.DefaultOfficerTitle || CustomOfficerTitleText == string.Empty))
         {
             result = false;
             CustomOfficerTitleBorder = Brushes.Red;

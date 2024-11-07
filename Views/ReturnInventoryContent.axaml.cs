@@ -15,6 +15,8 @@ public partial class ReturnInventoryContentTab : UserControl
 
         // From x:Name in the .axaml
         string[] textboxes = [
+            "SearchedPropertyTextBox",
+            "SeizedPropertyTextBox",
         ];
 
         foreach (string textbox in textboxes)

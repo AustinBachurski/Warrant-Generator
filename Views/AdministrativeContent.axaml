@@ -1,6 +1,9 @@
 <UserControl xmlns="https://github.com/avaloniaui"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:vm="using:WarrantGenerator.ViewModels"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
              x:Class="WarrantGenerator.Views.AdministrativeContentTab"
 			 x:DataType="vm:AdministrativeContentViewModel">
 
@@ -99,6 +102,7 @@
 			<!-- /Left Column -->
 
 			<!-- Right Column -->
+
 			<!-- Items Pawned -->
 			<StackPanel Grid.Column="2">
 				<TextBlock Text="Items Pawned"
@@ -109,12 +113,14 @@
 						     Text="{Binding ItemsPawnedText}"
 							 AcceptsReturn="True"
 							 TextWrapping="Wrap"
-							 MinHeight="200"/>
+							 MinHeight="200" />
 				</Border>
 			</StackPanel>
 			<!-- /Items Pawned -->
+
 			<!-- /Right Column -->
 
 		</Grid>
 	</ScrollViewer>
 </UserControl>
+

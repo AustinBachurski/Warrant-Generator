@@ -69,65 +69,50 @@
 
 		<TabControl>
 
-
 			<TabItem Header="Administrative"
 					 FontSize="18">
-				<ContentControl Content="{Binding AdministrativeTab}"/>
+				<ContentControl Content="{Binding AdministrativeTab}" />
 			</TabItem>
-
 
 			<TabItem Header="Return/Inventory"
 					 FontSize="18">
-				<ContentControl Content="{Binding ReturnInventoryTab}"/>
+				<ContentControl Content="{Binding ReturnInventoryTab}" />
 			</TabItem>
 
 			<TabItem Header="App and Order"
 					 FontSize="18">
-				<ContentControl Content="{Binding AppOrderTab}"/>
+				<ContentControl Content="{Binding AppOrderTab}" />
 			</TabItem>
-
-
 
 			<TabItem Header="Structure"
 					 FontSize="18">
-				<ContentControl Content="{Binding StructureTab}"/>
+				<ContentControl Content="{Binding StructureTab}" />
 			</TabItem>
-
-
 
 			<TabItem Header="DNA"
 					 FontSize="18">
-				<ContentControl Content="{Binding DnaTab}"/>
+				<ContentControl Content="{Binding DnaTab}" />
 			</TabItem>
-
-
 
 			<TabItem Header="GSR"
 					 FontSize="18">
-				<ContentControl Content="{Binding GsrTab}"/>
+				<ContentControl Content="{Binding GsrTab}" />
 			</TabItem>
-
-
 
 			<TabItem Header="Subpoena"
 					 FontSize="18">
-				<ContentControl Content="{Binding SubpoenaTab}"/>
+				<ContentControl Content="{Binding SubpoenaTab}" />
 			</TabItem>
-
-
 
 			<TabItem Header="Telephonic"
 					 FontSize="18">
-				<ContentControl Content="{Binding TelephonicTab}"/>
+				<ContentControl Content="{Binding TelephonicTab}" />
 			</TabItem>
-
-
 
 			<TabItem Header="Social Media"
 					 FontSize="18">
-				<ContentControl Content="{Binding SocialMediaTab}"/>
+				<ContentControl Content="{Binding SocialMediaTab}" />
 			</TabItem>
-
 
 		</TabControl>
 	</DockPanel>
