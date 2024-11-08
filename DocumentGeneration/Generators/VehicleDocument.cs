@@ -6,7 +6,7 @@ namespace WarrantGenerator.DocumentGeneration;
 
 public partial class DocumentGenerator
 {
-    private string StructureDocument()
+    private string VehicleDocument()
     {
         using var newDocument = WordprocessingDocument.Create(_outputPath, WordprocessingDocumentType.Document);
 

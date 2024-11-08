@@ -45,29 +45,29 @@
 				</StackPanel>
 				<!-- /Officer Gender -->
 
-				<!-- Officer Title -->
+				<!-- Officer Rank -->
 					<StackPanel>
-						<TextBlock Text="Officer Title"
+						<TextBlock Text="Officer Rank"
 						   VerticalAlignment="Center"
 						   Margin="5, 0, 0, 0" />
-						<Border BorderBrush="{Binding OfficerTitleBorder}"
+						<Border BorderBrush="{Binding OfficerRankBorder}"
 								BorderThickness="2">
-							<ComboBox ItemsSource="{Binding OfficerTitles}"
-									  SelectedItem="{Binding OfficerTitleSelection}"
+							<ComboBox ItemsSource="{Binding OfficerRanks}"
+									  SelectedItem="{Binding OfficerRankSelection}"
 									  PlaceholderText="Select Rank">
 							</ComboBox>
 						</Border>
 					</StackPanel>
 
 					<StackPanel VerticalAlignment="Bottom">
-						<Border BorderBrush="{Binding CustomOfficerTitleBorder}"
+						<Border BorderBrush="{Binding CustomOfficerRankBorder}"
 								BorderThickness="2">
-							<TextBox Text="{Binding CustomOfficerTitleText}"
+							<TextBox Text="{Binding CustomOfficerRankText}"
 									 Width="150"
-									 IsVisible="{Binding CustomOfficerTitleVisibility}" />
+									 IsVisible="{Binding CustomOfficerRankVisibility}" />
 						</Border>
 					</StackPanel>
-				<!-- /Officer Title -->
+				<!-- /Officer Rank -->
 
 				</StackPanel>
 

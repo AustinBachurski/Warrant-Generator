@@ -3,11 +3,11 @@ using Avalonia.SpellChecker;
 
 namespace WarrantGenerator.Views;
 
-public partial class StructureContentTab : UserControl
+public partial class ResidentialContentTab : UserControl
 {
     private readonly TextBoxSpellChecker _spellChecker;
 
-    public StructureContentTab()
+    public ResidentialContentTab()
     {
         InitializeComponent();
 
@@ -15,8 +15,6 @@ public partial class StructureContentTab : UserControl
 
         // From x:Name in the .axaml
         string[] textboxes = [
-            "ProbableCauseTextBox",
-            "SeizablePropertyTextBox",
         ];
 
         foreach (string textbox in textboxes)

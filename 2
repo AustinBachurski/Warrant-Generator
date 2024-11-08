@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Avalonia.Media;
 using WarrantGenerator.Constants;
@@ -12,12 +12,12 @@ using WarrantGenerator.Interfaces;
 
 namespace WarrantGenerator.ViewModels;
 
-public partial class AppOrderContentViewModel : ObservableObject, IHasOfficerTitle
+public partial class AppOrderContentViewModel : ObservableObject, IHasOfficerRank
 {
     public string[] CourtDistrictTypes { get; } = ConstantData.CourtDistricts;
     public string[] DurationTypes { get; } = ConstantData.DurationTypes;
     public string DurationTypeSelection { get; set; } = ConstantData.DefaultDurationTypeSelection;
-    public string[] OfficerTitles { get; } = ConstantData.OfficerTitles;
+    public string[] OfficerRanks { get; } = ConstantData.OfficerRanks;
 
     [ObservableProperty]
     private IBrush _mcaCodeBorder = Brushes.Transparent;
@@ -42,7 +42,7 @@ public partial class AppOrderContentViewModel : ObservableObject, IHasOfficerTit
 
     [ObservableProperty]
     private string _organizationText =
-        Environment.GetEnvironmentVariable("ORGANIZATION") ?? string.Empty;
+        Environment.GetEnvironmentVariable(EnVars.Organization) ?? string.Empty;
 
     [ObservableProperty]
     private IBrush _officerNameBorder = Brushes.Transparent;
@@ -60,19 +60,19 @@ public partial class AppOrderContentViewModel : ObservableObject, IHasOfficerTit
     private bool _maleChecked = false;
 
     [ObservableProperty]
-    private IBrush _officerTitleBorder = Brushes.Transparent;
+    private IBrush _officerRankBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _officerTitleSelection = string.Empty;
+    private string _officerRankSelection = string.Empty;
 
     [ObservableProperty]
-    private IBrush _customOfficerTitleBorder = Brushes.Transparent;
+    private IBrush _customOfficerRankBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _customOfficerTitleText = ConstantData.DefaultOfficerTitle;
+    private string _customOfficerRankText = ConstantData.DefaultOfficerRank;
 
     [ObservableProperty]
-    private bool _customOfficerTitleVisibility = false;
+    private bool _customOfficerRankVisibility = false;
 
     [ObservableProperty]
     private IBrush _employmentDurationBorder = Brushes.Transparent;
@@ -187,24 +187,24 @@ public partial class AppOrderContentViewModel : ObservableObject, IHasOfficerTit
         OfficerGenderBorder = Brushes.Transparent;
     }
 
-    partial void OnOfficerTitleSelectionChanged(string value)
+    partial void OnOfficerRankSelectionChanged(string value)
     {
-        if (value == "Other")
+        if (value == ConstantData.OfficerRanksOther)
         {
-            CustomOfficerTitleVisibility = true;
+            CustomOfficerRankVisibility = true;
         }
         else
         {
-            CustomOfficerTitleVisibility = false;
+            CustomOfficerRankVisibility = false;
         }
 
-        OfficerTitleBorder = Brushes.Transparent;
-        CustomOfficerTitleBorder = Brushes.Transparent;
+        OfficerRankBorder = Brushes.Transparent;
+        CustomOfficerRankBorder = Brushes.Transparent;
     }
 
-    partial void OnCustomOfficerTitleTextChanged(string value)
+    partial void OnCustomOfficerRankTextChanged(string value)
     {
-        CustomOfficerTitleBorder = Brushes.Transparent;
+        CustomOfficerRankBorder = Brushes.Transparent;
     }
 
     partial void OnEmploymentDurationTextChanged(string value)
@@ -324,17 +324,17 @@ public partial class AppOrderContentViewModel : ObservableObject, IHasOfficerTit
             OfficerGenderBorder = Brushes.Red;
         }
 
-        if (OfficerTitleSelection == string.Empty)
+        if (OfficerRankSelection == string.Empty)
         {
             result = false;
-            OfficerTitleBorder= Brushes.Red;
+            OfficerRankBorder= Brushes.Red;
         }
 
-        if (CustomOfficerTitleVisibility
-            && (CustomOfficerTitleText == ConstantData.DefaultOfficerTitle || CustomOfficerTitleText == string.Empty))
+        if (CustomOfficerRankVisibility
+            && (CustomOfficerRankText == ConstantData.DefaultOfficerRank || CustomOfficerRankText == string.Empty))
         {
             result = false;
-            CustomOfficerTitleBorder = Brushes.Red;
+            CustomOfficerRankBorder = Brushes.Red;
         }
 
         if (EmploymentDurationText == string.Empty)

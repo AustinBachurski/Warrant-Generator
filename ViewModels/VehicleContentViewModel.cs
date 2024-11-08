@@ -10,7 +10,7 @@ using System.Collections.ObjectModel;
 
 namespace WarrantGenerator.ViewModels;
 
-public partial class StructureContentViewModel : ObservableObject
+public partial class VehicleContentViewModel : ObservableObject
 {
 }
 

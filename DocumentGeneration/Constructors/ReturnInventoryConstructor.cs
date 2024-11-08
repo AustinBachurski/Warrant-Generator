@@ -9,9 +9,9 @@ public partial class DocumentGenerator
     {
         GenerateDocument = ReturnInventoryDocument;
 
-        _outputPath += (ValidFileName(model.OutputFileNameText));  // Extension omitted on purpose.
+        _outputPath += (ValidFileName(model.OutputFileNameText));  // Extension applied in the document generation methods.
         _officerName = model.OfficerNameText;
-        _officerTitle = GetOfficerTitle(model);
+        _officerRank = GetOfficerRank(model);
         _officerSubjectivePronoun = SubjectivePronoun(model.OfficerGenderSelection);
         _officerPosessivePronoun = PosessivePronoun(model.OfficerGenderSelection);
         _courtDistrict = model.CourtDistrictSelection;

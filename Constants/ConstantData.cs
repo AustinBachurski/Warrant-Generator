@@ -18,18 +18,16 @@ public static class ConstantData
 
     public static string DefaultDurationTypeSelection { get; set; } = "years";
 
-    public static string[] OfficerTitles { get; } = [
+    public static string[] OfficerRanks { get; } = [
         "Captain", "Chief", "Detective", "Detective Sergeant", "Lieutenant",
         "Master Patrol Officer", "Officer", "Sergeant", "Other",
     ];
 
-    public static string OfficerTitlesOther { get; } = "Other";
+    public static string OfficerRanksOther { get; } = "Other";
 
-    public static string[] Genders { get; } = [
-        "Female", "Male",
-        ];
+    public static string[] Genders { get; } = [ "Female", "Male", ];
 
-    public static string DefaultOfficerTitle { get; } = "Enter Title";
+    public static string DefaultOfficerRank { get; } = "Enter Rank";
 
     public static string MissingField { get; } = "All fields must be filled out first.";
 

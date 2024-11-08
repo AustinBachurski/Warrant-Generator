@@ -13,13 +13,15 @@ public partial class DocumentGenerator
 
     private Body _body = new();
 
-    private readonly string _outputPath = Environment.GetEnvironmentVariable("DOCUMENT_OUTPUT_PATH") ?? "./";
+    private readonly string _organization = ConstantData.KPD;
     private readonly string _todaysDate = FormattedDateString();
+    private readonly string _outputPath = Environment.GetEnvironmentVariable(EnVars.DocumentOutPath) ?? "./";
     private readonly string _officerName = string.Empty;
-    private readonly string _officerTitle = string.Empty;
+    private readonly string _officerRank = string.Empty;
     private readonly string _officerSubjectivePronoun = string.Empty;
     private readonly string _officerPosessivePronoun = string.Empty;
-    private readonly string _organization = Environment.GetEnvironmentVariable("ORGANIZATION") ?? ConstantData.KPD;
+    private readonly string _employmentDuration = string.Empty;
+    private readonly string _employmentDurationType = string.Empty;
     private readonly string _courtDistrict = string.Empty;
     private readonly string _reportNumber = string.Empty;
     private readonly string _pawnBrokerName = string.Empty;
@@ -34,5 +36,16 @@ public partial class DocumentGenerator
     private readonly bool _generateReturnAndRequestDocument = false;
     private readonly bool _generateInventoryDocument = false;
     private readonly bool _generateOrderDocument = false;
+    private readonly bool _generateWarrantApplicationDocument = false;
+    private readonly bool _generateWarrantDocument = false;
+    private readonly bool _utilizeSWAT = false;
+    private readonly bool _utilizeCrimeUnit = false;
+    private readonly string _residenceAddress = string.Empty;
+    private readonly string _residenceDescription = string.Empty;
+    private readonly string _crimesCombined = string.Empty;
+    private readonly string _crimeCodes = string.Empty;
+    private readonly string _crimeDescriptions = string.Empty;
+    private readonly string _probableCause = string.Empty;
+    private readonly string _seizableProperty = string.Empty;
 }
 

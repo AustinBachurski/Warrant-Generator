@@ -34,8 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\AppOrderContent.axaml.cs">
-      <DependentUpon>AppOrderContent.axaml</DependentUpon>
+    <Compile Update="Views\ResidentialContent.axaml.cs">
+      <DependentUpon>ResidentialContent.axaml</DependentUpon>
     </Compile>
     <Compile Update="Views\SocialMediaContent.axaml.cs">
       <DependentUpon>SocialMediaContent.axaml</DependentUpon>
@@ -52,8 +52,8 @@
     <Compile Update="Views\DnaContent.axaml.cs">
       <DependentUpon>DnaContentaxaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\StructureContent.axaml.cs">
-      <DependentUpon>StructureContent.axaml</DependentUpon>
+    <Compile Update="Views\VehicleContent.axaml.cs">
+      <DependentUpon>VehicleContent.axaml</DependentUpon>
     </Compile>
     <Compile Update="Views\ReturnInventoryContent.axaml.cs">
       <DependentUpon>ReturnInventoryContent.axaml</DependentUpon>

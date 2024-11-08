@@ -16,7 +16,7 @@ public partial class AdministrativeContentViewModel : ObservableObject
     private IBrush _officerNameBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _officerNameText = Environment.GetEnvironmentVariable("OFFICER_NAME") ?? string.Empty;
+    private string _officerNameText = Environment.GetEnvironmentVariable(EnVars.OfficerName) ?? string.Empty;
 
     partial void OnOfficerNameTextChanged(string value)
     {

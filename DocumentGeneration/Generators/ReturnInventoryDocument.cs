@@ -60,7 +60,7 @@ public partial class DocumentGenerator
         AppendMultilineText(_seizedProperty);
         AppendEmptyLine();
         AppendIndentedText(
-            $"I, {_officerTitle} {_officerName}, declare under penalty of perjury that this inventory is correct and was returned along with the original warrant to the designated judge."
+            $"I, {_officerRank} {_officerName}, declare under penalty of perjury that this inventory is correct and was returned along with the original warrant to the designated judge."
             );
         AppendEmptyLine();
         AppendEmptyLine();
@@ -101,7 +101,7 @@ public partial class DocumentGenerator
         AppendText(_searchableProperty);
         AppendEmptyLine();
         AppendIndentedText(
-            $"{_officerTitle} {_officerName} does hereby state that on the {_servedDate} {_officerSubjectivePronoun} executed the Warrant issued on the {_signedDate}, and as a result of said execution, the property seized was inventoried and is as follows:"
+            $"{_officerRank} {_officerName} does hereby state that on the {_servedDate} {_officerSubjectivePronoun} executed the Warrant issued on the {_signedDate}, and as a result of said execution, the property seized was inventoried and is as follows:"
             );
         AppendEmptyLine();
         AppendMultilineText(_seizedProperty);
@@ -113,7 +113,7 @@ public partial class DocumentGenerator
         StateOfMontanaCountyOfFlathead();
         AppendEmptyLine();
         AppendIndentedText(
-            $"{_officerTitle} {_officerName}, being first duly sworn deposes and says that {_officerSubjectivePronoun} is the person who signed the above Inventory and knows the contents to be true and correct of {_officerPosessivePronoun} own personal knowledge."
+            $"{_officerRank} {_officerName}, being first duly sworn deposes and says that {_officerSubjectivePronoun} is the person who signed the above Inventory and knows the contents to be true and correct of {_officerPosessivePronoun} own personal knowledge."
             );
         AppendEmptyLine();
         AppendEmptyLine();

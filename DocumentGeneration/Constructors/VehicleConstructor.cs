@@ -4,9 +4,9 @@ namespace WarrantGenerator.DocumentGeneration;
 
 public partial class DocumentGenerator
 {
-    public DocumentGenerator(StructureContentViewModel model)
+    public DocumentGenerator(VehicleContentViewModel model)
     {
-        GenerateDocument = StructureDocument;
+        GenerateDocument = VehicleDocument;
     }
 }
 

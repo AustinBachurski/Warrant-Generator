@@ -6,6 +6,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 
 namespace WarrantGenerator.DocumentGeneration;
@@ -47,14 +48,14 @@ public partial class DocumentGenerator
         };
     }
 
-    private static string GetOfficerTitle(IHasOfficerTitle model)
+    private static string GetOfficerRank(IHasOfficerRank model)
     {
-        if (model.CustomOfficerTitleVisibility)
+        if (model.CustomOfficerRankVisibility)
         {
-            return model.CustomOfficerTitleText;
+            return model.CustomOfficerRankText;
         }
 
-        return model.OfficerTitleSelection;
+        return model.OfficerRankSelection;
     }
 
     private static string PosessivePronoun(string gender)
@@ -91,8 +92,50 @@ public partial class DocumentGenerator
         return fileName;
     }
 
-    private static string CrimesAsString(ObservableCollection<MCACrime> crimesList)
+    private static string CrimeCodesAsString(ObservableCollection<MCACrime> crimesList)
     {
+        string combined = string.Join(", ", crimesList.Select(crime => $"M.C.A. § {crime.Code} ({crime.Description})"));
+
+        if (crimesList.Count > 1)
+        {
+            return InsertCoordinatingConjunction(combined);
+        }
+
+        return combined;
+    }
+
+    private static string  InsertCoordinatingConjunction(string text)
+    {
+        return text.Insert(text.LastIndexOf(',') + 1, " and"); // TODO: Verify word placement is correct and LINQ other methods.
+    }
+
+    private static string CrimeDescriptionsAsString(ObservableCollection<MCACrime> crimesList)
+    {
+        // TODO: LINQ
+        StringBuilder builder = new();
+
+        const string comma = ", ";
+
+        string combined = String.Join(", ", crimesList.Select(crime => crime.Description));
+
+        foreach (MCACrime each in crimesList)
+        {
+            builder.Append(each.Code);
+            builder.Append(comma);
+        }
+
+        if (crimesList.Count > 1)
+        {
+            builder.Insert(StartingPositionOfLastEntry(builder, comma.Length, crimesList), "and ");
+        }
+
+        // Trailing ", " is intentional.
+        return builder.ToString();
+    }
+
+    private static string CrimesCombinedAsString(ObservableCollection<MCACrime> crimesList)
+    {
+        // TODO: LINQ
         StringBuilder builder = new();
 
         const string prefix = "M.C.A. § ";

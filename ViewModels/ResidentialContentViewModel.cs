@@ -1,21 +1,26 @@
 ﻿using WarrantGenerator.Constants;
 using WarrantGenerator.DocumentGeneration;
+using WarrantGenerator.DTOs;
 using WarrantGenerator.Interfaces;
 
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
 
 
 namespace WarrantGenerator.ViewModels;
 
-public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOfficerRank
+public partial class ResidentialContentViewModel : ObservableObject, IHasOfficerRank
 {
     public string[] CourtDistrictTypes { get; } = ConstantData.CourtDistricts;
+    public string[] DurationTypes { get; } = ConstantData.DurationTypes;
+    public string DurationTypeSelection { get; set; } = ConstantData.DefaultDurationTypeSelection;
     public string[] OfficerRanks { get; } = ConstantData.OfficerRanks;
     public string[] OfficerGender { get; } = ConstantData.Genders;
+
 
     [ObservableProperty]
     private IBrush _officerNameBorder = Brushes.Transparent;
@@ -43,7 +48,7 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
     private IBrush _officerRankBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _officerRankSelection = Environment.GetEnvironmentVariable(EnVars.OfficerRank) ?? string.Empty;
+    private string _officerRankSelection = string.Empty;
 
     partial void OnOfficerRankSelectionChanged(string value)
     {
@@ -64,6 +69,9 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
     private IBrush _customOfficerRankBorder = Brushes.Transparent;
 
     [ObservableProperty]
+    private bool _customOfficerRankVisibility = false;
+
+    [ObservableProperty]
     private string _customOfficerRankText = ConstantData.DefaultOfficerRank;
 
     partial void OnCustomOfficerRankTextChanged(string value)
@@ -72,73 +80,125 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
     }
 
     [ObservableProperty]
-    private bool _customOfficerRankVisibility = false;
+    private IBrush _employmentDurationBorder = Brushes.Transparent;
+
+    [ObservableProperty]
+    private string _employmentDurationText = string.Empty;
+
+    partial void OnEmploymentDurationTextChanged(string value)
+    {
+        EmploymentDurationBorder = Brushes.Transparent;
+    }
 
     [ObservableProperty]
     private string _courtDistrictSelection = ConstantData.DefaultCourtSelection;
 
     [ObservableProperty]
-    private IBrush _warrantSignedByBorder = Brushes.Transparent;
+    private bool _SWATChecked = false;
 
     [ObservableProperty]
-    private string _warrantSignedByText = string.Empty;
+    private bool _crimeUnitChecked = false;
 
-    partial void OnWarrantSignedByTextChanged(string value)
+    [ObservableProperty]
+    private IBrush _residenceAddressBorder = Brushes.Transparent;
+
+    [ObservableProperty]
+    private string _residenceAddressText = string.Empty;
+
+    partial void OnResidenceAddressTextChanged(string value)
     {
-        WarrantSignedByBorder = Brushes.Transparent;
+        ResidenceAddressBorder = Brushes.Transparent;
     }
 
     [ObservableProperty]
-    private IBrush _searchablePropertyBorder = Brushes.Transparent;
+    private IBrush _residenceDescriptionBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _searchablePropertyText = string.Empty;
+    private string _residenceDescriptionText = string.Empty;
 
-    partial void OnSearchablePropertyTextChanged(string value)
+    partial void OnResidenceDescriptionTextChanged(string value)
     {
-        SearchablePropertyBorder = Brushes.Transparent;
+        ResidenceDescriptionBorder = Brushes.Transparent;
     }
 
     [ObservableProperty]
-    private IBrush _signedDateBorder = Brushes.Transparent;
+    private IBrush _crimesBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private DateTimeOffset? _signedDateSelection = null;
+    private ObservableCollection<MCACrime> _crimes = [];
 
-    partial void OnSignedDateSelectionChanged(DateTimeOffset? value)
+    [ObservableProperty]
+    private MCACrime _selectedItem;
+
+    [ObservableProperty]
+    private IBrush _mcaCodeBorder = Brushes.Transparent;
+
+    [ObservableProperty]
+    private string _mcaCodeText = string.Empty;
+
+    partial void OnMcaCodeTextChanged(string value)
     {
-        SignedDateBorder = Brushes.Transparent;
+        McaCodeBorder = Brushes.Transparent;
     }
 
     [ObservableProperty]
-    private IBrush _servedDateBorder = Brushes.Transparent;
+    private IBrush _mcaDescriptionBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private DateTimeOffset? _servedDateSelection = null;
+    private string _mcaDescriptionText = string.Empty;
 
-    partial void OnServedDateSelectionChanged(DateTimeOffset? value)
+    partial void OnMcaDescriptionTextChanged(string value)
     {
-        ServedDateBorder = Brushes.Transparent;
+        McaDescriptionBorder = Brushes.Transparent;
     }
 
-    [ObservableProperty]
-    private IBrush _seizedPropertyBorder = Brushes.Transparent;
-
-    [ObservableProperty]
-    private string _seizedPropertyText = string.Empty;
-
-    partial void OnSeizedPropertyTextChanged(string value)
+    [RelayCommand]
+    public void AddCrimeToCrimesList()
     {
-        SeizedPropertyBorder = Brushes.Transparent;
+        if (!ValidateMcaCrimeInput())
+        {
+            return;
+        }
+
+        Crimes.Add(new(McaCodeText, McaDescriptionText));
+        CrimesBorder = Brushes.Transparent;
+
+        McaCodeText = string.Empty;
+        McaDescriptionText = string.Empty;
+    }
+
+    private bool ValidateMcaCrimeInput()
+    {
+        bool result = true;
+
+        if (McaCodeText == string.Empty)
+        {
+            result = false;
+            McaCodeBorder = Brushes.Red;
+        }
+
+        if (McaDescriptionText == string.Empty)
+        {
+            result = false;
+            McaDescriptionBorder = Brushes.Red;
+        }
+
+        return result;
+    }
+
+    [RelayCommand]
+    public void RemoveCrime()
+    {
+        Crimes.Remove(SelectedItem);
     }
 
     [ObservableProperty]
     private IBrush _documentTypeCheckboxesBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private bool _returnAndRequestChecked = true;
+    private bool _searchWarrantApplicationChecked = true;
 
-    partial void OnReturnAndRequestCheckedChanged(bool value)
+    partial void OnSearchWarrantApplicationCheckedChanged(bool value)
     {
         if (value)
         {
@@ -147,9 +207,9 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
     }
 
     [ObservableProperty]
-    private bool _inventoryChecked = true;
+    private bool _searchWarrantChecked = true;
 
-    partial void OnInventoryCheckedChanged(bool value)
+    partial void OnSearchWarrantCheckedChanged(bool value)
     {
         if (value)
         {
@@ -158,14 +218,25 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
     }
 
     [ObservableProperty]
-    private bool _orderChecked = true;
+    private IBrush _probableCauseBorder = Brushes.Transparent;
 
-    partial void OnOrderCheckedChanged(bool value)
+    [ObservableProperty]
+    private string _probableCauseText = string.Empty;
+
+    partial void OnProbableCauseTextChanged(string value)
     {
-        if (value)
-        {
-            DocumentTypeCheckboxesBorder = Brushes.Transparent;
-        }
+        ProbableCauseBorder = Brushes.Transparent;
+    }
+
+    [ObservableProperty]
+    private IBrush _seizablePropertyBorder = Brushes.Transparent;
+
+    [ObservableProperty]
+    private string _seizablePropertyText = string.Empty;
+
+    partial void OnSeizablePropertyTextChanged(string value)
+    {
+        SeizablePropertyBorder = Brushes.Transparent;
     }
 
     [ObservableProperty]
@@ -173,14 +244,14 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
 
     [ObservableProperty]
     private string _outputFileNameText = string.Empty;
-    
+
     partial void OnOutputFileNameTextChanged(string value)
     {
         OutputFileNameBorder = Brushes.Transparent;
     }
-    
+
     [ObservableProperty]
-    private string _flyoutMessage = string.Empty;
+    private string? _flyoutMessage = null;
 
     [RelayCommand]
     public void GenerateDocument()
@@ -230,45 +301,51 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
         }
 
         if (CustomOfficerRankVisibility
-            && (CustomOfficerRankText == ConstantData.DefaultOfficerRank
-                || CustomOfficerRankText == string.Empty))
+            && (CustomOfficerRankText == ConstantData.DefaultOfficerRank || CustomOfficerRankText == string.Empty))
         {
             result = false;
             CustomOfficerRankBorder = Brushes.Red;
         }
 
-        if (WarrantSignedByText == string.Empty)
+        if (EmploymentDurationText == string.Empty)
         {
             result = false;
-            WarrantSignedByBorder = Brushes.Red;
+            EmploymentDurationBorder = Brushes.Red;
         }
 
-        if (SearchablePropertyText == string.Empty)
+        if (ResidenceAddressText == string.Empty)
         {
             result = false;
-            SearchablePropertyBorder = Brushes.Red;
+            ResidenceAddressBorder = Brushes.Red;
         }
 
-        if (SignedDateSelection == null)
+        if (ResidenceDescriptionText == string.Empty)
         {
             result = false;
-            SignedDateBorder = Brushes.Red;
+            ResidenceDescriptionBorder = Brushes.Red;
         }
 
-        if (ServedDateSelection == null)
+        if (Crimes.Count == 0)
         {
             result = false;
-            ServedDateBorder = Brushes.Red;
+            CrimesBorder = Brushes.Red;
         }
 
-        if (SeizedPropertyText == string.Empty)
+        if (ProbableCauseText == string.Empty)
         {
             result = false;
-            SeizedPropertyBorder = Brushes.Red;
+            ProbableCauseBorder = Brushes.Red;
         }
 
-        if (!ReturnAndRequestChecked && !InventoryChecked && !OrderChecked)
+        if (SeizablePropertyText == string.Empty)
         {
+            result = false;
+            SeizablePropertyBorder = Brushes.Red;
+        }
+
+        if (!SearchWarrantApplicationChecked && !SearchWarrantChecked)
+        {
+            result = false;
             DocumentTypeCheckboxesBorder = Brushes.Red;
         }
 

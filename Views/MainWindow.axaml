@@ -24,11 +24,11 @@
 		<DataTemplate DataType="vm:ReturnInventoryContentViewModel">
 			<views:ReturnInventoryContentTab />
 		</DataTemplate>
-		<DataTemplate DataType="vm:AppOrderContentViewModel">
-			<views:AppOrderContentTab />
+		<DataTemplate DataType="vm:ResidentialContentViewModel">
+			<views:ResidentialContentTab />
 		</DataTemplate>
-		<DataTemplate DataType="vm:StructureContentViewModel">
-			<views:StructureContentTab />
+		<DataTemplate DataType="vm:VehicleContentViewModel">
+			<views:VehicleContentTab />
 		</DataTemplate>
 		<DataTemplate DataType="vm:DnaContentViewModel">
 			<views:DnaContentTab />
@@ -79,14 +79,14 @@
 				<ContentControl Content="{Binding ReturnInventoryTab}" />
 			</TabItem>
 
-			<TabItem Header="App and Order"
+			<TabItem Header="Residential"
 					 FontSize="18">
-				<ContentControl Content="{Binding AppOrderTab}" />
+				<ContentControl Content="{Binding ResidentialTab}" />
 			</TabItem>
 
-			<TabItem Header="Structure"
+			<TabItem Header="Vehicle"
 					 FontSize="18">
-				<ContentControl Content="{Binding StructureTab}" />
+				<ContentControl Content="{Binding VehicleTab}" />
 			</TabItem>
 
 			<TabItem Header="DNA"
