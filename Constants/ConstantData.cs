@@ -2,6 +2,8 @@
 
 public static class ConstantData
 {
+    public static string KPD { get; } = "Kalispell Police Department";
+
     public static string[] CourtDistricts { get; } = [
         "11TH JUDICIAL DISTRICT COURT",
         "FLATHEAD COUNTY JUSTICE COURT",
@@ -21,6 +23,12 @@ public static class ConstantData
         "Master Patrol Officer", "Officer", "Sergeant", "Other",
     ];
 
+    public static string OfficerTitlesOther { get; } = "Other";
+
+    public static string[] Genders { get; } = [
+        "Female", "Male",
+        ];
+
     public static string DefaultOfficerTitle { get; } = "Enter Title";
 
     public static string MissingField { get; } = "All fields must be filled out first.";
@@ -33,3 +41,4 @@ public static class ConstantData
 
     public static string SignHere { get; } = "_____________________________________";
 }
+

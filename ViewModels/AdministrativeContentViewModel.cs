@@ -1,10 +1,12 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Avalonia.Media;
+﻿using WarrantGenerator.Constants;
 using WarrantGenerator.DocumentGeneration;
-using System.IO;
+
+using Avalonia.Media;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
-using WarrantGenerator.Constants;
+using System.IO;
+
 
 namespace WarrantGenerator.ViewModels;
 

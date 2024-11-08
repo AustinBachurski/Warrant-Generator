@@ -11,53 +11,65 @@
 		<Grid ColumnDefinitions="*, 10, *"
 			  RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
 
-			<Grid Grid.Column="0"
-				  Grid.Row="0"
-				  ColumnDefinitions="*, *">
+				<StackPanel Grid.Column="0"
+							Orientation="Horizontal"
+							Spacing="5">
 
 				<!-- Officer Name -->
-			<StackPanel Grid.Column="0"
-						Grid.Row="0">
-				<TextBlock Text="Officer Name"
+				<StackPanel>
+					<TextBlock Text="Officer Name"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding OfficerNameBorder}"
+							BorderThickness="2">
+						<TextBox x:Name="OfficerNameTextBox"
+								 Text="{Binding OfficerNameText}"
+								 Width="200"/>
+					</Border>
+				</StackPanel>
+				<!-- /Officer Name -->
+
+				<!-- Officer Gender -->
+				<StackPanel>
+					<TextBlock Text="Gender"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding OfficerGenderBorder}"
+							BorderThickness="2">
+						<StackPanel Orientation="Horizontal" Spacing="10">
+							<ComboBox ItemsSource="{Binding OfficerGender}"
+									  SelectedItem="{Binding OfficerGenderSelection}">
+							</ComboBox>
+						</StackPanel>
+					</Border>
+				</StackPanel>
+				<!-- /Officer Gender -->
+
+				<!-- Officer Title -->
+					<StackPanel>
+						<TextBlock Text="Officer Title"
 						   VerticalAlignment="Center"
 						   Margin="5, 0, 0, 0" />
-				<Border BorderBrush="{Binding OfficerNameBorder}"
-						BorderThickness="2">
-					<TextBox x:Name="OfficerNameTextBox"
-							 Text="{Binding OfficerNameText}" />
-				</Border>
-			</StackPanel>
-			<!-- /Officer Name -->
-			
-					<!-- Officer Title -->
-				<StackPanel Grid.Column="1"
-							Orientation="Horizontal">
-				<StackPanel>
-					<TextBlock Text="Officer Title"
-					   VerticalAlignment="Center"
-					   Margin="5, 0, 0, 0" />
-					<Border BorderBrush="{Binding OfficerTitleBorder}"
-							BorderThickness="2">
-						<ComboBox ItemsSource="{Binding OfficerTitles}"
-								  SelectedItem="{Binding OfficerTitleSelection}"
-								  PlaceholderText="Select Rank">
-						</ComboBox>
-					</Border>
-				</StackPanel>
+						<Border BorderBrush="{Binding OfficerTitleBorder}"
+								BorderThickness="2">
+							<ComboBox ItemsSource="{Binding OfficerTitles}"
+									  SelectedItem="{Binding OfficerTitleSelection}"
+									  PlaceholderText="Select Rank">
+							</ComboBox>
+						</Border>
+					</StackPanel>
 
-				<StackPanel VerticalAlignment="Bottom">
-					<Border BorderBrush="{Binding CustomOfficerTitleBorder}"
-							BorderThickness="2">
-						<TextBox Text="{Binding CustomOfficerTitleText}"
-								 Width="150"
-								 IsVisible="{Binding CustomOfficerTitleVisibility}" />
-					</Border>
-				</StackPanel>
-				</StackPanel>
+					<StackPanel VerticalAlignment="Bottom">
+						<Border BorderBrush="{Binding CustomOfficerTitleBorder}"
+								BorderThickness="2">
+							<TextBox Text="{Binding CustomOfficerTitleText}"
+									 Width="150"
+									 IsVisible="{Binding CustomOfficerTitleVisibility}" />
+						</Border>
+					</StackPanel>
 				<!-- /Officer Title -->
 
-
-			</Grid>
+				</StackPanel>
 
 			<!-- District and Warrant Signed by Grid -->
 			<Grid Grid.Column="2"

@@ -1,4 +1,5 @@
-﻿using WarrantGenerator.ViewModels;
+﻿using WarrantGenerator.Constants;
+using WarrantGenerator.ViewModels;
 
 namespace WarrantGenerator.DocumentGeneration;
 
@@ -8,7 +9,7 @@ public partial class DocumentGenerator
     {
         GenerateDocument = AdministrativeDocument;
 
-        _outputPath += (ValidFileName(model.OutputFileNameText) + ".docx");
+        _outputPath += (ValidFileName(model.OutputFileNameText) + Extension.Docx);
         _officerName = model.OfficerNameText;
         _reportNumber = model.ReportNumberText;
         _pawnBrokerName = model.PawnBrokerNameText;

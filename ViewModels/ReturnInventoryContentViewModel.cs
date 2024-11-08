@@ -1,11 +1,13 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Avalonia.Media;
+﻿using WarrantGenerator.Constants;
 using WarrantGenerator.DocumentGeneration;
-using System.IO;
-using System;
-using WarrantGenerator.Constants;
 using WarrantGenerator.Interfaces;
+
+using Avalonia.Media;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System;
+using System.IO;
+
 
 namespace WarrantGenerator.ViewModels;
 
@@ -13,6 +15,29 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
 {
     public string[] CourtDistrictTypes { get; } = ConstantData.CourtDistricts;
     public string[] OfficerTitles { get; } = ConstantData.OfficerTitles;
+    public string[] OfficerGender { get; } = ConstantData.Genders;
+
+    [ObservableProperty]
+    private IBrush _officerNameBorder = Brushes.Transparent;
+
+    [ObservableProperty]
+    private string _officerNameText = string.Empty;
+
+    partial void OnOfficerNameTextChanged(string value)
+    {
+        OfficerNameBorder = Brushes.Transparent;
+    }
+
+    [ObservableProperty]
+    private IBrush _officerGenderBorder = Brushes.Transparent;
+
+    [ObservableProperty]
+    private string _officerGenderSelection = string.Empty;
+
+    partial void OnOfficerGenderSelectionChanged(string value)
+    {
+        OfficerGenderBorder = Brushes.Transparent;
+    }
 
     [ObservableProperty]
     private IBrush _officerTitleBorder = Brushes.Transparent;
@@ -22,7 +47,7 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
 
     partial void OnOfficerTitleSelectionChanged(string value)
     {
-        if (value == "Other")
+        if (value == ConstantData.OfficerTitlesOther)
         {
             CustomOfficerTitleVisibility = true;
         }
@@ -41,19 +66,13 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
     [ObservableProperty]
     private string _customOfficerTitleText = ConstantData.DefaultOfficerTitle;
 
+    partial void OnCustomOfficerTitleTextChanged(string value)
+    {
+        CustomOfficerTitleBorder = Brushes.Transparent;
+    }
+
     [ObservableProperty]
     private bool _customOfficerTitleVisibility = false;
-
-    [ObservableProperty]
-    private IBrush _officerNameBorder = Brushes.Transparent;
-
-    [ObservableProperty]
-    private string _officerNameText = string.Empty;
-
-    partial void OnOfficerNameTextChanged(string value)
-    {
-        OfficerNameBorder = Brushes.Transparent;
-    }
 
     [ObservableProperty]
     private string _courtDistrictSelection = ConstantData.DefaultCourtSelection;
@@ -81,17 +100,6 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
     }
 
     [ObservableProperty]
-    private IBrush _seizedPropertyBorder = Brushes.Transparent;
-
-    [ObservableProperty]
-    private string _seizedPropertyText = string.Empty;
-
-    partial void OnSeizedPropertyTextChanged(string value)
-    {
-        SeizedPropertyBorder = Brushes.Transparent;
-    }
-
-    [ObservableProperty]
     private IBrush _signedDateBorder = Brushes.Transparent;
 
     [ObservableProperty]
@@ -111,6 +119,17 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
     partial void OnServedDateSelectionChanged(DateTimeOffset? value)
     {
         ServedDateBorder = Brushes.Transparent;
+    }
+
+    [ObservableProperty]
+    private IBrush _seizedPropertyBorder = Brushes.Transparent;
+
+    [ObservableProperty]
+    private string _seizedPropertyText = string.Empty;
+
+    partial void OnSeizedPropertyTextChanged(string value)
+    {
+        SeizedPropertyBorder = Brushes.Transparent;
     }
 
     [ObservableProperty]
@@ -198,6 +217,26 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
             OfficerNameBorder = Brushes.Red;
         }
 
+        if (OfficerGenderSelection == string.Empty)
+        {
+            result = false;
+            OfficerGenderBorder = Brushes.Red;
+        }
+
+        if (OfficerTitleSelection == string.Empty)
+        {
+            result = false;
+            OfficerTitleBorder= Brushes.Red;
+        }
+
+        if (CustomOfficerTitleVisibility
+            && (CustomOfficerTitleText == ConstantData.DefaultOfficerTitle
+                || CustomOfficerTitleText == string.Empty))
+        {
+            result = false;
+            CustomOfficerTitleBorder = Brushes.Red;
+        }
+
         if (WarrantSignedByText == string.Empty)
         {
             result = false;
@@ -241,5 +280,5 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
 
         return result;
     }
-
 }
+

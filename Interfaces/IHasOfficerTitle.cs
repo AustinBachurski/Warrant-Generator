@@ -6,3 +6,4 @@ public interface IHasOfficerTitle
     public string OfficerTitleSelection { get; }
     public bool CustomOfficerTitleVisibility { get; }
 }
+

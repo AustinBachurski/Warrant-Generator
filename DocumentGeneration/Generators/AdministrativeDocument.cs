@@ -1,7 +1,9 @@
-﻿using DocumentFormat.OpenXml;
+﻿using WarrantGenerator.Constants;
+
+using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using WarrantGenerator.Constants;
+
 
 namespace WarrantGenerator.DocumentGeneration;
 
@@ -14,6 +16,9 @@ public partial class DocumentGenerator
         var document = newDocument.AddMainDocumentPart();
         document.Document = new Document();
         SetDocumentFormatting(document);
+
+        /* Document Content
+        *****************************************/ 
 
         AppendBoldCenteredText("ADMINISTRATIVE WARRANT");
         AppendEmptyLine();
@@ -35,12 +40,13 @@ public partial class DocumentGenerator
             "You have the right to appeal the validity of this warrant in either Justice or Municipal court within 30 days of the date of issuance."
             );
         AppendEmptyLine();
-        AppendText( $"Issued this {_nthDayOfMonthYear}" );
+        AppendText( $"Issued this {_todaysDate}." );
         AppendEmptyLine();
         AppendEmptyLine();
         AppendEmptyLine();
         AppendCenteredText(ConstantData.SignHere);
         AppendCenteredText("Issuing Peace Officer");
+        AppendEmptyLine();
         AppendEmptyLine();
         AppendText( $"Administrative Warrant received this ______ day of _____________, 20____." );
         AppendEmptyLine();
@@ -58,14 +64,16 @@ public partial class DocumentGenerator
         AppendText($"Address: {_pawnBrokerAddress}");
         AppendText("In the amount of $_______________ upon the adjudication of this case for the seizure of the following evidence, loss through damage, or unrecovered property.");
         AppendEmptyLine();
-        AppendText(_itemsPawned);
+        AppendMultilineText(_itemsPawned);
         AppendEmptyLine();
-        AppendText($"{_officerName} {_nthDayOfMonthYear}");
+        AppendText($"{_officerName} {_todaysDate}.");
+
+        /***************************************** 
+         * End Document Content*/
 
         document.Document.Append(_body);
         document.Document.Save();
         return _outputPath;
     }
-
 }
 
