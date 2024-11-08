@@ -21,7 +21,7 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
     private IBrush _officerNameBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _officerNameText = string.Empty;
+    private string _officerNameText = Environment.GetEnvironmentVariable("OFFICER_NAME") ?? string.Empty;
 
     partial void OnOfficerNameTextChanged(string value)
     {
@@ -32,7 +32,7 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
     private IBrush _officerGenderBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _officerGenderSelection = string.Empty;
+    private string _officerGenderSelection = Environment.GetEnvironmentVariable("OFFICER_GENDER") ?? string.Empty;
 
     partial void OnOfficerGenderSelectionChanged(string value)
     {
@@ -43,7 +43,7 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
     private IBrush _officerTitleBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _officerTitleSelection = string.Empty;
+    private string _officerTitleSelection = Environment.GetEnvironmentVariable("OFFICER_RANK") ?? string.Empty;
 
     partial void OnOfficerTitleSelectionChanged(string value)
     {
