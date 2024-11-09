@@ -94,6 +94,45 @@ public partial class DocumentGenerator
 
     private static string CrimeCodesAsString(ObservableCollection<MCACrime> crimesList)
     {
+        if (crimesList.Count == 2)
+        {
+            return string.Join(" and ", crimesList.Select(crime => crime.Code));
+        }
+
+        string combined = string.Join(", ", crimesList.Select(crime => crime.Code));
+
+        if (crimesList.Count > 1)
+        {
+            return InsertCoordinatingConjunction(combined);
+        }
+
+        return combined;
+    }
+
+    private static string CrimeDescriptionsAsString(ObservableCollection<MCACrime> crimesList)
+    {
+        if (crimesList.Count == 2)
+        {
+            return string.Join(" and ", crimesList.Select(crime => crime.Description));
+        }
+
+        string combined = string.Join(", ", crimesList.Select(crime => crime.Description));
+
+        if (crimesList.Count > 1)
+        {
+            return InsertCoordinatingConjunction(combined);
+        }
+
+        return combined;
+    }
+
+    private static string CrimesCombinedAsString(ObservableCollection<MCACrime> crimesList)
+    {
+        if (crimesList.Count == 2)
+        {
+            return string.Join(" and ", crimesList.Select(crime => $"M.C.A. § {crime.Code} ({crime.Description})"));
+        }
+
         string combined = string.Join(", ", crimesList.Select(crime => $"M.C.A. § {crime.Code} ({crime.Description})"));
 
         if (crimesList.Count > 1)
@@ -104,61 +143,9 @@ public partial class DocumentGenerator
         return combined;
     }
 
-    private static string  InsertCoordinatingConjunction(string text)
+    private static string InsertCoordinatingConjunction(string text)
     {
-        return text.Insert(text.LastIndexOf(',') + 1, " and"); // TODO: Verify word placement is correct and LINQ other methods.
-    }
-
-    private static string CrimeDescriptionsAsString(ObservableCollection<MCACrime> crimesList)
-    {
-        // TODO: LINQ
-        StringBuilder builder = new();
-
-        const string comma = ", ";
-
-        string combined = String.Join(", ", crimesList.Select(crime => crime.Description));
-
-        foreach (MCACrime each in crimesList)
-        {
-            builder.Append(each.Code);
-            builder.Append(comma);
-        }
-
-        if (crimesList.Count > 1)
-        {
-            builder.Insert(StartingPositionOfLastEntry(builder, comma.Length, crimesList), "and ");
-        }
-
-        // Trailing ", " is intentional.
-        return builder.ToString();
-    }
-
-    private static string CrimesCombinedAsString(ObservableCollection<MCACrime> crimesList)
-    {
-        // TODO: LINQ
-        StringBuilder builder = new();
-
-        const string prefix = "M.C.A. § ";
-        const string space = " (";
-        const string suffix = "), ";
-        int contentLength = prefix.Length + space.Length + suffix.Length;
-
-        foreach (MCACrime each in crimesList)
-        {
-            builder.Append(prefix);
-            builder.Append(each.Code);
-            builder.Append(space);
-            builder.Append(each.Description);
-            builder.Append(suffix);
-        }
-
-        if (crimesList.Count > 1)
-        {
-            builder.Insert(StartingPositionOfLastEntry(builder, contentLength, crimesList), "and ");
-        }
-
-        // Trailing ", " is intentional.
-        return builder.ToString();
+        return text.Insert(text.LastIndexOf(',') + 1, " and");
     }
 
     private static int StartingPositionOfLastEntry(StringBuilder builder, int contentLength, ObservableCollection<MCACrime> crimesList)

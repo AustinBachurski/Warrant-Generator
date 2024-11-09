@@ -45,6 +45,7 @@ public partial class DocumentGenerator
     private readonly string _crimesCombined = string.Empty;
     private readonly string _crimeCodes = string.Empty;
     private readonly string _crimeDescriptions = string.Empty;
+    private readonly string _crimeGrammar = string.Empty;
     private readonly string _probableCause = string.Empty;
     private readonly string _seizableProperty = string.Empty;
 }

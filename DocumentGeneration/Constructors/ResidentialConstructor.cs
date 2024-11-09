@@ -23,6 +23,7 @@ public partial class DocumentGenerator
         _crimesCombined = CrimesCombinedAsString(model.Crimes);
         _crimeCodes = CrimeCodesAsString(model.Crimes);
         _crimeDescriptions = CrimeDescriptionsAsString(model.Crimes);
+        _crimeGrammar = model.Crimes.Count > 1 ? "crime" : "crimes";
         _probableCause = model.ProbableCauseText;
         _seizableProperty = model.SeizablePropertyText;
     }
