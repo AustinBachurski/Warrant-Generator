@@ -66,6 +66,25 @@ public partial class DocumentGenerator
         _body.Append(paragraph);
     }
 
+    private void AppendHeading(string text)
+    {
+        var paragraph = new Paragraph();
+        var run = new Run();
+
+        var alignment = new ParagraphProperties();
+        alignment.Justification = new Justification() { Val = JustificationValues.Center };
+        paragraph.ParagraphProperties = alignment;
+
+        var format = new RunProperties();
+        format.Bold = new Bold();
+        format.Underline = new Underline();
+        run.RunProperties = format;
+
+        run.Append(new Text(text));
+        paragraph.Append(run);
+        _body.Append(paragraph);
+    }
+
     private void AppendIndentedText(string text)
     {
         var paragraph = new Paragraph();

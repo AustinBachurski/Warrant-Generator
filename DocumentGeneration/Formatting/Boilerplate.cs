@@ -53,7 +53,7 @@ public partial class DocumentGenerator
         }
     }
 
-    private void InsertWarrantBoilerplate()
+    private void InsertWarrantApplicationBoilerplate()
     {
         var boilerplate = new[]
         {
@@ -61,6 +61,24 @@ public partial class DocumentGenerator
             "STATE OF MONTANA\t\t\t\t\t\t)",
             "\t\t\tPlaintiff,\t\t\t\t)\t\tAPPLICATION FOR",
             "\t\t\t\t-vs-\t\t\t\t\t)\t\tSEARCH WARRANT",
+            "\t\t\tDefendant,\t\t\t\t)",
+            "",
+        };
+
+        foreach (var line in boilerplate)
+        {
+            AppendFormattedLine(line);
+        }
+    }
+
+    private void InsertWarrantBoilerplate()
+    {
+        var boilerplate = new[]
+        {
+            $"IN THE {_courtDistrict}, COUNTY OF FLATHEAD, STATE OF MONTANA",
+            "STATE OF MONTANA\t\t\t\t\t\t)",
+            "\t\t\tPlaintiff,\t\t\t\t)\t\tSEARCH WARRANT",
+            "\t\t\t\t-vs-\t\t\t\t\t)",
             "\t\t\tDefendant,\t\t\t\t)",
             "",
         };
