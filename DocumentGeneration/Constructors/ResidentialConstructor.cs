@@ -26,6 +26,8 @@ public partial class DocumentGenerator
         _crimeGrammar = model.Crimes.Count > 1 ? "crime" : "crimes";
         _probableCause = model.ProbableCauseText;
         _seizableProperty = model.SeizablePropertyText;
+        _generateWarrantApplicationDocument = model.SearchWarrantApplicationChecked;
+        _generateWarrantDocument = model.SearchWarrantChecked;
     }
 }
 

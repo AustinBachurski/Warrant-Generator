@@ -29,7 +29,8 @@ public partial class DocumentGenerator
 
     private string SearchWarrantApplicationDocument()
     {
-        using var newDocument = WordprocessingDocument.Create(_outputPath, WordprocessingDocumentType.Document);
+        const string suffix = " - APPLICATION";
+        using var newDocument = WordprocessingDocument.Create(_outputPath + suffix + Extension.Docx, WordprocessingDocumentType.Document);
 
         var document = newDocument.AddMainDocumentPart();
         document.Document = new Document();
@@ -99,12 +100,13 @@ public partial class DocumentGenerator
 
         document.Document.Append(_body);
         document.Document.Save();
-        return _outputPath;
+        return _outputPath + suffix + Extension.Docx;
     }
 
     private string SearchWarrantDocument()
     {
-        using var newDocument = WordprocessingDocument.Create(_outputPath, WordprocessingDocumentType.Document);
+        const string suffix = " - WARRANT";
+        using var newDocument = WordprocessingDocument.Create(_outputPath + suffix + Extension.Docx, WordprocessingDocumentType.Document);
 
         var document = newDocument.AddMainDocumentPart();
         document.Document = new Document();
@@ -140,7 +142,7 @@ public partial class DocumentGenerator
 
         document.Document.Append(_body);
         document.Document.Save();
-        return _outputPath;
+        return _outputPath + suffix + Extension.Docx;
     }
 }
 
