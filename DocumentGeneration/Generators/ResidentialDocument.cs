@@ -59,7 +59,7 @@ public partial class DocumentGenerator
             );
         AppendEmptyLine();
         AppendText(
-            $"Affiant, {_officerRank} {_officerName}, hereinafter referred to as I, is a {_officerRank} with the {_organization} and has been a Law Enforcement Officer for the {_organization} for {_employmentDuration} {_employmentDurationType}."
+            $"Affiant, {_officerRank} {_officerName}, hereinafter referred to as I, is a {_officerRank} with the {_organization} and has been a Law Enforcement Officer for the {_organization} for {_employmentDuration} {_employmentDurationType}.{UtilizeSWAT()}{UtilizeCrimeUnit()}"
             );
         AppendEmptyLine();
         AppendText(
@@ -80,8 +80,19 @@ public partial class DocumentGenerator
         AppendEmptyLine();
         AppendHeading("CONCLUSION");
         AppendEmptyLine();
-        // Working Here: Use conslusion from the Facebook warrant as well as the "WHEREFORE" part of the Application document.
-
+        AppendText(
+            $"Wherefore, Affiant verily believes there is located within the above-described area, evidence of the {_crimeGrammar} of {_crimeDescriptions}, including but not limited to, {_seizableProperty}, contrary to the provisions of {_crimeCodes}, Montana Code Annotated.  Affiant requests a Search Warrant be issued authoring a search of said area and to seize any evidence of the {_crimeGrammar} observide therein."
+            );
+        AppendEmptyLine();
+        AppendHeading("OATH/VERIFICATION");
+        AppendEmptyLine();
+        AppendText(
+            $"I declare under penalty of perjury and under the laws of the State of Montana that all statements and information contained in the foregoing Affidavit are true and correct.  Signed this {_todaysDate}."
+            );
+        AppendEmptyLine();
+        AppendEmptyLine();
+        AppendIndentedText(ConstantData.SignHere);
+        AppendIndentedText(_officerName);
 
         /***************************************** 
          * End Document Content*/
@@ -100,8 +111,29 @@ public partial class DocumentGenerator
         SetDocumentFormatting(document);
 
         /* Document Content
-        *****************************************/ 
+        *****************************************/
 
+        InsertWarrantBoilerplate();
+        AppendEmptyLine();
+        AppendText(_residenceDescription);
+        AppendEmptyLine();
+        AppendText($"{_officerRank} {_officerName}, {_organization}");
+        AppendEmptyLine();
+        AppendIndentedText(
+            $"A sworn application having been made before meu by {_officerRank} {_officerName}, with the {_organization}, that {_officerSubjectivePronoun} has reason to believe that in the above described area, namely, {_residenceDescription}, there is now located evidence of the crime of {_crimeDescriptions}, namely, {_seizableProperty}."
+            );
+        AppendIndentedText(
+            $"I have examined the Applicaiton for Search Warrant and am satisfied that there is probable cause to believe that said evidence is located within the above described area."
+            );
+        AppendIndentedText(
+            $"You are hereby commanded to serve this Warrant and search said area for, including, but not limited to, {_seizableProperty}.  If said evidence is found there, to seize it, together with any other evidence of the {_crimeGrammar} of {_crimeDescriptions}, give a receipt for the same, prepare a written inventory verified by you and the evidence seized and bring said evidence before me, all in the manner provided and required by law."
+            );
+        AppendEmptyLine();
+        AppendText($"Dated this {_todaysDate}.");
+        AppendEmptyLine();
+        AppendEmptyLine();
+        AppendText(ConstantData.SignHere);
+        AppendText("District Court Judge");
 
         /***************************************** 
          * End Document Content*/
