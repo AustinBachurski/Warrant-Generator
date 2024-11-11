@@ -12,7 +12,7 @@ public partial class DocumentGenerator
 {
     private string ResidentialDocument()
     {
-        List<string> documents = new();
+        List<string> documents = [];
 
         if (_generateWarrantApplicationDocument)
         {
@@ -34,6 +34,7 @@ public partial class DocumentGenerator
 
         var document = newDocument.AddMainDocumentPart();
         document.Document = new Document();
+        _body = new();
         SetDocumentFormatting(document);
 
         /* Document Content
@@ -82,13 +83,13 @@ public partial class DocumentGenerator
         AppendHeading("CONCLUSION");
         AppendEmptyLine();
         AppendText(
-            $"Wherefore, Affiant verily believes there is located within the above-described area, evidence of the {_crimeGrammar} of {_crimeDescriptions}, including but not limited to, {_seizableProperty}, contrary to the provisions of {_crimeCodes}, Montana Code Annotated.  Affiant requests a Search Warrant be issued authoring a search of said area and to seize any evidence of the {_crimeGrammar} observide therein."
+            $"Wherefore, Affiant verily believes there is located within the above-described area, evidence of the {_crimeGrammar} of {_crimeDescriptions}, including but not limited to, {_seizableProperty}, contrary to the provisions of {_crimeCodes}, Montana Code Annotated.  Affiant requests a Search Warrant be issued authoring a search of said area and to seize any evidence of the {_crimeGrammar} observed therein."
             );
         AppendEmptyLine();
         AppendHeading("OATH/VERIFICATION");
         AppendEmptyLine();
         AppendText(
-            $"I declare under penalty of perjury and under the laws of the State of Montana that all statements and information contained in the foregoing Affidavit are true and correct.  Signed this {_todaysDate}."
+            $"I declare under penalty of perjury and under the laws of the State of Montana that all statements and information contained in the foregoing affidavit are true and correct.  Signed this {_todaysDate}."
             );
         AppendEmptyLine();
         AppendEmptyLine();
@@ -110,6 +111,7 @@ public partial class DocumentGenerator
 
         var document = newDocument.AddMainDocumentPart();
         document.Document = new Document();
+        _body = new();
         SetDocumentFormatting(document);
 
         /* Document Content
@@ -122,7 +124,7 @@ public partial class DocumentGenerator
         AppendText($"{_officerRank} {_officerName}, {_organization}");
         AppendEmptyLine();
         AppendIndentedText(
-            $"A sworn application having been made before meu by {_officerRank} {_officerName}, with the {_organization}, that {_officerSubjectivePronoun} has reason to believe that in the above described area, namely, {_residenceDescription}, there is now located evidence of the crime of {_crimeDescriptions}, namely, {_seizableProperty}."
+            $"A sworn application having been made before me by {_officerRank} {_officerName}, with the {_organization}, that {_officerSubjectivePronoun} has reason to believe that in the above described area, namely, {_residenceDescription}, there is now located evidence of the crime of {_crimeDescriptions}, namely, {_seizableProperty}."
             );
         AppendIndentedText(
             $"I have examined the Applicaiton for Search Warrant and am satisfied that there is probable cause to believe that said evidence is located within the above described area."

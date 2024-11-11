@@ -12,7 +12,7 @@ public partial class DocumentGenerator
 {
     private string ReturnInventoryDocument()
     {
-        List<string> documents = new();
+        List<string> documents = [];
 
         if (_generateReturnAndRequestDocument)
         {

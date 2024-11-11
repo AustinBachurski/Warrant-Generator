@@ -111,7 +111,7 @@ public partial class DocumentGenerator
             return string.Empty;
         }
 
-        return $"1.  Affiant, {_officerRank} {_officerName}, hereinafter referred to as I, is a {_officerRank} with the {_organization} and has been a Law Enforcement Officer for the {_organization} for {_employmentDuration} {_employmentDurationType}.  Affiant may use the services of the Flathead County Special Weapons and Tactics (SWAT) team acting under Affiant's direction to conduct a search of said area and to seize any evidence indicated in the issued search warrant.";
+        return "  Affiant may use the services of the Flathead County Special Weapons and Tactics (SWAT) team acting under Affiant's direction to conduct a search of said area and to seize any evidence indicated in the issued search warrant.";
     }
 
     private string UtilizeCrimeUnit()
@@ -121,7 +121,7 @@ public partial class DocumentGenerator
             return string.Empty;
         }
 
-        return $"1.  Affiant, {_officerRank} {_officerName}, hereinafter referred to as I, is a {_officerRank} with the {_organization} and has been a Law Enforcement Officer for the {_organization} for {_employmentDuration} {_employmentDurationType}.  Affiant may use the services of the designated Crime Scene Team Leader acting under Affiant's direction to process any evidence that may be seized in connection with the issued search warrant.";
+        return "  Affiant may use the services of the designated Crime Scene Team Leader acting under Affiant's direction to process any evidence that may be seized in connection with the issued search warrant.";
     }
 }
 
