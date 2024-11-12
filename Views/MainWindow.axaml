@@ -24,8 +24,8 @@
 		<DataTemplate DataType="vm:ReturnInventoryContentViewModel">
 			<views:ReturnInventoryContentTab />
 		</DataTemplate>
-		<DataTemplate DataType="vm:ResidentialContentViewModel">
-			<views:ResidentialContentTab />
+		<DataTemplate DataType="vm:ResidenceContentViewModel">
+			<views:ResidenceContentTab />
 		</DataTemplate>
 		<DataTemplate DataType="vm:VehicleContentViewModel">
 			<views:VehicleContentTab />
@@ -79,9 +79,9 @@
 				<ContentControl Content="{Binding ReturnInventoryTab}" />
 			</TabItem>
 
-			<TabItem Header="Residential"
+			<TabItem Header="Residence"
 					 FontSize="18">
-				<ContentControl Content="{Binding ResidentialTab}" />
+				<ContentControl Content="{Binding ResidenceTab}" />
 			</TabItem>
 
 			<TabItem Header="Vehicle"

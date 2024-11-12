@@ -29,17 +29,9 @@ public partial class DocumentGenerator
     private readonly string _suspectName = string.Empty;
     private readonly string _itemsPawned = string.Empty;
     private readonly string _warrantSignedBy = string.Empty;
-    private readonly string _searchableProperty = string.Empty;
     private readonly string _signedDate = string.Empty;
     private readonly string _servedDate = string.Empty;
     private readonly string _seizedProperty = string.Empty;
-    private readonly bool _generateReturnAndRequestDocument = false;
-    private readonly bool _generateInventoryDocument = false;
-    private readonly bool _generateOrderDocument = false;
-    private readonly bool _generateWarrantApplicationDocument = false;
-    private readonly bool _generateWarrantDocument = false;
-    private readonly bool _utilizeSWAT = false;
-    private readonly bool _utilizeCrimeUnit = false;
     private readonly string _residenceAddress = string.Empty;
     private readonly string _residenceDescription = string.Empty;
     private readonly string _crimesCombined = string.Empty;
@@ -48,5 +40,16 @@ public partial class DocumentGenerator
     private readonly string _crimeGrammar = string.Empty;
     private readonly string _probableCause = string.Empty;
     private readonly string _seizableProperty = string.Empty;
+
+    private readonly bool _generateReturnAndRequestDocument = false;
+    private readonly bool _generateInventoryDocument = false;
+    private readonly bool _generateOrderDocument = false;
+    private readonly bool _generateWarrantApplicationDocument = false;
+    private readonly bool _generateWarrantDocument = false;
+    private readonly bool _utilizeSWAT = false;
+    private readonly bool _utilizeCrimeUnit = false;
+    private readonly bool _requestToSeal = false;
+    private readonly bool _requestToDelayNotification = false;
+    private readonly bool _telephonic = false;
 }
 

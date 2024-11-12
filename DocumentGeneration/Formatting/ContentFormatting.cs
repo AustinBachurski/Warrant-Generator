@@ -58,6 +58,21 @@ public partial class DocumentGenerator
         return model.OfficerRankSelection;
     }
 
+    private static string LowercaseStartAndRemoveTrailingPunctuation(string text)
+    {
+
+        var chars = text.ToCharArray();
+
+        chars[0] = char.ToLower(chars[0]);
+
+        while (chars.Length > 0 && !char.IsLetterOrDigit(chars.Last()))
+        {
+            Array.Resize(ref chars, chars.Length - 1);
+        }
+
+        return new string(chars);
+    }
+    
     private static string PosessivePronoun(string gender)
     {
         if (gender == "Female")
@@ -66,6 +81,18 @@ public partial class DocumentGenerator
         }
 
         return "his";
+    }
+
+    private static string RemoveTrailingPunctuation(string text)
+    {
+        var chars = text.ToCharArray();
+
+        while (chars.Length > 0 && !char.IsLetterOrDigit(chars.Last()))
+        {
+            Array.Resize(ref chars, chars.Length - 1);
+        }
+
+        return new string(chars);
     }
     
     private static string SubjectivePronoun(string gender)

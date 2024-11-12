@@ -16,7 +16,7 @@ public partial class DocumentGenerator
         _officerPosessivePronoun = PosessivePronoun(model.OfficerGenderSelection);
         _courtDistrict = model.CourtDistrictSelection;
         _warrantSignedBy = model.WarrantSignedByText;
-        _searchableProperty = model.SearchablePropertyText;
+        _seizableProperty = LowercaseStartAndRemoveTrailingPunctuation(model.SeizablePropertyText);
         _signedDate = FormattedDateString(model.SignedDateSelection
             ?? throw new UnreachableException("model.SignedDateSelection was null."));
         _servedDate = FormattedDateString(model.ServedDateSelection

@@ -47,7 +47,7 @@ public partial class DocumentGenerator
 
         InsertReturnBoilerplate();
         AppendEmptyLine();
-        AppendText(_searchableProperty);
+        AppendText(_seizableProperty);
         AppendEmptyLine();
         StateOfMontanaCountyOfFlathead();
         AppendEmptyLine();
@@ -98,7 +98,7 @@ public partial class DocumentGenerator
 
         InsertInventoryBoilerplate();
         AppendEmptyLine();
-        AppendText(_searchableProperty);
+        AppendText(_seizableProperty);
         AppendEmptyLine();
         AppendIndentedText(
             $"{_officerRank} {_officerName} does hereby state that on the {_servedDate} {_officerSubjectivePronoun} executed the Warrant issued on the {_signedDate}, and as a result of said execution, the property seized was inventoried and is as follows:"
@@ -149,7 +149,7 @@ public partial class DocumentGenerator
 
         InsertOrderBoilerplate();
         AppendEmptyLine();
-        AppendText(_searchableProperty);
+        AppendText(_seizableProperty);
         AppendEmptyLine();
         AppendText(
             "Return of Warrant having been made before the undersigned; and a verified copy of the Inventory of Property seized being presented; and deeming the custody of appropriate disposition is necessary,"

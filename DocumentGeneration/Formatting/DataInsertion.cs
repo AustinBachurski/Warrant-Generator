@@ -6,6 +6,20 @@ namespace WarrantGenerator.DocumentGeneration;
 
 public partial class DocumentGenerator
 {
+    private void AppendBoldText(string text)
+    {
+        var paragraph = new Paragraph();
+        var run = new Run();
+
+        var format = new RunProperties();
+        format.Bold = new Bold();
+        run.RunProperties = format;
+
+        run.Append(new Text(text));
+        paragraph.Append(run);
+        _body.Append(paragraph);
+    }
+
     private void AppendBoldCenteredText(string text)
     {
         var paragraph = new Paragraph();
@@ -77,7 +91,7 @@ public partial class DocumentGenerator
 
         var format = new RunProperties();
         format.Bold = new Bold();
-        format.Underline = new Underline();
+        format.Underline = new Underline() { Val = UnderlineValues.Single };
         run.RunProperties = format;
 
         run.Append(new Text(text));

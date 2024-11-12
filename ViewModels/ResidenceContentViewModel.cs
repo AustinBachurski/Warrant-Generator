@@ -9,11 +9,13 @@ using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 
 namespace WarrantGenerator.ViewModels;
 
-public partial class ResidentialContentViewModel : ObservableObject, IHasOfficerRank
+public partial class ResidenceContentViewModel : ObservableObject, IHasOfficerRank
 {
     public string[] CourtDistrictTypes { get; } = ConstantData.CourtDistricts;
     public string[] DurationTypes { get; } = ConstantData.DurationTypes;
@@ -48,7 +50,7 @@ public partial class ResidentialContentViewModel : ObservableObject, IHasOfficer
     private IBrush _officerRankBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _officerRankSelection = string.Empty;
+    private string _officerRankSelection = Environment.GetEnvironmentVariable(EnVars.OfficerRank) ?? string.Empty;
 
     partial void OnOfficerRankSelectionChanged(string value)
     {
@@ -83,9 +85,9 @@ public partial class ResidentialContentViewModel : ObservableObject, IHasOfficer
     private IBrush _employmentDurationBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _employmentDurationText = string.Empty;
+    private decimal? _employmentDurationValue = EnVars.DateToDecimal();
 
-    partial void OnEmploymentDurationTextChanged(string value)
+    partial void OnEmploymentDurationValueChanged(decimal? value)
     {
         EmploymentDurationBorder = Brushes.Transparent;
     }
@@ -98,6 +100,15 @@ public partial class ResidentialContentViewModel : ObservableObject, IHasOfficer
 
     [ObservableProperty]
     private bool _crimeUnitChecked = false;
+
+    [ObservableProperty]
+    private bool _DelayChecked = false;
+
+    [ObservableProperty]
+    private bool _SealChecked = false;
+
+    [ObservableProperty]
+    private bool _TelephonicChecked = false;
 
     [ObservableProperty]
     private IBrush _residenceAddressBorder = Brushes.Transparent;
@@ -160,7 +171,7 @@ public partial class ResidentialContentViewModel : ObservableObject, IHasOfficer
             return;
         }
 
-        Crimes.Add(new(McaCodeText, McaDescriptionText));
+        Crimes.Add(new(McaCodeText.Trim(), CorrectCaseAndPunctuation(McaDescriptionText)));
         CrimesBorder = Brushes.Transparent;
 
         McaCodeText = string.Empty;
@@ -184,6 +195,20 @@ public partial class ResidentialContentViewModel : ObservableObject, IHasOfficer
         }
 
         return result;
+    }
+
+    private static string CorrectCaseAndPunctuation(string text)
+    {
+        var chars = text.ToCharArray();
+
+        chars[0] = char.ToUpper(chars[0]);
+
+        while (chars.Length > 0 && !char.IsLetterOrDigit(chars.Last()))
+        {
+            Array.Resize(ref chars, chars.Length - 1);
+        }
+
+        return new string(chars);
     }
 
     [RelayCommand]
@@ -307,7 +332,7 @@ public partial class ResidentialContentViewModel : ObservableObject, IHasOfficer
             CustomOfficerRankBorder = Brushes.Red;
         }
 
-        if (EmploymentDurationText == string.Empty)
+        if (EmploymentDurationValue == null)
         {
             result = false;
             EmploymentDurationBorder = Brushes.Red;

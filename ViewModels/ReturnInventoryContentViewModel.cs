@@ -89,14 +89,14 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
     }
 
     [ObservableProperty]
-    private IBrush _searchablePropertyBorder = Brushes.Transparent;
+    private IBrush _seizablePropertyBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _searchablePropertyText = string.Empty;
+    private string _seizablePropertyText = string.Empty;
 
-    partial void OnSearchablePropertyTextChanged(string value)
+    partial void OnSeizablePropertyTextChanged(string value)
     {
-        SearchablePropertyBorder = Brushes.Transparent;
+        SeizablePropertyBorder = Brushes.Transparent;
     }
 
     [ObservableProperty]
@@ -243,10 +243,10 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
             WarrantSignedByBorder = Brushes.Red;
         }
 
-        if (SearchablePropertyText == string.Empty)
+        if (SeizablePropertyText == string.Empty)
         {
             result = false;
-            SearchablePropertyBorder = Brushes.Red;
+            SeizablePropertyBorder = Brushes.Red;
         }
 
         if (SignedDateSelection == null)

@@ -4,8 +4,8 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
-             x:Class="WarrantGenerator.Views.ResidentialContentTab"
-			 x:DataType="vm:ResidentialContentViewModel">
+             x:Class="WarrantGenerator.Views.ResidenceContentTab"
+			 x:DataType="vm:ResidenceContentViewModel">
 
 	<ScrollViewer>
 		<Grid ColumnDefinitions="*, 10, *">
@@ -28,8 +28,7 @@
 								   Margin="5, 0, 0, 0" />
 						<Border BorderBrush="{Binding OfficerNameBorder}"
 								BorderThickness="2">
-							<TextBox x:Name="OfficerNameTextBox"
-									 Text="{Binding OfficerNameText}"
+							<TextBox Text="{Binding OfficerNameText}"
 									 Width="200"/>
 						</Border>
 					</StackPanel>
@@ -90,7 +89,12 @@
 						<StackPanel Orientation="Horizontal">
 							<Border BorderBrush="{Binding EmploymentDurationBorder}"
 									BorderThickness="2">
-								<TextBox Text="{Binding EmploymentDurationText}" />
+									<NumericUpDown Value="{Binding EmploymentDurationValue}"
+												   Minimum="1"
+												   FormatString="N0"
+												   ParsingNumberStyle="Integer"
+												   Width="110"
+												   ButtonSpinnerLocation="Left" />
 							</Border>
 							<ComboBox
 								ItemsSource="{Binding DurationTypes}"
@@ -119,15 +123,37 @@
 
 				<!-- Special Content -->
 				<Grid Grid.Column="0"
-					  ColumnDefinitions="Auto, Auto">
+					  ColumnDefinitions="Auto, Auto"
+					  RowDefinitions="Auto, Auto, Auto">
 					<CheckBox Grid.Column="0"
+							  Grid.Row="0"
 							  Content="Utilize SWAT"
 							  Margin="15, 0, 0, 0"
 							  IsChecked="{Binding SWATChecked}" />
 					<CheckBox Grid.Column="1"
+							  Grid.Row="0"
 							  Content="Utilize Crime Unit"
 							  Margin="15, 0, 0, 0"
 							  IsChecked="{Binding CrimeUnitChecked}" />
+					<CheckBox Grid.Column="0"
+							  Grid.Row="1"
+							  Content="Request to Seal"
+							  Margin="15, 0, 0, 0"
+							  IsChecked="{Binding SealChecked}" />
+					<CheckBox Grid.Column="1"
+							  Grid.Row="1"
+							  Content="Request to Delay Notification"
+							  Margin="15, 0, 0, 0"
+							  IsChecked="{Binding DelayChecked}" />
+					<TextBlock Grid.Column="0"
+							   Grid.Row="2"
+							   Text="Telephonic Warrant?"
+							   VerticalAlignment="Center" />
+					<ToggleSwitch Grid.Column="1"
+								  Grid.Row="2"
+								  OnContent="Yes"
+								  OffContent="No"
+								  IsChecked="{Binding TelephonicChecked}" />
 				</Grid>
 				<!-- /Special Content -->
 
@@ -150,7 +176,8 @@
 							   Margin="5, 0, 0, 0" />
 					<Border BorderBrush="{Binding ResidenceDescriptionBorder}"
 							BorderThickness="2">
-						<TextBox Text="{Binding ResidenceDescriptionText}"
+						<TextBox x:Name="LegalDescriptionTextBox"
+								 Text="{Binding ResidenceDescriptionText}"
 								 AcceptsReturn="True"
 								 TextWrapping="Wrap"
 								 Height="60" />
@@ -221,7 +248,8 @@
 								   Margin="5, 0, 0, 0" />
 							<Border BorderBrush="{Binding McaDescriptionBorder}"
 									BorderThickness="2">
-								<TextBox Text="{Binding McaDescriptionText}" />
+								<TextBox x:Name="McaDescriptionTextBox"
+										 Text="{Binding McaDescriptionText}" />
 							</Border>
 						</StackPanel>
 

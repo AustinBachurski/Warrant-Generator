@@ -34,8 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\ResidentialContent.axaml.cs">
-      <DependentUpon>ResidentialContent.axaml</DependentUpon>
+    <Compile Update="Views\ResidenceContent.axaml.cs">
+      <DependentUpon>ResidenceContent.axaml</DependentUpon>
     </Compile>
     <Compile Update="Views\SocialMediaContent.axaml.cs">
       <DependentUpon>SocialMediaContent.axaml</DependentUpon>
