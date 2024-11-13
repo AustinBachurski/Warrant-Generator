@@ -1,4 +1,6 @@
-﻿using DocumentFormat.OpenXml.Packaging;
+﻿using WarrantGenerator.Constants;
+
+using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 
 
@@ -6,21 +8,39 @@ namespace WarrantGenerator.DocumentGeneration;
 
 public partial class DocumentGenerator
 {
-    private static LineNumberType LineNumbers()
+    private void AddHyperlinkStyle()
     {
-        var lineNumberType = new LineNumberType
+        var hyperlinkStyle = new Style()
         {
-            CountBy = 1,
-            Start = 0,
-            Distance = "720",  // Distance from text in twips
-            Restart = LineNumberRestartValues.NewPage, // Restart numbering on each new page
+            Type = StyleValues.Character,
+            StyleId = StyleText.Hyperlink,
+            CustomStyle = false,
+            StyleName = new StyleName() { Val = StyleText.Hyperlink },
         };
 
-        return lineNumberType;
+        var styleRunProperties = new StyleRunProperties();
+        styleRunProperties.Append(new Color() { Val = StyleText.Blue, ThemeColor = ThemeColorValues.Hyperlink });
+        styleRunProperties.Append(new Underline() { Val = UnderlineValues.Single });
+
+        hyperlinkStyle.Append(styleRunProperties);
+
+        _document.StyleDefinitionsPart.Styles.Append(hyperlinkStyle);
     }
 
-    private static ParagraphProperties SetParagraphProperties()
+    private void AddNormalStyle()
     {
+        var styleDefinitions = _document.AddNewPart<StyleDefinitionsPart>();
+
+        styleDefinitions.Styles = new Styles();
+
+        var defaultStyle = new Style()
+        {
+            Type = StyleValues.Paragraph,
+            StyleId = StyleText.Normal,
+            Default = true,
+            StyleName = new StyleName() { Val = StyleText.Normal },
+        };
+
         var paragraphProperties = new ParagraphProperties();
         paragraphProperties.Append(new Justification() { Val = JustificationValues.Both });
         paragraphProperties.SpacingBetweenLines = new SpacingBetweenLines
@@ -30,22 +50,27 @@ public partial class DocumentGenerator
             Line = "455",  // With "Exact" LineRule, Line is set in "twips", 1 "twip" == 1/20th of a point.
             LineRule = LineSpacingRuleValues.Exact,
         };
+        defaultStyle.Append(paragraphProperties);
 
-        return paragraphProperties;
-    }
-
-    private static StyleRunProperties SetRunProperties()
-    {
         var runProperties = new RunProperties();
-        runProperties.Append(new RunFonts() { Ascii = "Courier New", HighAnsi = "Courier New" });
+        runProperties.Append(new RunFonts() { Ascii = StyleText.CourierNew, HighAnsi = StyleText.CourierNew });
         runProperties.Append(new FontSize() { Val = "24" });  // Val / 2 == font size.
+        defaultStyle.Append(runProperties);
 
-        return new StyleRunProperties(runProperties);
+        styleDefinitions.Styles.Append(defaultStyle);
     }
 
-    private static Footer SetFooterProperties()
+    private void InitializeDocument()
     {
-        var footer = new Footer();
+        AddNormalStyle();
+        AddHyperlinkStyle();
+        SetFooterProperties();
+    }
+
+    private void SetFooterProperties()
+    {
+        var footerPart = _document.AddNewPart<FooterPart>();
+
         var paragraph = new Paragraph(new Run(new FieldChar() { FieldCharType = FieldCharValues.Begin }));
 
         var alignment = new ParagraphProperties
@@ -55,51 +80,33 @@ public partial class DocumentGenerator
 
         paragraph.ParagraphProperties = alignment;
 
-        var pageNumberRun = new Run(new FieldCode(" PAGE "));
-        paragraph.Append(pageNumberRun);
-
+        paragraph.Append(new Run(new FieldCode(" PAGE ")));
         paragraph.Append(new Run(new FieldChar() { FieldCharType = FieldCharValues.Separate }));
         paragraph.Append(new Run(new FieldChar() { FieldCharType = FieldCharValues.End }));
-        footer.Append(paragraph);
 
-        return footer;
-    }
-
-    private void SetDocumentFormatting(MainDocumentPart document)
-    {
-
-        var documentStyle = document.AddNewPart<StyleDefinitionsPart>();
-        documentStyle.Styles = new Styles();
-
-        var defaultStyle = new Style()
-        {
-            Type = StyleValues.Paragraph,
-            StyleId = "Normal",
-            Default = true,
-            StyleName = new StyleName() { Val = "Normal" },
-        };
-
-        defaultStyle.Append(SetParagraphProperties());
-        defaultStyle.Append(SetRunProperties());
-        documentStyle.Styles.Append(defaultStyle);
-
-        // Create footer content with page numbers
-        var footerPart = document.AddNewPart<FooterPart>();
-
-        footerPart.Footer = SetFooterProperties();
+        footerPart.Footer = new Footer(paragraph);
         footerPart.Footer.Save();
+
+        var sectionProperties = new SectionProperties();
 
         var footerReference = new FooterReference
         {
             Type = HeaderFooterValues.Default,
-            Id = document.GetIdOfPart(footerPart),
+            Id = _document.GetIdOfPart(footerPart),
         };
-
-        var sectionProperties = new SectionProperties();
         sectionProperties.Append(footerReference);
-        sectionProperties.Append(LineNumbers());
+
+        var lineNumberType = new LineNumberType
+        {
+            CountBy = 1,
+            Start = 0,
+            Distance = "720",  // Distance from text in twips
+            Restart = LineNumberRestartValues.NewPage, // Restart numbering on each new page
+        };
+        sectionProperties.Append(lineNumberType);
 
         _body.Append(sectionProperties);
     }
+
 }
 

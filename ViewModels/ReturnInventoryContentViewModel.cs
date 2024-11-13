@@ -280,5 +280,6 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
 
         return result;
     }
+
 }
 

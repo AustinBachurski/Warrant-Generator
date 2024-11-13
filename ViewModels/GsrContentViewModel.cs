@@ -4,5 +4,6 @@ using CommunityToolkit.Mvvm.Input;
 namespace WarrantGenerator.ViewModels;
 
 public partial class GsrContentViewModel : ObservableObject
+
 {
 }

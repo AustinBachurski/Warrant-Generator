@@ -23,6 +23,10 @@ public static class ConstantData
         "Master Patrol Officer", "Officer", "Sergeant", "Other",
     ];
 
+    public static string[] Platforms { get; } = [
+        SocialMedia.Facebook, SocialMedia.SnapChat,
+        ];
+
     public static string OfficerRanksOther { get; } = "Other";
 
     public static string[] Genders { get; } = [ "Female", "Male", ];
@@ -38,5 +42,12 @@ public static class ConstantData
     public static string UnexpectedError { get; } = "Unexpected Error Encountered, Error Details:\n\n";
 
     public static string SignHere { get; } = "_____________________________________";
+
+    public static string NormalUrlTitleText { get; } = "URL for Account";
+
+    public static string ErrorUrlTitleText { get; } = "URL for Account - MUST BE A VALID URL";
+
+    public static char Separator { get; } = '|';
+
 }
 

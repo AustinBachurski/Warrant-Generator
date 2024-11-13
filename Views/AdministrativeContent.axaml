@@ -75,8 +75,29 @@
 				</StackPanel>
 				<!-- /Suspect Name -->
 
+			</StackPanel>
+			<!-- /Left Column -->
+
+			<!-- Right Column -->
+			<StackPanel Grid.Column="2">
+
+			<!-- Items Pawned -->
+			<StackPanel>
+				<TextBlock Text="Items Pawned"
+						   Margin="5, 0, 0, 0" />
+				<Border BorderBrush="{Binding ItemsPawnedBorder}"
+						BorderThickness="2">
+					<TextBox x:Name="ItemsPawnedTextBox"
+						     Text="{Binding ItemsPawnedText}"
+							 AcceptsReturn="True"
+							 TextWrapping="Wrap"
+							 MinHeight="200" />
+				</Border>
+			</StackPanel>
+			<!-- /Items Pawned -->
+
 				<!-- Output File -->
-				<StackPanel>
+				<StackPanel Margin="0, 15, 0, 0">
 					<TextBlock Text="Output File Name"
 							   VerticalAlignment="Center"
 							   Margin="5, 0, 0, 0" />
@@ -99,25 +120,6 @@
 				<!-- /Output File -->
 
 			</StackPanel>
-			<!-- /Left Column -->
-
-			<!-- Right Column -->
-
-			<!-- Items Pawned -->
-			<StackPanel Grid.Column="2">
-				<TextBlock Text="Items Pawned"
-						   Margin="5, 0, 0, 0" />
-				<Border BorderBrush="{Binding ItemsPawnedBorder}"
-						BorderThickness="2">
-					<TextBox x:Name="ItemsPawnedTextBox"
-						     Text="{Binding ItemsPawnedText}"
-							 AcceptsReturn="True"
-							 TextWrapping="Wrap"
-							 MinHeight="200" />
-				</Border>
-			</StackPanel>
-			<!-- /Items Pawned -->
-
 			<!-- /Right Column -->
 
 		</Grid>

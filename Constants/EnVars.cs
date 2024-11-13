@@ -13,15 +13,13 @@ public static class EnVars
 
     public static decimal? DateToDecimal()
     {
-        try
-        {
-            DateTime startDate = DateTime.Parse(Environment.GetEnvironmentVariable(HireDate));
-            return (int)(((DateTime.Now - startDate).TotalDays) / 365);
-        }
-        catch(Exception)
+        if (!DateTime.TryParse(Environment.GetEnvironmentVariable(HireDate), out DateTime startDate))
         {
             return null;
         }
+
+        return (int)((DateTime.Now - startDate).TotalDays / 365);
     }
+
 }
 

@@ -36,5 +36,6 @@ public partial class DocumentGenerator
         _generateWarrantDocument = model.SearchWarrantChecked;
 #pragma warning restore CS8629
     }
+
 }
 

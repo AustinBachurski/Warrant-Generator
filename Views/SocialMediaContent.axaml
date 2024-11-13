@@ -6,5 +6,441 @@
 			 mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
              x:Class="WarrantGenerator.Views.SocialMediaContentTab"
 			 x:DataType="vm:SocialMediaContentViewModel">
-    <TextBlock Text="SOCIAL MEDIA" />
+
+	<ScrollViewer>
+		<Grid ColumnDefinitions="*, 10, *">
+
+
+			<!-- Left Column -->
+			<StackPanel Grid.Column="0"
+						Spacing="10"
+						HorizontalAlignment="Stretch">
+
+				<!-- Name Gender Rank Grouping -->
+				<StackPanel Grid.Column="0"
+							Orientation="Horizontal"
+							Spacing="5">
+
+					<!-- Officer Name -->
+					<StackPanel>
+						<TextBlock Text="Officer Name"
+								   VerticalAlignment="Center"
+								   Margin="5, 0, 0, 0" />
+						<Border BorderBrush="{Binding OfficerNameBorder}"
+								BorderThickness="2">
+							<TextBox Text="{Binding OfficerNameText}"
+									 Width="200"/>
+						</Border>
+					</StackPanel>
+					<!-- /Officer Name -->
+
+					<!-- Officer Gender -->
+					<StackPanel>
+						<TextBlock Text="Gender"
+								   VerticalAlignment="Center"
+								   Margin="5, 0, 0, 0" />
+						<Border BorderBrush="{Binding OfficerGenderBorder}"
+								BorderThickness="2">
+							<StackPanel Orientation="Horizontal" Spacing="10">
+								<ComboBox ItemsSource="{Binding OfficerGender}"
+										  SelectedItem="{Binding OfficerGenderSelection}">
+								</ComboBox>
+							</StackPanel>
+						</Border>
+					</StackPanel>
+					<!-- /Officer Gender -->
+
+					<!-- Officer Rank -->
+					<StackPanel>
+						<TextBlock Text="Officer Rank"
+						   VerticalAlignment="Center"
+						   Margin="5, 0, 0, 0" />
+						<Border BorderBrush="{Binding OfficerRankBorder}"
+								BorderThickness="2">
+							<ComboBox ItemsSource="{Binding OfficerRanks}"
+									  SelectedItem="{Binding OfficerRankSelection}"
+									  PlaceholderText="Select Rank">
+							</ComboBox>
+						</Border>
+					</StackPanel>
+
+					<StackPanel VerticalAlignment="Bottom">
+						<Border BorderBrush="{Binding CustomOfficerRankBorder}"
+								BorderThickness="2">
+							<TextBox Text="{Binding CustomOfficerRankText}"
+									 Width="150"
+									 IsVisible="{Binding CustomOfficerRankVisibility}" />
+						</Border>
+					</StackPanel>
+					<!-- /Officer Rank -->
+
+				</StackPanel>
+				<!-- /Name Gender Rank Grouping -->
+
+				<!-- Employment Duration and District Grouping -->
+				<StackPanel Orientation="Horizontal"
+							Spacing="25">
+
+					<!-- Time with KPD -->
+					<StackPanel Margin="10, 0, 0, 0">
+						<TextBlock Text="Time with KPD"
+						   VerticalAlignment="Center"
+						   Margin="5, 0, 0, 0" />
+						<StackPanel Orientation="Horizontal">
+							<Border BorderBrush="{Binding EmploymentDurationBorder}"
+									BorderThickness="2">
+								<NumericUpDown Value="{Binding EmploymentDurationValue}"
+											   Minimum="1"
+											   FormatString="N0"
+											   ParsingNumberStyle="Integer"
+											   Width="110"
+											   ButtonSpinnerLocation="Left" />
+							</Border>
+							<ComboBox
+								ItemsSource="{Binding DurationTypes}"
+								SelectedItem="{Binding DurationTypeSelection}"
+								SelectedIndex="0"
+								VerticalAlignment="Center">
+							</ComboBox>
+						</StackPanel>
+					</StackPanel>
+					<!-- /Time with KPD -->
+
+					<!-- Court District -->
+					<StackPanel HorizontalAlignment="Stretch">
+						<TextBlock Text="Court District"
+								   VerticalAlignment="Center"
+								   Margin="5, 0, 0, 0" />
+						<ComboBox ItemsSource="{Binding CourtDistrictTypes}"
+								  SelectedItem="{Binding CourtDistrictSelection}"
+								  SelectedIndex="2">
+						</ComboBox>
+					</StackPanel>
+					<!-- /Court District -->
+
+				</StackPanel>
+				<!-- /Employment Duration and District Grouping -->
+
+				<!-- Platform and Date Selection -->
+				<StackPanel Grid.Column="0"
+							Grid.Row="2"
+							Orientation="Horizontal"
+							Spacing="15">
+
+					<!-- Platform Selection -->
+					<StackPanel HorizontalAlignment="Stretch">
+						<TextBlock Text="Platform"
+								   VerticalAlignment="Center"
+								   Margin="5, 0, 0, 0" />
+						<ComboBox ItemsSource="{Binding SocialMediaPlatforms}"
+								  SelectedItem="{Binding PlatformSelection}">
+						</ComboBox>
+					</StackPanel>
+					<!-- /Platform Selection -->
+
+					<!-- Start Date -->
+					<StackPanel>
+						<TextBlock Text="Start Date of requested data"
+								   VerticalAlignment="Center"
+								   Margin="5, 0, 0, 0" />
+						<Border BorderBrush="{Binding StartDateBorder}"
+								BorderThickness="2">
+							<DatePicker SelectedDate="{Binding StartDateSelection}" />
+						</Border>
+					</StackPanel>
+					<!-- /Start Date -->
+
+				</StackPanel>
+				<!-- /Platform and Date Selection -->
+
+				<!-- Special Content -->
+				<Grid Grid.Column="0"
+					  ColumnDefinitions="Auto, Auto"
+					  RowDefinitions="Auto, Auto, Auto">
+					<CheckBox Grid.Column="0"
+							  Grid.Row="1"
+							  Content="Request to Seal"
+							  Margin="15, 0, 0, 0"
+							  IsChecked="{Binding SealChecked}" />
+					<CheckBox Grid.Column="1"
+							  Grid.Row="1"
+							  Content="Request to Delay Notification"
+							  Margin="15, 0, 0, 0"
+							  IsChecked="{Binding DelayChecked}" />
+				</Grid>
+				<!-- /Special Content -->
+
+				<!-- Username and Account Grouping -->
+				<!-- Name and Account List -->
+				<StackPanel>
+					<TextBlock Text="Name and User Account(s)"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding AccountsBorder}"
+							BorderThickness="2">
+						<ListBox ItemsSource="{Binding Accounts}"
+								 SelectedItem="{Binding SelectedAccount}"
+								 BorderThickness="1"
+								 CornerRadius="2"
+								 Padding="4"
+								 Height="120">
+							<ListBox.Styles>
+								<Style Selector="ListBoxItem">
+									<Setter Property="Padding" Value="1" />
+								</Style>
+							</ListBox.Styles>
+							<ListBox.ContextMenu>
+								<ContextMenu>
+									<MenuItem Header="Remove Selected Account"
+											  Command="{Binding RemoveAccountCommand}" />
+								</ContextMenu>
+							</ListBox.ContextMenu>
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<Border BorderBrush="Black"
+											BorderThickness="1"
+											CornerRadius="4">
+										<StackPanel Orientation="Horizontal"
+													Margin="2, 2, 2, 2">
+											<TextBlock Text="{Binding Name}" />
+											<TextBlock Text=" - " />
+											<TextBlock Text="{Binding URL}" />
+										</StackPanel>
+									</Border>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</Border>
+					<!-- /Name and Account List -->
+
+					<!-- Account Entry -->
+					<Grid ColumnDefinitions="*, Auto"
+						  RowDefinitions="Auto, Auto"
+						  Margin="10">
+						<StackPanel Grid.Column="0"
+									Grid.Row="0">
+							<TextBlock Text="Name on Account"
+								   VerticalAlignment="Center"
+								   Margin="5, 0, 0, 0" />
+							<Border BorderBrush="{Binding NameEntryBorder}"
+									BorderThickness="2">
+								<TextBox x:Name="NameEntryTextBox"
+										 Text="{Binding NameEntryText}" />
+							</Border>
+						</StackPanel>
+
+						<StackPanel Grid.Column="0"
+									Grid.Row="1">
+							<TextBlock Text="{Binding UrlTextTitle}"
+								   VerticalAlignment="Center"
+								   Margin="5, 0, 0, 0" />
+							<Border BorderBrush="{Binding UrlEntryBorder}"
+									BorderThickness="2">
+								<TextBox x:Name="IdEntryTextBox"
+										 Text="{Binding UrlEntryText}" />
+							</Border>
+						</StackPanel>
+
+						<StackPanel Orientation="Horizontal"
+									Grid.Column="2">
+							<Button Content="+"
+									Padding="5, 0, 5, 0"
+									FontSize="24"
+									Foreground="Green"
+									VerticalAlignment="Top"
+									Command="{Binding AddAccountToAccountListCommand}" />
+							<Button Content="-"
+									Padding="7, 0, 7, 0"
+									FontSize="24"
+									Foreground="Red"
+									VerticalAlignment="Top"
+									Command="{Binding RemoveAccountCommand}" />
+						</StackPanel>
+					</Grid>
+				</StackPanel>
+				<!-- /Account Entry -->
+
+				<!-- Username and Account Grouping -->
+
+				<!-- Crime Entry Grouping -->
+
+				<!-- Crimes List -->
+				<StackPanel>
+					<TextBlock Text="Crimes Associated with this Warrant"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding CrimesBorder}"
+							BorderThickness="2">
+						<ListBox ItemsSource="{Binding Crimes}"
+								 SelectedItem="{Binding SelectedCrime}"
+								 BorderThickness="1"
+								 CornerRadius="2"
+								 Padding="4"
+								 Height="120">
+							<ListBox.Styles>
+								<Style Selector="ListBoxItem">
+									<Setter Property="Padding" Value="1" />
+								</Style>
+							</ListBox.Styles>
+							<ListBox.ContextMenu>
+								<ContextMenu>
+									<MenuItem Header="Remove Selected Crime"
+											  Command="{Binding RemoveCrimeCommand}" />
+								</ContextMenu>
+							</ListBox.ContextMenu>
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<Border BorderBrush="Black"
+											BorderThickness="1"
+											CornerRadius="4">
+										<StackPanel Orientation="Horizontal"
+													Margin="2, 2, 2, 2">
+											<TextBlock Text="M.C.A. § " />
+											<TextBlock Text="{Binding Code}" />
+											<TextBlock Text=" (" />
+											<TextBlock Text="{Binding Description}" />
+											<TextBlock Text=")" />
+										</StackPanel>
+									</Border>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</Border>
+					<!-- /Crimes List -->
+
+					<!-- Crime Entry -->
+					<Grid ColumnDefinitions="100, *, Auto" Margin="10">
+						<StackPanel Grid.Column="0">
+							<TextBlock Text="M.C.A. Code"
+								   VerticalAlignment="Center"
+								   Margin="5, 0, 0, 0" />
+							<Border BorderBrush="{Binding McaCodeBorder}"
+									BorderThickness="2">
+								<TextBox Text="{Binding McaCodeText}" />
+							</Border>
+						</StackPanel>
+
+						<StackPanel Grid.Column="1">
+							<TextBlock Text="Description"
+								   VerticalAlignment="Center"
+								   Margin="5, 0, 0, 0" />
+							<Border BorderBrush="{Binding McaDescriptionBorder}"
+									BorderThickness="2">
+								<TextBox x:Name="McaDescriptionTextBox"
+										 Text="{Binding McaDescriptionText}" />
+							</Border>
+						</StackPanel>
+
+						<StackPanel Orientation="Horizontal"
+									Grid.Column="2">
+							<Button Content="+"
+									Padding="5, 0, 5, 0"
+									FontSize="24"
+									Foreground="Green"
+									VerticalAlignment="Top"
+									Command="{Binding AddCrimeToCrimesListCommand}" />
+							<Button Content="-"
+									Padding="7, 0, 7, 0"
+									FontSize="24"
+									Foreground="Red"
+									VerticalAlignment="Top"
+									Command="{Binding RemoveCrimeCommand}" />
+						</StackPanel>
+					</Grid>
+				</StackPanel>
+				<!-- /Crime Entry -->
+
+				<!-- /Crime Entry Grouping -->
+
+			</StackPanel>
+			<!-- /Left Column -->
+
+
+			<!-- Right Column -->
+			<Grid Grid.Column="2"
+				  RowDefinitions="Auto, Auto, Auto, Auto" >
+
+				<!-- Probable Cause -->
+				<StackPanel Grid.Row="0">
+					<TextBlock Text="Probable Cause"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding ProbableCauseBorder}"
+							BorderThickness="2">
+						<TextBox x:Name="ProbableCauseTextBox"
+								 Text="{Binding ProbableCauseText}"
+								 AcceptsReturn="True"
+								 TextWrapping="Wrap"
+								 MinHeight="200"/>
+					</Border>
+				</StackPanel>
+				<!-- /Probable Cause -->
+
+				<!-- Description of Offenses -->
+				<StackPanel Grid.Row="1"
+							Margin="0, 15, 0, 0">
+					<TextBlock Text="Detailed Description of Offense(s)"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding DescriptionOfOffensesBorder}"
+								BorderThickness="2">
+						<TextBox x:Name="DescriptionOfOffensesTextBox"
+								 Text="{Binding DescriptionOfOffensesText}"
+								 AcceptsReturn="True"
+								 TextWrapping="Wrap"
+								 MinHeight="200"/>
+					</Border>
+				</StackPanel>
+				<!-- /Description of Offenses -->
+
+				<!-- Document Types -->
+				<Border Grid.Row="2"
+						BorderBrush="{Binding DocumentTypeCheckboxesBorder}"
+						BorderThickness="2">
+					<Grid Grid.Column="0"
+						  ColumnDefinitions="Auto, Auto, Auto, Auto">
+						<TextBlock Grid.Column="0"
+								   Text="Documents to Generate:"
+								   VerticalAlignment="Center"/>
+						<CheckBox Grid.Column="1"
+								  Content="Search Warrant Application"
+								  Margin="15, 0, 0, 0"
+								  IsChecked="{Binding SearchWarrantApplicationChecked}" />
+						<CheckBox Grid.Column="2"
+								  Content="Search Warrant"
+								  Margin="15, 0, 0, 0"
+								  IsChecked="{Binding SearchWarrantChecked}" />
+					</Grid>
+				</Border>
+				<!-- /Document Types -->
+
+				<!-- Output File -->
+				<StackPanel Grid.Row="3">
+					<TextBlock Text="Output File Name"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding OutputFileNameBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding OutputFileNameText}" />
+					</Border>
+					<Button Command="{Binding GenerateDocumentCommand}"
+							Margin="0, 10, 0, 0"
+							Content="Generate Document">
+						<Button.Flyout>
+							<Flyout Placement="RightEdgeAlignedTop">
+								<StackPanel>
+									<TextBlock Text="{Binding FlyoutMessage}" />
+								</StackPanel>
+							</Flyout>
+						</Button.Flyout>
+					</Button>
+				</StackPanel>
+				<!-- /Output File -->
+
+			</Grid>
+			<!-- /Right Column -->
+
+		</Grid>
+	</ScrollViewer>
+
 </UserControl>

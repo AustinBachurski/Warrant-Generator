@@ -39,9 +39,6 @@
 		<DataTemplate DataType="vm:SubpoenaContentViewModel">
 			<views:SubpoenaContentTab />
 		</DataTemplate>
-		<DataTemplate DataType="vm:TelephonicContentViewModel">
-			<views:TelephonicContentTab />
-		</DataTemplate>
 		<DataTemplate DataType="vm:SocialMediaContentViewModel">
 			<views:SocialMediaContentTab />
 		</DataTemplate>
@@ -102,11 +99,6 @@
 			<TabItem Header="Subpoena"
 					 FontSize="18">
 				<ContentControl Content="{Binding SubpoenaTab}" />
-			</TabItem>
-
-			<TabItem Header="Telephonic"
-					 FontSize="18">
-				<ContentControl Content="{Binding TelephonicTab}" />
 			</TabItem>
 
 			<TabItem Header="Social Media"

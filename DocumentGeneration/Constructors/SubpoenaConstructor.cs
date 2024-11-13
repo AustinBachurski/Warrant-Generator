@@ -8,5 +8,6 @@ public partial class DocumentGenerator
     {
         GenerateDocument = SubpoenaDocument;
     }
+
 }
 

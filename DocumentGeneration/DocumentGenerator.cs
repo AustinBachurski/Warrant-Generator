@@ -2,6 +2,7 @@
 
 using DocumentFormat.OpenXml.Wordprocessing;
 using System;
+using DocumentFormat.OpenXml.Packaging;
 
 
 namespace WarrantGenerator.DocumentGeneration;
@@ -11,7 +12,8 @@ public partial class DocumentGenerator
     public delegate string DocumentDelegate();
     public DocumentDelegate GenerateDocument;
 
-    private Body _body = new();
+    private MainDocumentPart _document = null;
+    private Body _body = null;
 
     private readonly string _organization = ConstantData.KPD;
     private readonly string _todaysDate = FormattedDateString();
@@ -31,15 +33,22 @@ public partial class DocumentGenerator
     private readonly string _warrantSignedBy = string.Empty;
     private readonly string _signedDate = string.Empty;
     private readonly string _servedDate = string.Empty;
+    private readonly string _startDate = string.Empty;
+    private readonly string _socialMediaPlatform = string.Empty;
     private readonly string _seizedProperty = string.Empty;
     private readonly string _residenceAddress = string.Empty;
     private readonly string _residenceDescription = string.Empty;
+    private readonly string _accountNamesCombined = string.Empty;
+    private readonly string _accountURLs = string.Empty;
     private readonly string _crimesCombined = string.Empty;
     private readonly string _crimeCodes = string.Empty;
     private readonly string _crimeDescriptions = string.Empty;
     private readonly string _crimeGrammar = string.Empty;
     private readonly string _probableCause = string.Empty;
     private readonly string _seizableProperty = string.Empty;
+    private readonly string _individual = string.Empty;
+    private readonly string _account = string.Empty;
+
 
     private readonly bool _generateReturnAndRequestDocument = false;
     private readonly bool _generateInventoryDocument = false;
@@ -51,5 +60,6 @@ public partial class DocumentGenerator
     private readonly bool _requestToSeal = false;
     private readonly bool _requestToDelayNotification = false;
     private readonly bool _telephonic = false;
+
 }
 

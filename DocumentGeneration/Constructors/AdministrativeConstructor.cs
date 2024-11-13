@@ -17,5 +17,6 @@ public partial class DocumentGenerator
         _suspectName = model.SuspectNameText;
         _itemsPawned = model.ItemsPawnedText;
     }
+
 }
 

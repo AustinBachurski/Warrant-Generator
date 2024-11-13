@@ -37,10 +37,10 @@ public partial class DocumentGenerator
         const string suffix = " - RETURN";
         using var newDocument = WordprocessingDocument.Create(_outputPath + suffix + Extension.Docx, WordprocessingDocumentType.Document);
 
-        var document = newDocument.AddMainDocumentPart();
-        document.Document = new Document();
+        _document = newDocument.AddMainDocumentPart();
+        _document.Document = new Document();
         _body = new();
-        SetDocumentFormatting(document);
+        InitializeDocument();
 
         /* Document Content
         *****************************************/ 
@@ -78,8 +78,8 @@ public partial class DocumentGenerator
         /***************************************** 
          * End Document Content*/
 
-        document.Document.Append(_body);
-        document.Document.Save();
+        _document.Document.Append(_body);
+        _document.Document.Save();
         return _outputPath + suffix + Extension.Docx;
     }
 
@@ -88,10 +88,10 @@ public partial class DocumentGenerator
         const string suffix = " - INVENTORY";
         using var newDocument = WordprocessingDocument.Create(_outputPath + suffix + Extension.Docx, WordprocessingDocumentType.Document);
 
-        var document = newDocument.AddMainDocumentPart();
-        document.Document = new Document();
+        _document = newDocument.AddMainDocumentPart();
+        _document.Document = new Document();
         _body = new();
-        SetDocumentFormatting(document);
+        InitializeDocument();
 
         /* Document Content
         *****************************************/ 
@@ -129,8 +129,8 @@ public partial class DocumentGenerator
         /***************************************** 
          * End Document Content*/
 
-        document.Document.Append(_body);
-        document.Document.Save();
+        _document.Document.Append(_body);
+        _document.Document.Save();
         return _outputPath + suffix + Extension.Docx;
     }
 
@@ -139,10 +139,10 @@ public partial class DocumentGenerator
         const string suffix = " - ORDER";
         using var newDocument = WordprocessingDocument.Create(_outputPath + suffix + Extension.Docx, WordprocessingDocumentType.Document);
 
-        var document = newDocument.AddMainDocumentPart();
-        document.Document = new Document();
+        _document = newDocument.AddMainDocumentPart();
+        _document.Document = new Document();
         _body = new();
-        SetDocumentFormatting(document);
+        InitializeDocument();
 
         /* Document Content
         *****************************************/ 
@@ -168,9 +168,10 @@ public partial class DocumentGenerator
         /***************************************** 
          * End Document Content*/
 
-        document.Document.Append(_body);
-        document.Document.Save();
+        _document.Document.Append(_body);
+        _document.Document.Save();
         return _outputPath + suffix + Extension.Docx;
     }
+
 }
 

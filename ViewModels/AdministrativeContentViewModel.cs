@@ -165,5 +165,6 @@ public partial class AdministrativeContentViewModel : ObservableObject
 
         return result;
     }
+
 }
 

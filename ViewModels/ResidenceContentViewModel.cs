@@ -10,7 +10,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 
 namespace WarrantGenerator.ViewModels;
@@ -139,7 +138,7 @@ public partial class ResidenceContentViewModel : ObservableObject, IHasOfficerRa
     private ObservableCollection<MCACrime> _crimes = [];
 
     [ObservableProperty]
-    private MCACrime _selectedItem;
+    private MCACrime _selectedCrime;
 
     [ObservableProperty]
     private IBrush _mcaCodeBorder = Brushes.Transparent;
@@ -214,7 +213,7 @@ public partial class ResidenceContentViewModel : ObservableObject, IHasOfficerRa
     [RelayCommand]
     public void RemoveCrime()
     {
-        Crimes.Remove(SelectedItem);
+        Crimes.Remove(SelectedCrime);
     }
 
     [ObservableProperty]
@@ -382,5 +381,6 @@ public partial class ResidenceContentViewModel : ObservableObject, IHasOfficerRa
 
         return result;
     }
+
 }
 

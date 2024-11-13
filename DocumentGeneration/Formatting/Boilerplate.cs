@@ -2,6 +2,19 @@
 
 public partial class DocumentGenerator
 {
+    private void FacebookAndFacebookMessenger()
+    {
+        AppendText("Facebook and Facebook messenger for ");
+        AppendText($"the following {_individual} and user");
+        AppendText($"{_account} identified by their name");
+        AppendText("followed by the account URL:");
+    }
+
+    private void FiledUnderSeal()
+    {
+        AppendFormattedLine("\t\t\t\t\t\t\t\t\tFiled Under Seal");
+    }
+
     private void InsertInventoryBoilerplate()
     {
         var boilerplate = new[]
@@ -62,7 +75,6 @@ public partial class DocumentGenerator
             "\t\t\tPlaintiff,\t\t\t\t)\t\tAPPLICATION FOR",
             "\t\t\t\t-vs-\t\t\t\t\t)\t\tSEARCH WARRANT",
             "\t\t\tDefendant,\t\t\t\t)",
-            "",
         };
 
         foreach (var line in boilerplate)
@@ -163,5 +175,6 @@ public partial class DocumentGenerator
 
         return "  Affiant may use the services of the designated Crime Scene Team Leader acting under affiant's direction to process any evidence that may be seized in connection with the issued search warrant.";
     }
+
 }
 

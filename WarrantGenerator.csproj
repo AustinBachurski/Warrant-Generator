@@ -40,9 +40,6 @@
     <Compile Update="Views\SocialMediaContent.axaml.cs">
       <DependentUpon>SocialMediaContent.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\TelephonicContent.axaml.cs">
-      <DependentUpon>TelephonicContent.axaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\SubpoenaContent.axaml.cs">
       <DependentUpon>SubpoenaContent.axaml</DependentUpon>
     </Compile>

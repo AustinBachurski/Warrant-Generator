@@ -32,10 +32,10 @@ public partial class DocumentGenerator
         const string suffix = " - APPLICATION";
         using var newDocument = WordprocessingDocument.Create(_outputPath + suffix + Extension.Docx, WordprocessingDocumentType.Document);
 
-        var document = newDocument.AddMainDocumentPart();
-        document.Document = new Document();
+        _document = newDocument.AddMainDocumentPart();
+        _document.Document = new Document();
         _body = new();
-        SetDocumentFormatting(document);
+        InitializeDocument();
 
         /* Document Content
         *****************************************/
@@ -68,7 +68,7 @@ public partial class DocumentGenerator
             );
         AppendEmptyLine();
         AppendText(
-            $"Affiant, {_officerRank} {_officerName}, hereinafter referred to as I, is a {_officerRank} with the {_organization} and has been a Law Enforcement Officer for the {_organization} for {_employmentDuration} {_employmentDurationType}.{UtilizeSWAT()}{UtilizeCrimeUnit()}"
+            $"Affiant, {_officerRank} {_officerName}, hereinafter referred to as I, is {IndefiniteArticle(_officerRank[0])} {_officerRank} with the {_organization} and has been a Law Enforcement Officer for the {_organization} for {_employmentDuration} {_employmentDurationType}.{UtilizeSWAT()}{UtilizeCrimeUnit()}"
             );
         AppendEmptyLine();
         AppendText(
@@ -108,8 +108,8 @@ public partial class DocumentGenerator
         /***************************************** 
          * End Document Content*/
 
-        document.Document.Append(_body);
-        document.Document.Save();
+        _document.Document.Append(_body);
+        _document.Document.Save();
         return _outputPath + suffix + Extension.Docx;
     }
 
@@ -118,10 +118,10 @@ public partial class DocumentGenerator
         const string suffix = " - WARRANT";
         using var newDocument = WordprocessingDocument.Create(_outputPath + suffix + Extension.Docx, WordprocessingDocumentType.Document);
 
-        var document = newDocument.AddMainDocumentPart();
-        document.Document = new Document();
+        _document = newDocument.AddMainDocumentPart();
+        _document.Document = new Document();
         _body = new();
-        SetDocumentFormatting(document);
+        InitializeDocument();
 
         /* Document Content
         *****************************************/
@@ -151,9 +151,10 @@ public partial class DocumentGenerator
         /***************************************** 
          * End Document Content*/
 
-        document.Document.Append(_body);
-        document.Document.Save();
+        _document.Document.Append(_body);
+        _document.Document.Save();
         return _outputPath + suffix + Extension.Docx;
     }
+
 }
 

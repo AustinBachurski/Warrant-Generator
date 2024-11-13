@@ -15,6 +15,9 @@ public partial class SocialMediaContentTab : UserControl
 
         // From x:Name in the .axaml
         string[] textboxes = [
+            "McaDescriptionTextBox",
+            "ProbableCauseTextBox",
+            "DescriptionOfOffensesTextBox",
         ];
 
         foreach (string textbox in textboxes)
@@ -26,5 +29,6 @@ public partial class SocialMediaContentTab : UserControl
             }
         }
     }
+
 }
 

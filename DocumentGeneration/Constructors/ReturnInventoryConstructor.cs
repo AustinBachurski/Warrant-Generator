@@ -26,5 +26,6 @@ public partial class DocumentGenerator
         _generateInventoryDocument = model.InventoryChecked;
         _generateOrderDocument = model.OrderChecked;
     }
+
 }
 

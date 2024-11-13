@@ -1,4 +1,6 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
+﻿using WarrantGenerator.Constants;
+
+using DocumentFormat.OpenXml.Wordprocessing;
 using System;
 
 
@@ -123,6 +125,38 @@ public partial class DocumentGenerator
         }
     }
 
+    private void AppendIndentedUrl(string url)
+    {
+        var linkRelationship = _document.AddHyperlinkRelationship(new Uri(url), true);
+
+        var paragraph = new Paragraph();
+        paragraph.Append(new Run(new TabChar()));
+        var run = new Run(new Text(url));
+
+        var properties = new RunProperties();
+        properties.Append(new RunStyle() { Val = StyleText.Hyperlink, });
+        run.PrependChild(properties);
+
+        Hyperlink link = new(run) { Id = linkRelationship.Id, };
+
+        paragraph.Append(link);
+        _body.Append(paragraph);
+    }
+
+    private void AppendSocialMediaAccounts()
+    {
+        var accounts = _accountNamesCombined.Split(Environment.NewLine);
+
+        foreach (var account in  accounts)
+        {
+            var data = account.Split(ConstantData.Separator);
+
+            AppendText(data[0]);         // Name
+            AppendIndentedUrl(data[1]);  // URL
+            AppendEmptyLine();
+        }
+    }
+
     private void AppendText(string text)
     {
         var paragraph = new Paragraph();
@@ -132,5 +166,6 @@ public partial class DocumentGenerator
         paragraph.Append(run);
         _body.Append(paragraph);
     }
+
 }
 

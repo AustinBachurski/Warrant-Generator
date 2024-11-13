@@ -89,12 +89,12 @@
 						<StackPanel Orientation="Horizontal">
 							<Border BorderBrush="{Binding EmploymentDurationBorder}"
 									BorderThickness="2">
-									<NumericUpDown Value="{Binding EmploymentDurationValue}"
-												   Minimum="1"
-												   FormatString="N0"
-												   ParsingNumberStyle="Integer"
-												   Width="110"
-												   ButtonSpinnerLocation="Left" />
+								<NumericUpDown Value="{Binding EmploymentDurationValue}"
+											   Minimum="1"
+											   FormatString="N0"
+											   ParsingNumberStyle="Integer"
+											   Width="110"
+											   ButtonSpinnerLocation="Left" />
 							</Border>
 							<ComboBox
 								ItemsSource="{Binding DurationTypes}"
@@ -186,6 +186,7 @@
 				<!-- /Residence Legal Description -->
 
 				<!-- Crime Entry Grouping -->
+
 				<!-- Crimes List -->
 				<StackPanel>
 					<TextBlock Text="Crimes Associated with this Warrant"
@@ -194,7 +195,7 @@
 					<Border BorderBrush="{Binding CrimesBorder}"
 							BorderThickness="2">
 						<ListBox ItemsSource="{Binding Crimes}"
-								 SelectedItem="{Binding SelectedItem}"
+								 SelectedItem="{Binding SelectedCrime}"
 								 BorderThickness="1"
 								 CornerRadius="2"
 								 Padding="4"
@@ -230,7 +231,7 @@
 					</Border>
 					<!-- /Crimes List -->
 
-					<!-- Crime Entry Group -->
+					<!-- Crime Entry -->
 					<Grid ColumnDefinitions="100, *, Auto" Margin="10">
 						<StackPanel Grid.Column="0">
 							<TextBlock Text="M.C.A. Code"
@@ -270,11 +271,53 @@
 						</StackPanel>
 					</Grid>
 				</StackPanel>
-				<!-- /Crime Entry Group -->
+				<!-- /Crime Entry -->
+
 				<!-- Crime Entry Grouping -->
 
+			</StackPanel>
+			<!-- /Left Column -->
+
+
+			<!-- Right Column -->
+			<Grid Grid.Column="2"
+				  RowDefinitions="Auto, Auto, Auto, Auto">
+
+				<!-- Probable Cause -->
+				<StackPanel Grid.Row="0">
+					<TextBlock Text="Probable Cause"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding ProbableCauseBorder}"
+							BorderThickness="2">
+						<TextBox x:Name="ProbableCauseTextBox"
+								 Text="{Binding ProbableCauseText}"
+								 AcceptsReturn="True"
+								 TextWrapping="Wrap"
+								 MinHeight="200"/>
+					</Border>
+				</StackPanel>
+				<!-- /Probable Cause -->
+
+				<!-- Seizable Property -->
+				<StackPanel Grid.Row="1"
+							Margin="0, 15, 0, 0">
+					<TextBlock Text="Seizable Property"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding SeizablePropertyBorder}"
+								BorderThickness="2">
+						<TextBox x:Name="SeizablePropertyTextBox"
+								 Text="{Binding SeizablePropertyText}"
+								 AcceptsReturn="True"
+								 TextWrapping="Wrap"
+								 MinHeight="200"/>
+					</Border>
+				</StackPanel>
+				<!-- /Seizable Property -->
+
 				<!-- Document Types -->
-				<Border Grid.Column="0"
+				<Border Grid.Row="2"
 						BorderBrush="{Binding DocumentTypeCheckboxesBorder}"
 						BorderThickness="2">
 					<Grid Grid.Column="0"
@@ -295,7 +338,7 @@
 				<!-- /Document Types -->
 
 				<!-- Output File -->
-				<StackPanel Grid.Column="0">
+				<StackPanel Grid.Row="3">
 					<TextBlock Text="Output File Name"
 							   VerticalAlignment="Center"
 							   Margin="5, 0, 0, 0" />
@@ -316,46 +359,6 @@
 					</Button>
 				</StackPanel>
 				<!-- /Output File -->
-
-			</StackPanel>
-			<!-- /Left Column -->
-
-
-			<!-- Right Column -->
-			<Grid Grid.Column="2"
-				  RowDefinitions="Auto, Auto">
-
-				<!-- Probable Cause -->
-				<StackPanel Grid.Row="0">
-					<TextBlock Text="Probable Cause"
-							   VerticalAlignment="Center"
-							   Margin="5, 0, 0, 0" />
-					<Border BorderBrush="{Binding ProbableCauseBorder}"
-							BorderThickness="2">
-						<TextBox x:Name="ProbableCauseTextBox"
-								 Text="{Binding ProbableCauseText}"
-								 AcceptsReturn="True"
-								 TextWrapping="Wrap"
-								 MinHeight="200"/>
-					</Border>
-				</StackPanel>
-				<!-- /Probable Cause -->
-
-				<!-- Seizable Property -->
-				<StackPanel Grid.Row="1">
-					<TextBlock Text="Seizable Property"
-							   VerticalAlignment="Center"
-							   Margin="5, 0, 0, 0" />
-					<Border BorderBrush="{Binding SeizablePropertyBorder}"
-								BorderThickness="2">
-						<TextBox x:Name="SeizablePropertyTextBox"
-								 Text="{Binding SeizablePropertyText}"
-								 AcceptsReturn="True"
-								 TextWrapping="Wrap"
-								 MinHeight="200"/>
-					</Border>
-				</StackPanel>
-				<!-- /Seizable Property -->
 
 			</Grid>
 			<!-- /Right Column -->

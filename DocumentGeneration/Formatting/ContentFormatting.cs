@@ -5,21 +5,21 @@ using WarrantGenerator.Interfaces;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using DocumentFormat.OpenXml.Wordprocessing;
 
 
 namespace WarrantGenerator.DocumentGeneration;
 
 public partial class DocumentGenerator
 {
-   private static string CorrectGrammar(char c)
+    private static string AccountDataCombinedAsString(ObservableCollection<SocialMediaProfile> accounts)
     {
-        return char.ToUpper(c) switch
-        {
-            'A' or 'E' or 'I' or 'O' or 'U' => "an",
-            _ => "a",
-        };
+        return string.Join(Environment.NewLine, accounts.Select(
+            data => $"{data.Name}{ConstantData.Separator}{data.URL}"));
+    }
+
+    private static string AccountURLsCombinedAsString(ObservableCollection<SocialMediaProfile> accounts)
+    {
+        return string.Join(Environment.NewLine, accounts.Select(data => data.URL));
     }
 
     private static string FormattedDateString()
@@ -56,6 +56,15 @@ public partial class DocumentGenerator
         }
 
         return model.OfficerRankSelection;
+    }
+
+   private static string IndefiniteArticle(char c)
+    {
+        return char.ToUpper(c) switch
+        {
+            'A' or 'E' or 'I' or 'O' or 'U' => "an",
+            _ => "a",
+        };
     }
 
     private static string LowercaseStartAndRemoveTrailingPunctuation(string text)
@@ -175,12 +184,5 @@ public partial class DocumentGenerator
         return text.Insert(text.LastIndexOf(',') + 1, " and");
     }
 
-    private static int StartingPositionOfLastEntry(StringBuilder builder, int contentLength, ObservableCollection<MCACrime> crimesList)
-    {
-        contentLength += crimesList.Last().Code.Length;
-        contentLength += crimesList.Last().Description.Length;
-
-        return builder.Length - contentLength;
-    }
 }
 

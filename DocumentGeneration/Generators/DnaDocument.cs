@@ -10,17 +10,19 @@ public partial class DocumentGenerator
     {
         using var newDocument = WordprocessingDocument.Create(_outputPath, WordprocessingDocumentType.Document);
 
-        var document = newDocument.AddMainDocumentPart();
-        document.Document = new Document();
-        SetDocumentFormatting(document);
+        _document = newDocument.AddMainDocumentPart();
+        _document.Document = new Document();
+        _body = new();
+        InitializeDocument();
 
 
         // Data insertion.
 
 
-        document.Document.Append(_body);
-        document.Document.Save();
+        _document.Document.Append(_body);
+        _document.Document.Save();
         return _outputPath;
     }
+
 }
 

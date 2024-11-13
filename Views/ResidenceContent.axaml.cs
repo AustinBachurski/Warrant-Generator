@@ -30,5 +30,6 @@ public partial class ResidenceContentTab : UserControl
             }
         }
     }
+
 }
 

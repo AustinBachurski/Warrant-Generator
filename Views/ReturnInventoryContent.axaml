@@ -103,7 +103,7 @@
 			</Grid>
 			<!-- /District and Signed by Grid -->
 
-			<!-- /Signed Date -->
+			<!-- Signed Date -->
 			<StackPanel Grid.Column="0"
 						Grid.Row="2"
 						Margin="15">
@@ -117,7 +117,7 @@
 			</StackPanel>
 			<!-- /Signed Date -->
 
-			<!-- /Served Date -->
+			<!-- Served Date -->
 			<StackPanel Grid.Column="2"
 						Grid.Row="2"
 						Margin="15">
