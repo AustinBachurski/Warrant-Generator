@@ -132,9 +132,12 @@
 						<TextBlock Text="Platform"
 								   VerticalAlignment="Center"
 								   Margin="5, 0, 0, 0" />
-						<ComboBox ItemsSource="{Binding SocialMediaPlatforms}"
-								  SelectedItem="{Binding PlatformSelection}">
-						</ComboBox>
+						<Border BorderBrush="{Binding PlatformBorder}"
+								BorderThickness="2">
+							<ComboBox ItemsSource="{Binding SocialMediaPlatforms}"
+									  SelectedItem="{Binding PlatformSelection}">
+							</ComboBox>
+						</Border>
 					</StackPanel>
 					<!-- /Platform Selection -->
 

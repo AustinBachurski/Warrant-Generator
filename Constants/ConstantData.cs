@@ -45,7 +45,7 @@ public static class ConstantData
 
     public static string NormalUrlTitleText { get; } = "URL for Account";
 
-    public static string ErrorUrlTitleText { get; } = "URL for Account - MUST BE A VALID URL";
+    public static string ErrorUrlTitleText { get; } = "URL for Account - MUST BE A VALID URL - i.e. http://example.com/user";
 
     public static char Separator { get; } = '|';
 

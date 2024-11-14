@@ -63,14 +63,7 @@ public partial class DocumentGenerator
         AppendIndentedText(_officerName);
         AppendIndentedText(_organization);
         AppendEmptyLine();
-        AppendIndentedText(
-            $"On this {_todaysDate}, {_officerRank} {_officerName}, of the {_organization}, being first duly sworn and upon oath, deposes and says:"
-            );
-        AppendEmptyLine();
-        AppendText(
-            $"Affiant, {_officerRank} {_officerName}, hereinafter referred to as I, is {IndefiniteArticle(_officerRank[0])} {_officerRank} with the {_organization} and has been a Law Enforcement Officer for the {_organization} for {_employmentDuration} {_employmentDurationType}.{UtilizeSWAT()}{UtilizeCrimeUnit()}"
-            );
-        AppendEmptyLine();
+        OfficerDeposesAndSays();
         AppendText(
             $"I make this affidavit in support of an application for a search warrant for the above described location, particularly, {_residenceDescription}."
             );

@@ -1,13 +1,61 @@
-﻿namespace WarrantGenerator.DocumentGeneration;
+﻿using WarrantGenerator.Constants;
+
+using DocumentFormat.OpenXml.Wordprocessing;
+using System;
+using DocumentFormat.OpenXml;
+
+
+namespace WarrantGenerator.DocumentGeneration;
 
 public partial class DocumentGenerator
 {
+    private void AffidavitIntent()
+    {
+        AppendText(
+            "This affidavit is intended to show merely that there is sufficient probable cause for the requested warrant and does not set forth all of my knowledge about this matter."
+            );
+        AppendEmptyLine();
+        AppendText(
+            $"Based on my training and experience and the facts as set forth in this affidavit, there is probable cause to believe that violations of {_crimesCombined} have been committed by suspects or unknown person(s)."
+            );
+    }
+
+    private void InsertFacebookAddressBlock()
+    {
+        AppendText("Facebook, Inc.");
+        AppendText("Attn: Legal Process Department");
+        AppendText("1601 Willow Rd");
+        AppendText("Menlo Park, CA 94025");
+    }
+
     private void FacebookAndFacebookMessenger()
     {
         AppendText("Facebook and Facebook messenger for ");
         AppendText($"the following {_individual} and user");
         AppendText($"{_account} identified by their name");
         AppendText("followed by the account URL:");
+    }
+
+    private void FacebookRecords()
+    {
+        string recordsURL = "https://www.facebook.com/records";
+        var linkRelationship = _document.AddHyperlinkRelationship(new Uri(recordsURL), true);
+
+        var paragraph = new Paragraph();
+        var runBeforeLink = new Run();
+        runBeforeLink.Append(new Text(
+            $"I make this affidavit in support of an application for a search warrant for information associated with {_certainAccounts} stored at premises controlled by Facebook, Inc., a Social Media provider headquartered at 151 University Avenue, Palo Alto, CA 94301, "
+            ) { Space = SpaceProcessingModeValues.Preserve });
+        paragraph.Append(runBeforeLink);
+
+        var linkRun = new Run(new Text(recordsURL));
+        linkRun.PrependChild(new RunProperties(new RunStyle() { Val = StyleText.Hyperlink }));
+        Hyperlink link = new(linkRun) { Id = linkRelationship.Id, };
+        paragraph.Append(link);
+
+        var runAfterLink = new Run(new Text(".  The information to be searched is described as:"));
+        paragraph.Append(runAfterLink);
+        _body.Append(paragraph);
     }
 
     private void FiledUnderSeal()
@@ -101,6 +149,18 @@ public partial class DocumentGenerator
         }
     }
 
+    private void OfficerDeposesAndSays()
+    {
+        AppendIndentedText(
+            $"On this {_todaysDate}, {_officerRank} {_officerName}, of the {_organization}, being first duly sworn and upon oath, deposes and says:"
+            );
+        AppendEmptyLine();
+        AppendText(
+            $"Affiant, {_officerRank} {_officerName}, hereinafter referred to as I, is {IndefiniteArticle(_officerRank[0])} {_officerRank} with the {_organization} and has been a Law Enforcement Officer for the {_organization} for {_employmentDuration} {_employmentDurationType}.{UtilizeSWAT()}{UtilizeCrimeUnit()}"
+            );
+        AppendEmptyLine();
+    }
+
     private void RequestToDelayNotification()
     {
         AppendHeading("REQUEST TO DELAY NOTIFICATION");
@@ -139,6 +199,13 @@ public partial class DocumentGenerator
             "Pursuant to M.C.A. § 46-11-701(6)(b), and based on the facts and statements set forth above, affiant further requests that the Court order that all papers in support of this application, including the affidavit and search warrant, be sealed until further order of the Court.  These documents discuss an ongoing criminal investigation that is neither public nor known to all of the targets of the investigation.  Accordingly, there is good cause to seal these documents because their premature disclosure may seriously jeopardize that investigation."
             );
         AppendEmptyLine();
+    }
+
+    private void CommonForSocialMediaCriminalActivity()
+    {
+        AppendIndentedText(
+            "In my training and experience, it is common for people involved in criminal activity to use social media platforms to communicate and discuss their activities, both legal and illegal. Often contained on social media platforms are photographs of the fruits of the crime as well as discussion of the disposal, sales or trades of the fruits of the crime. "
+            );
     }
 
     private void StateOfMontanaCountyOfFlathead()

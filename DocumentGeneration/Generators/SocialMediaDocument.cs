@@ -45,90 +45,54 @@ public partial class DocumentGenerator
         if (_socialMediaPlatform == SocialMedia.Facebook)
         {
             FacebookAndFacebookMessenger();
+            AppendEmptyLine();
+            AppendSocialMediaAccounts();
+            AppendText("Which is under control of:");
+            InsertFacebookAddressBlock();
+            AppendEmptyLine();
         }
+        StateOfMontanaCountyOfFlathead();
         AppendEmptyLine();
-        AppendSocialMediaAccounts();
-        AppendEmptyLine();
-
-        /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        AppendEmptyLine();
-        AppendText($"Address: {_residenceAddress}");
-        AppendText($"Description: {_residenceDescription}.");
-        AppendEmptyLine();
-        if (!_telephonic)
+        OfficerDeposesAndSays();
+        if (_socialMediaPlatform == SocialMedia.Facebook)
         {
-            StateOfMontanaCountyOfFlathead();
+            FacebookRecords();
+            AppendEmptyLine();
+            AppendSocialMediaAccounts();
         }
-        else
-        {
-            AppendBoldText("(JUDGE WILL ADMINISTER OATH OVER THE TELEPHONE)");
-        }
-        AppendEmptyLine();
-        AppendText(
-            $"I, {_officerName}, do solemnly affirm or swear that I am the person who signed the below Application for Search Warrant and knows the contents to be true and correct of my own personal knowledge."
+        AppendIndentedText(
+            $"and in the following paragraphs.  This affidavit is made in support of an application for a search warrant under 18 U.S.C. §§ 2703(a), 2703(b)(1)(A) and 2703(c)(1)(A) to require {_socialMediaPlatform} to disclose to the government copies of the information (including the content of communications) further described in Section I of Attachment A."
             );
+        AppendEmptyLine();
+        AffidavitIntent();
+        AppendEmptyLine();
+        AppendHeading("PROBABLE CAUSE");
+        AppendEmptyLine();
+        AppendMultilineText(_probableCause);
+        AppendEmptyLine();
+        CommonForSocialMediaCriminalActivity();
+        AppendEmptyLine();
+        AppendHeading("CONCLUSION");
+        AppendEmptyLine();
+        AppendIndentedText(
+            $"Based on the forgoing, I request that the Court issue the proposed search warrant.  Because the warrant will be served on {_socialMediaPlatform}, who will then compile the requested records at a time convenient to it, reasonable cause exists to permit the execution of the requested warrant at any time in the day or night."
+            );
+        AppendEmptyLine();
+        if (_requestToDelayNotification) { RequestToDelayNotification(); }
+        if (_requestToSeal) { RequestToSeal(); }
+        AppendText($"Dated this {_todaysDate}.");
         AppendEmptyLine();
         AppendEmptyLine();
         AppendIndentedText(ConstantData.SignHere);
         AppendIndentedText(_officerName);
         AppendIndentedText(_organization);
         AppendEmptyLine();
-        AppendIndentedText(
-            $"On this {_todaysDate}, {_officerRank} {_officerName}, of the {_organization}, being first duly sworn and upon oath, deposes and says:"
-            );
         AppendEmptyLine();
-        AppendText(
-            $"Affiant, {_officerRank} {_officerName}, hereinafter referred to as I, is {IndefiniteArticle(_officerRank[0])} {_officerRank} with the {_organization} and has been a Law Enforcement Officer for the {_organization} for {_employmentDuration} {_employmentDurationType}.{UtilizeSWAT()}{UtilizeCrimeUnit()}"
-            );
-        AppendEmptyLine();
-        AppendText(
-            $"I make this affidavit in support of an application for a search warrant for the above described location, particularly, {_residenceDescription}."
-            );
-        AppendEmptyLine();
-        AppendText(
-            "This affidavit is intended to show merely that there is sufficient probable cause for the requested warrant and does not set forth all of my knowledge about this matter."
-            );
-        AppendEmptyLine();
-        AppendText(
-            $"Based on my training and experience and the facts as set forth in this affidavit, there is probable cause to believe that violations of Montana Code Annotated {_crimesCombined} have been committed by suspects or unknown person(s)."
-            );
-        AppendEmptyLine();
-        AppendHeading("PROBABLE CAUSE");
-        AppendEmptyLine();
-        AppendMultilineText(_probableCause);
-        AppendEmptyLine();
-        AppendHeading("CONCLUSION");
-        AppendEmptyLine();
-        AppendText(
-            $"Wherefore, Affiant verily believes there is located within the above-described area, evidence of the {_crimeGrammar} of {_crimeDescriptions}, including but not limited to, {_seizableProperty}, contrary to the provisions of {_crimeCodes}, Montana Code Annotated.  Affiant requests a Search Warrant be issued authoring a search of said area and to seize any evidence of the {_crimeGrammar} observed therein."
-            );
-        AppendEmptyLine();
-        if (_requestToDelayNotification) { RequestToDelayNotification(); }
-        if (_requestToSeal) { RequestToSeal(); }
-        AppendHeading("OATH/VERIFICATION");
-        AppendEmptyLine();
-        AppendText(
-            $"I declare under penalty of perjury and under the laws of the State of Montana that all statements and information contained in the foregoing affidavit are true and correct.  Signed this {_todaysDate}."
-            );
+        AppendText($"Subscribed and sworn to before me this {_todaysDate}.");
         AppendEmptyLine();
         AppendEmptyLine();
         AppendIndentedText(ConstantData.SignHere);
-        AppendIndentedText(_officerName);
-        */
+        AppendIndentedText("District Court Judge");
 
         /***************************************** 
          * End Document Content*/

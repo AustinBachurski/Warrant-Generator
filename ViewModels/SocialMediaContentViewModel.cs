@@ -169,7 +169,7 @@ public partial class SocialMediaContentViewModel : ObservableObject, IHasOfficer
 
         try
         {
-            var verify = new Uri(UrlEntryText.Trim());
+            var verify = new Uri(UrlEntryText.Trim(' ', '/'));
         }
         catch(UriFormatException)
         {
@@ -178,7 +178,7 @@ public partial class SocialMediaContentViewModel : ObservableObject, IHasOfficer
             return;
         }
 
-        Accounts.Add(new(NameEntryText.Trim(), UrlEntryText.Trim()));
+        Accounts.Add(new(NameEntryText.Trim(), UrlEntryText.Trim(' ', '/')));
         AccountsBorder = Brushes.Transparent;
 
         NameEntryText = string.Empty;

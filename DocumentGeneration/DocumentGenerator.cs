@@ -48,6 +48,8 @@ public partial class DocumentGenerator
     private readonly string _seizableProperty = string.Empty;
     private readonly string _individual = string.Empty;
     private readonly string _account = string.Empty;
+    private readonly string _certainAccounts = string.Empty;
+
 
 
     private readonly bool _generateReturnAndRequestDocument = false;

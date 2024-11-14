@@ -125,17 +125,30 @@ public partial class DocumentGenerator
         }
     }
 
+    private void AppendUrl(string url)
+    {
+        var linkRelationship = _document.AddHyperlinkRelationship(new Uri(url), true);
+
+        var paragraph = new Paragraph();
+
+        var run = new Run(new Text(url));
+        run.PrependChild(new RunProperties(new RunStyle() { Val = StyleText.Hyperlink }));
+
+        Hyperlink link = new(run) { Id = linkRelationship.Id, };
+
+        paragraph.Append(link);
+        _body.Append(paragraph);
+    }
+
     private void AppendIndentedUrl(string url)
     {
         var linkRelationship = _document.AddHyperlinkRelationship(new Uri(url), true);
 
         var paragraph = new Paragraph();
         paragraph.Append(new Run(new TabChar()));
-        var run = new Run(new Text(url));
 
-        var properties = new RunProperties();
-        properties.Append(new RunStyle() { Val = StyleText.Hyperlink, });
-        run.PrependChild(properties);
+        var run = new Run(new Text(url));
+        run.PrependChild(new RunProperties(new RunStyle() { Val = StyleText.Hyperlink }));
 
         Hyperlink link = new(run) { Id = linkRelationship.Id, };
 
@@ -152,6 +165,19 @@ public partial class DocumentGenerator
             var data = account.Split(ConstantData.Separator);
 
             AppendText(data[0]);         // Name
+            AppendIndentedUrl(data[1]);  // URL
+            AppendEmptyLine();
+        }
+    }
+
+    private void AppendSocialMediaAddresses()
+    {
+        var accounts = _accountNamesCombined.Split(Environment.NewLine);
+
+        foreach (var account in  accounts)
+        {
+            var data = account.Split(ConstantData.Separator);
+
             AppendIndentedUrl(data[1]);  // URL
             AppendEmptyLine();
         }
