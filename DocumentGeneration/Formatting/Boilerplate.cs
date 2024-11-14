@@ -22,9 +22,9 @@ public partial class DocumentGenerator
 
     private void InsertFacebookAddressBlock()
     {
-        AppendText("Facebook, Inc.");
+        AppendText("Meta Platforms, Inc.");
         AppendText("Attn: Legal Process Department");
-        AppendText("1601 Willow Rd");
+        AppendText("1 Meta Way");
         AppendText("Menlo Park, CA 94025");
     }
 
@@ -44,12 +44,12 @@ public partial class DocumentGenerator
         var paragraph = new Paragraph();
         var runBeforeLink = new Run();
         runBeforeLink.Append(new Text(
-            $"I make this affidavit in support of an application for a search warrant for information associated with {_certainAccounts} stored at premises controlled by Facebook, Inc., a Social Media provider headquartered at 151 University Avenue, Palo Alto, CA 94301, "
+            $"I make this affidavit in support of an application for a search warrant for information associated with {_certainAccounts} stored at premises controlled by {SocialMedia.MetaCompany}, "
             ) { Space = SpaceProcessingModeValues.Preserve });
         paragraph.Append(runBeforeLink);
 
         var linkRun = new Run(new Text(recordsURL));
-        linkRun.PrependChild(new RunProperties(new RunStyle() { Val = StyleText.Hyperlink }));
+        linkRun.PrependChild(new RunProperties(new RunStyle() { Val = Doc.Styles.Hyperlink }));
         Hyperlink link = new(linkRun) { Id = linkRelationship.Id, };
         paragraph.Append(link);
 
@@ -63,84 +63,20 @@ public partial class DocumentGenerator
         AppendFormattedLine("\t\t\t\t\t\t\t\t\tFiled Under Seal");
     }
 
-    private void InsertInventoryBoilerplate()
+    private void DistrictBoilerplate(string text)
     {
-        var boilerplate = new[]
-        {
-            $"IN THE {_courtDistrict}, COUNTY OF FLATHEAD, STATE OF MONTANA",
-            "STATE OF MONTANA\t\t\t\t\t\t)",
-            "\t\t\tPlaintiff,\t\t\t\t)",
-            "\t\t\t\t-vs-\t\t\t\t\t)\t\tINVENTORY",
-            "\t\t\tDefendant,\t\t\t\t)\t\t",
-        };
-
-        foreach (var line in boilerplate)
-        {
-            AppendFormattedLine(line);
-        }
+        DistrictBoilerplate(string.Empty, text);
     }
 
-    private void InsertOrderBoilerplate()
+    private void DistrictBoilerplate(string option1 = "", string option2 = "")
     {
         var boilerplate = new[]
         {
             $"IN THE {_courtDistrict}, COUNTY OF FLATHEAD, STATE OF MONTANA",
             "STATE OF MONTANA\t\t\t\t\t\t)",
-            "\t\t\tPlaintiff,\t\t\t\t)",
-            "\t\t\t\t-vs-\t\t\t\t\t)\t\tORDER FOR CUSTODY",
-            "\t\t\tDefendant,\t\t\t\t)\t\t",
-        };
-
-        foreach (var line in boilerplate)
-        {
-            AppendFormattedLine(line);
-        }
-    }
-
-    private void InsertReturnBoilerplate()
-    {
-        var boilerplate = new[]
-        {
-            $"IN THE {_courtDistrict}, COUNTY OF FLATHEAD, STATE OF MONTANA",
-            "STATE OF MONTANA\t\t\t\t\t\t)",
-            "\t\t\tPlaintiff,\t\t\t\t)\t\tRETURN OF WARRANT",
-            "\t\t\t\t-vs-\t\t\t\t\t)\t\tAND INVENTORY",
+            $"\t\t\tPlaintiff,\t\t\t\t)\t\t{option1}",
+            $"\t\t\t\t-vs-\t\t\t\t\t)\t\t{option2}",
             "\t\t\tDefendant,\t\t\t\t)",
-        };
-
-        foreach (var line in boilerplate)
-        {
-            AppendFormattedLine(line);
-        }
-    }
-
-    private void InsertWarrantApplicationBoilerplate()
-    {
-        var boilerplate = new[]
-        {
-            $"IN THE {_courtDistrict}, COUNTY OF FLATHEAD, STATE OF MONTANA",
-            "STATE OF MONTANA\t\t\t\t\t\t)",
-            "\t\t\tPlaintiff,\t\t\t\t)\t\tAPPLICATION FOR",
-            "\t\t\t\t-vs-\t\t\t\t\t)\t\tSEARCH WARRANT",
-            "\t\t\tDefendant,\t\t\t\t)",
-        };
-
-        foreach (var line in boilerplate)
-        {
-            AppendFormattedLine(line);
-        }
-    }
-
-    private void InsertWarrantBoilerplate()
-    {
-        var boilerplate = new[]
-        {
-            $"IN THE {_courtDistrict}, COUNTY OF FLATHEAD, STATE OF MONTANA",
-            "STATE OF MONTANA\t\t\t\t\t\t)",
-            "\t\t\tPlaintiff,\t\t\t\t)\t\tSEARCH WARRANT",
-            "\t\t\t\t-vs-\t\t\t\t\t)",
-            "\t\t\tDefendant,\t\t\t\t)",
-            "",
         };
 
         foreach (var line in boilerplate)

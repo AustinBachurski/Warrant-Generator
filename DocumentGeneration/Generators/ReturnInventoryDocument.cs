@@ -43,9 +43,9 @@ public partial class DocumentGenerator
         InitializeDocument();
 
         /* Document Content
-        *****************************************/ 
+        *****************************************/
 
-        InsertReturnBoilerplate();
+        DistrictBoilerplate("RETURN OF WARRANT", "AND INVENTORY");
         AppendEmptyLine();
         AppendText(_seizableProperty);
         AppendEmptyLine();
@@ -94,9 +94,9 @@ public partial class DocumentGenerator
         InitializeDocument();
 
         /* Document Content
-        *****************************************/ 
+        *****************************************/
 
-        InsertInventoryBoilerplate();
+        DistrictBoilerplate("INVENTORY");
         AppendEmptyLine();
         AppendText(_seizableProperty);
         AppendEmptyLine();
@@ -145,9 +145,9 @@ public partial class DocumentGenerator
         InitializeDocument();
 
         /* Document Content
-        *****************************************/ 
+        *****************************************/
 
-        InsertOrderBoilerplate();
+        DistrictBoilerplate("ORDER FOR CUSTODY");
         AppendEmptyLine();
         AppendText(_seizableProperty);
         AppendEmptyLine();

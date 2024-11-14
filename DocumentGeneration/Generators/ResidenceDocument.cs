@@ -40,7 +40,7 @@ public partial class DocumentGenerator
         /* Document Content
         *****************************************/
 
-        InsertWarrantApplicationBoilerplate();
+        DistrictBoilerplate("APPLICATION FOR", "SEARCH WARRANT");
         AppendEmptyLine();
         AppendText($"Address: {_residenceAddress}");
         AppendText($"Description: {_residenceDescription}.");
@@ -119,7 +119,7 @@ public partial class DocumentGenerator
         /* Document Content
         *****************************************/
 
-        InsertWarrantBoilerplate();
+        DistrictBoilerplate("SEARCH WARRANT");
         AppendEmptyLine();
         AppendText(_residenceDescription);
         AppendEmptyLine();

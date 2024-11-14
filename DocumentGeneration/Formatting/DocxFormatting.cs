@@ -13,13 +13,13 @@ public partial class DocumentGenerator
         var hyperlinkStyle = new Style()
         {
             Type = StyleValues.Character,
-            StyleId = StyleText.Hyperlink,
+            StyleId = Doc.Styles.Hyperlink,
             CustomStyle = false,
-            StyleName = new StyleName() { Val = StyleText.Hyperlink },
+            StyleName = new StyleName() { Val = Doc.Styles.Hyperlink },
         };
 
         var styleRunProperties = new StyleRunProperties();
-        styleRunProperties.Append(new Color() { Val = StyleText.Blue, ThemeColor = ThemeColorValues.Hyperlink });
+        styleRunProperties.Append(new Color() { Val = Doc.Colors.Blue, ThemeColor = ThemeColorValues.Hyperlink });
         styleRunProperties.Append(new Underline() { Val = UnderlineValues.Single });
 
         hyperlinkStyle.Append(styleRunProperties);
@@ -36,9 +36,9 @@ public partial class DocumentGenerator
         var defaultStyle = new Style()
         {
             Type = StyleValues.Paragraph,
-            StyleId = StyleText.Normal,
+            StyleId = Doc.Styles.Normal,
             Default = true,
-            StyleName = new StyleName() { Val = StyleText.Normal },
+            StyleName = new StyleName() { Val = Doc.Styles.Normal },
         };
 
         var paragraphProperties = new ParagraphProperties();
@@ -53,21 +53,32 @@ public partial class DocumentGenerator
         defaultStyle.Append(paragraphProperties);
 
         var runProperties = new RunProperties();
-        runProperties.Append(new RunFonts() { Ascii = StyleText.CourierNew, HighAnsi = StyleText.CourierNew });
+        runProperties.Append(new RunFonts() { Ascii = Doc.Fonts.CourierNew, HighAnsi = Doc.Fonts.CourierNew });
         runProperties.Append(new FontSize() { Val = "24" });  // Val / 2 == font size.
         defaultStyle.Append(runProperties);
 
         styleDefinitions.Styles.Append(defaultStyle);
     }
 
-    private void InitializeDocument()
+    private void AddNumbering()  // TODO: Refactor other methods to this style.
     {
-        AddNormalStyle();
-        AddHyperlinkStyle();
-        SetFooterProperties();
+        var numberingPart = _document.AddNewPart<NumberingDefinitionsPart>();
+
+        numberingPart.Numbering = new Numbering(
+            new AbstractNum(
+                new Level(
+                    new NumberingFormat() { Val = NumberFormatValues.Bullet },
+                    new LevelText() { Val = "" },
+                    new ParagraphProperties( new Indentation() { Left = "720", Hanging = "360" }),
+                    new RunProperties(new RunFonts() { Ascii=Doc.Fonts.Symbol, HighAnsi=Doc.Fonts.Symbol })
+                ) { LevelIndex = 0 }
+            ) { AbstractNumberId = 1 },
+        new NumberingInstance( new AbstractNumId() { Val = 1 } ) { NumberID = 1 });
+
+        numberingPart.Numbering.Save();
     }
 
-    private void SetFooterProperties()
+    private void AddFooter()
     {
         var footerPart = _document.AddNewPart<FooterPart>();
 
@@ -106,6 +117,14 @@ public partial class DocumentGenerator
         sectionProperties.Append(lineNumberType);
 
         _body.Append(sectionProperties);
+    }
+
+    private void InitializeDocument()
+    {
+        AddNormalStyle();
+        AddHyperlinkStyle();
+        AddFooter();
+        AddNumbering();
     }
 
 }

@@ -307,14 +307,14 @@ public partial class SocialMediaContentViewModel : ObservableObject, IHasOfficer
     }
 
     [ObservableProperty]
-    private IBrush _descriptionOfOffensesBorder = Brushes.Transparent;
+    private IBrush _legalCriteriaBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _descriptionOfOffensesText = string.Empty;
+    private string _legalCriteriaText = string.Empty;
 
-    partial void OnDescriptionOfOffensesTextChanged(string value)
+    partial void OnLegalCriteriaTextChanged(string value)
     {
-        DescriptionOfOffensesBorder = Brushes.Transparent;
+        LegalCriteriaBorder = Brushes.Transparent;
     }
 
     [ObservableProperty]
@@ -446,10 +446,10 @@ public partial class SocialMediaContentViewModel : ObservableObject, IHasOfficer
             ProbableCauseBorder = Brushes.Red;
         }
 
-        if (DescriptionOfOffensesText == string.Empty)
+        if (LegalCriteriaText == string.Empty)
         {
             result = false;
-            DescriptionOfOffensesBorder = Brushes.Red;
+            LegalCriteriaBorder = Brushes.Red;
         }
 
         if (!SearchWarrantApplicationChecked && !SearchWarrantChecked)

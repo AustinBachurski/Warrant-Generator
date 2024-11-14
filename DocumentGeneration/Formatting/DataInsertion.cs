@@ -2,6 +2,7 @@
 
 using DocumentFormat.OpenXml.Wordprocessing;
 using System;
+using System.Text;
 
 
 namespace WarrantGenerator.DocumentGeneration;
@@ -10,56 +11,98 @@ public partial class DocumentGenerator
 {
     private void AppendBoldText(string text)
     {
-        var paragraph = new Paragraph();
-        var run = new Run();
-
-        var format = new RunProperties();
-        format.Bold = new Bold();
-        run.RunProperties = format;
-
-        run.Append(new Text(text));
-        paragraph.Append(run);
-        _body.Append(paragraph);
+        _body.Append(
+            new Paragraph(
+                new Run(
+                    new RunProperties(
+                        new Bold()
+                    ),
+                    new Text(text)
+                )
+            )
+        );
     }
 
     private void AppendBoldCenteredText(string text)
     {
-        var paragraph = new Paragraph();
-        var run = new Run();
+        _body.Append(
+            new Paragraph(
+                new ParagraphProperties(
+                    new Justification() { Val = JustificationValues.Center } 
+                ),
+                new Run(
+                    new RunProperties(
+                        new Bold(),
+                        new Text(text)
+                    )
+                )
+            )
+        );
+    }
 
-        var alignment = new ParagraphProperties();
-        alignment.Justification = new Justification() { Val = JustificationValues.Center };
-        paragraph.ParagraphProperties = alignment;
+    private void AppendBoldUnderlinedText(string text)
+    {
+        _body.Append(
+            new Paragraph(
+                new Run(
+                    new RunProperties(
+                        new Bold(),
+                        new Underline() { Val = UnderlineValues.Single }
+                    ),
+                    new Text(text)
+                )
+            )
+        );
+    }
 
-        var format = new RunProperties();
-        format.Bold = new Bold();
-        run.RunProperties = format;
-
-        run.Append(new Text(text));
-        paragraph.Append(run);
-        _body.Append(paragraph);
+    private void AppendBulletedText(string text)
+    {
+        _body.Append(
+            new Paragraph(
+                new ParagraphProperties(
+                    new NumberingProperties(
+                        new NumberingLevelReference() { Val = 0 },
+                        new NumberingId() { Val = 1 }
+                    )
+                ),
+                new Run(
+                    new Text(text)
+                )
+            )
+        );
     }
 
     private void AppendCenteredText(string text)
     {
-        var paragraph = new Paragraph();
-        var run = new Run();
+        _body.Append(
+            new Paragraph(
+                new ParagraphProperties(
+                    new Justification() { Val = JustificationValues.Center }
+                ),
+                new Run(
+                    new Text(text)
+                )
+            )
+        );
+    }
 
-        var alignment = new ParagraphProperties();
-        alignment.Justification = new Justification() { Val = JustificationValues.Center };
-        paragraph.ParagraphProperties = alignment;
-
-        run.Append(new Text(text));
-        paragraph.Append(run);
-        _body.Append(paragraph);
+    private void AppendDoublyIndentedText(string text)
+    {
+        _body.Append(
+            new Paragraph(
+                new Run(
+                    new TabChar(),
+                    new TabChar(),
+                    new Text(text)
+                )
+            )
+        );
     }
 
     private void AppendEmptyLine()
     {
-        var paragraph = new Paragraph();
-        _body.Append(paragraph);
+        _body.Append(new Paragraph());
     }
-
 
     private void AppendFormattedLine(string line)
     {
@@ -84,76 +127,66 @@ public partial class DocumentGenerator
 
     private void AppendHeading(string text)
     {
-        var paragraph = new Paragraph();
-        var run = new Run();
-
-        var alignment = new ParagraphProperties();
-        alignment.Justification = new Justification() { Val = JustificationValues.Center };
-        paragraph.ParagraphProperties = alignment;
-
-        var format = new RunProperties();
-        format.Bold = new Bold();
-        format.Underline = new Underline() { Val = UnderlineValues.Single };
-        run.RunProperties = format;
-
-        run.Append(new Text(text));
-        paragraph.Append(run);
-        _body.Append(paragraph);
+        _body.Append(
+            new Paragraph(
+                new ParagraphProperties(
+                    new Justification() { Val = JustificationValues.Center }
+                ),
+                new Run(
+                    new RunProperties(
+                        new Bold(),
+                        new Underline() { Val = UnderlineValues.Single }
+                    ),
+                    new Text(text)
+                )
+            )
+        );
     }
 
     private void AppendIndentedText(string text)
     {
-        var paragraph = new Paragraph();
-        var run = new Run();
-        run.Append(new TabChar());
-        run.Append(new Text(text));
+        _body.Append(
+            new Paragraph(
+                new Run(
+                    new TabChar(),
+                    new Text(text)
+                )
+            )
+        );
+    }
 
-        paragraph.Append(run);
-        _body.Append(paragraph);
+    private void AppendIndentedUrl(string url)
+    {
+        _body.Append(
+            new Paragraph(
+                new Run(
+                    new TabChar()
+                ),
+                new Hyperlink(
+                    new Run(
+                        new RunProperties(
+                            new RunStyle() { Val = Doc.Styles.Hyperlink }
+                        ),
+                        new Text(url)
+                    )
+                )
+                { Id = _document.AddHyperlinkRelationship(new Uri(url), true).Id }
+            )
+        );
     }
 
     private void AppendMultilineText(string text)
     {
         foreach (var content in text.Split(Environment.NewLine))
         {
-            var paragraph = new Paragraph();
-            var run = new Run();
-
-            run.Append(new Text(content));
-            paragraph.Append(run);
-            _body.Append(paragraph);
+            _body.Append(
+                new Paragraph(
+                    new Run(
+                        new Text(content)
+                    )
+                )
+            );
         }
-    }
-
-    private void AppendUrl(string url)
-    {
-        var linkRelationship = _document.AddHyperlinkRelationship(new Uri(url), true);
-
-        var paragraph = new Paragraph();
-
-        var run = new Run(new Text(url));
-        run.PrependChild(new RunProperties(new RunStyle() { Val = StyleText.Hyperlink }));
-
-        Hyperlink link = new(run) { Id = linkRelationship.Id, };
-
-        paragraph.Append(link);
-        _body.Append(paragraph);
-    }
-
-    private void AppendIndentedUrl(string url)
-    {
-        var linkRelationship = _document.AddHyperlinkRelationship(new Uri(url), true);
-
-        var paragraph = new Paragraph();
-        paragraph.Append(new Run(new TabChar()));
-
-        var run = new Run(new Text(url));
-        run.PrependChild(new RunProperties(new RunStyle() { Val = StyleText.Hyperlink }));
-
-        Hyperlink link = new(run) { Id = linkRelationship.Id, };
-
-        paragraph.Append(link);
-        _body.Append(paragraph);
     }
 
     private void AppendSocialMediaAccounts()
@@ -170,7 +203,7 @@ public partial class DocumentGenerator
         }
     }
 
-    private void AppendSocialMediaAddresses()
+    private void AppendSocialMediaUrls()
     {
         var accounts = _accountNamesCombined.Split(Environment.NewLine);
 
@@ -185,12 +218,41 @@ public partial class DocumentGenerator
 
     private void AppendText(string text)
     {
-        var paragraph = new Paragraph();
-        var run = new Run();
-        run.Append(new Text(text));
+        _body.Append(
+            new Paragraph(
+                new Run(
+                    new Text(text)
+                )
+            )
+        );
+    }
 
-        paragraph.Append(run);
-        _body.Append(paragraph);
+    private void AppendUrl(string url)
+    {
+        _body.Append(
+            new Paragraph(
+                new Hyperlink(
+                    new Run(
+                        new RunProperties(
+                            new RunStyle() { Val = Doc.Styles.Hyperlink }
+                        ),
+                        new Text(url)
+                    )
+                )
+                { Id = _document.AddHyperlinkRelationship(new Uri(url), true).Id }
+            )
+        );
+    }
+
+    private void PageBreak()
+    {
+        _body.Append(
+            new Paragraph(
+                new Run(
+                    new Break() { Type = BreakValues.Page }
+                )
+            )
+        );
     }
 
 }

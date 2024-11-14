@@ -143,7 +143,7 @@
 
 					<!-- Start Date -->
 					<StackPanel>
-						<TextBlock Text="Start Date of requested data"
+						<TextBlock Text="Start Date of Requested Data"
 								   VerticalAlignment="Center"
 								   Margin="5, 0, 0, 0" />
 						<Border BorderBrush="{Binding StartDateBorder}"
@@ -379,22 +379,22 @@
 				</StackPanel>
 				<!-- /Probable Cause -->
 
-				<!-- Description of Offenses -->
+				<!-- Legal Criteria for Offenses -->
 				<StackPanel Grid.Row="1"
 							Margin="0, 15, 0, 0">
-					<TextBlock Text="Detailed Description of Offense(s)"
+					<TextBlock Text="Enter the Legal Criteria for Committing each Offense"
 							   VerticalAlignment="Center"
 							   Margin="5, 0, 0, 0" />
-					<Border BorderBrush="{Binding DescriptionOfOffensesBorder}"
+					<Border BorderBrush="{Binding LegalCriteriaBorder}"
 								BorderThickness="2">
 						<TextBox x:Name="DescriptionOfOffensesTextBox"
-								 Text="{Binding DescriptionOfOffensesText}"
+								 Text="{Binding LegalCriteriaText}"
 								 AcceptsReturn="True"
 								 TextWrapping="Wrap"
 								 MinHeight="200"/>
 					</Border>
 				</StackPanel>
-				<!-- /Description of Offenses -->
+				<!-- Legal Criteria for Offenses -->
 
 				<!-- Document Types -->
 				<Border Grid.Row="2"

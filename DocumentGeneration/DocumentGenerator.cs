@@ -38,6 +38,7 @@ public partial class DocumentGenerator
     private readonly string _seizedProperty = string.Empty;
     private readonly string _residenceAddress = string.Empty;
     private readonly string _residenceDescription = string.Empty;
+    private readonly string _legalCriteriaForOffenses = string.Empty;
     private readonly string _accountNamesCombined = string.Empty;
     private readonly string _accountURLs = string.Empty;
     private readonly string _crimesCombined = string.Empty;
@@ -49,6 +50,7 @@ public partial class DocumentGenerator
     private readonly string _individual = string.Empty;
     private readonly string _account = string.Empty;
     private readonly string _certainAccounts = string.Empty;
+    private readonly string _isOrAre = string.Empty;
 
 
 

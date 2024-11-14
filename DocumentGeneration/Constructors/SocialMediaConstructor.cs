@@ -31,12 +31,14 @@ public partial class DocumentGenerator
         _accountURLs = AccountURLsCombinedAsString(model.Accounts);
         _individual = model.Accounts.Count > 1 ? "individuals" : "individual";
         _account = model.Accounts.Count > 1 ? "accounts" : "account";
+        _isOrAre = model.Accounts.Count > 1 ? "are" : "is";
         _certainAccounts = model.Accounts.Count > 1 ? "certain accounts" : "a certain account";
         _crimesCombined = CrimesCombinedAsString(model.Crimes);
         _crimeCodes = CrimeCodesAsString(model.Crimes);
         _crimeDescriptions = CrimeDescriptionsAsString(model.Crimes);
         _crimeGrammar = model.Crimes.Count > 1 ? "crimes" : "crime";
         _probableCause = model.ProbableCauseText;
+        _legalCriteriaForOffenses = model.LegalCriteriaText;
         _generateWarrantApplicationDocument = model.SearchWarrantApplicationChecked;
         _generateWarrantDocument = model.SearchWarrantChecked;
 #pragma warning restore CS8629
