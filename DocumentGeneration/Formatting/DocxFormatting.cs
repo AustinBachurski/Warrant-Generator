@@ -10,57 +10,67 @@ public partial class DocumentGenerator
 {
     private void AddHyperlinkStyle()
     {
-        var hyperlinkStyle = new Style()
-        {
-            Type = StyleValues.Character,
-            StyleId = Doc.Styles.Hyperlink,
-            CustomStyle = false,
-            StyleName = new StyleName() { Val = Doc.Styles.Hyperlink },
-        };
+        _document.StyleDefinitionsPart.Styles.Append(
+            new Style(
+                new StyleRunProperties(
+                    new Color()
+                    {
+                        Val = Doc.Colors.Blue,
+                        ThemeColor = ThemeColorValues.Hyperlink
+                    },
+                    new Underline() { Val = UnderlineValues.Single }
+                )
+            )
+            {
+                Type = StyleValues.Character,
+                StyleId = Doc.Styles.Hyperlink,
+                CustomStyle = false,
+                StyleName = new StyleName() { Val = Doc.Styles.Hyperlink },
+            }
+        );
 
-        var styleRunProperties = new StyleRunProperties();
-        styleRunProperties.Append(new Color() { Val = Doc.Colors.Blue, ThemeColor = ThemeColorValues.Hyperlink });
-        styleRunProperties.Append(new Underline() { Val = UnderlineValues.Single });
-
-        hyperlinkStyle.Append(styleRunProperties);
-
-        _document.StyleDefinitionsPart.Styles.Append(hyperlinkStyle);
+        _document.StyleDefinitionsPart.Styles.Save();
     }
 
     private void AddNormalStyle()
     {
-        var styleDefinitions = _document.AddNewPart<StyleDefinitionsPart>();
+        var stylePart = _document.AddNewPart<StyleDefinitionsPart>();
 
-        styleDefinitions.Styles = new Styles();
+        stylePart.Styles = new Styles(
+            new Style(
+                new ParagraphProperties(
+                    new Justification() { Val = JustificationValues.Both }
+                )
+                {
+                    SpacingBetweenLines = new SpacingBetweenLines()
+                    {
+                        Before = "0",
+                        After = "0",
+                        Line = "455",  // With "Exact" LineRule, Line is set in "twips", 1 "twip" == 1/20th of a point.
+                        LineRule = LineSpacingRuleValues.Exact,
+                    }
+                },
+                new RunProperties(
+                    new RunFonts()
+                    {
+                        Ascii = Doc.Fonts.CourierNew,
+                        HighAnsi = Doc.Fonts.CourierNew
+                    },
+                    new FontSize() { Val = "24" }
+                )
+            )
+            {
+                Type = StyleValues.Paragraph,
+                StyleId = Doc.Styles.Normal,
+                Default = true,
+                StyleName = new StyleName() { Val = Doc.Styles.Normal },
+            }
+        );
 
-        var defaultStyle = new Style()
-        {
-            Type = StyleValues.Paragraph,
-            StyleId = Doc.Styles.Normal,
-            Default = true,
-            StyleName = new StyleName() { Val = Doc.Styles.Normal },
-        };
-
-        var paragraphProperties = new ParagraphProperties();
-        paragraphProperties.Append(new Justification() { Val = JustificationValues.Both });
-        paragraphProperties.SpacingBetweenLines = new SpacingBetweenLines
-        {
-            Before = "0",
-            After = "0",
-            Line = "455",  // With "Exact" LineRule, Line is set in "twips", 1 "twip" == 1/20th of a point.
-            LineRule = LineSpacingRuleValues.Exact,
-        };
-        defaultStyle.Append(paragraphProperties);
-
-        var runProperties = new RunProperties();
-        runProperties.Append(new RunFonts() { Ascii = Doc.Fonts.CourierNew, HighAnsi = Doc.Fonts.CourierNew });
-        runProperties.Append(new FontSize() { Val = "24" });  // Val / 2 == font size.
-        defaultStyle.Append(runProperties);
-
-        styleDefinitions.Styles.Append(defaultStyle);
+        stylePart.Styles.Save();
     }
 
-    private void AddNumbering()  // TODO: Refactor other methods to this style.
+    private void AddNumbering()
     {
         var numberingPart = _document.AddNewPart<NumberingDefinitionsPart>();
 
@@ -82,41 +92,44 @@ public partial class DocumentGenerator
     {
         var footerPart = _document.AddNewPart<FooterPart>();
 
-        var paragraph = new Paragraph(new Run(new FieldChar() { FieldCharType = FieldCharValues.Begin }));
+        footerPart.Footer = new Footer(
+            new Paragraph(
+                new ParagraphProperties(
+                    new Justification() { Val = JustificationValues.Center }
+                ),
+                new Run(
+                    new FieldCode(" PAGE ")
+                ),
+                new Run(
+                    new FieldChar() { FieldCharType = FieldCharValues.Begin }
+                ),
+                new Run(
+                    new FieldChar() { FieldCharType = FieldCharValues.Separate }
+                ),
+                new Run(
+                    new FieldChar() { FieldCharType = FieldCharValues.End }
+                )
+            )
+        );
 
-        var alignment = new ParagraphProperties
-        {
-            Justification = new Justification() { Val = JustificationValues.Center }
-        };
-
-        paragraph.ParagraphProperties = alignment;
-
-        paragraph.Append(new Run(new FieldCode(" PAGE ")));
-        paragraph.Append(new Run(new FieldChar() { FieldCharType = FieldCharValues.Separate }));
-        paragraph.Append(new Run(new FieldChar() { FieldCharType = FieldCharValues.End }));
-
-        footerPart.Footer = new Footer(paragraph);
         footerPart.Footer.Save();
 
-        var sectionProperties = new SectionProperties();
-
-        var footerReference = new FooterReference
-        {
-            Type = HeaderFooterValues.Default,
-            Id = _document.GetIdOfPart(footerPart),
-        };
-        sectionProperties.Append(footerReference);
-
-        var lineNumberType = new LineNumberType
-        {
-            CountBy = 1,
-            Start = 0,
-            Distance = "720",  // Distance from text in twips
-            Restart = LineNumberRestartValues.NewPage, // Restart numbering on each new page
-        };
-        sectionProperties.Append(lineNumberType);
-
-        _body.Append(sectionProperties);
+        _body.Append(
+            new SectionProperties(
+                new FooterReference()
+                {
+                    Type = HeaderFooterValues.Default,
+                    Id = _document.GetIdOfPart(footerPart),
+                },
+                new LineNumberType()
+                {
+                    CountBy = 1,
+                    Start = 0,
+                    Distance = "720",                           // Distance from text in twips
+                    Restart = LineNumberRestartValues.NewPage,  // Restart numbering on each new page
+                }
+            )
+        );
     }
 
     private void InitializeDocument()
