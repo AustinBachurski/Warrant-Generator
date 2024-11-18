@@ -123,8 +123,8 @@
 
 				<!-- Special Content -->
 				<Grid Grid.Column="0"
-					  ColumnDefinitions="Auto, Auto"
-					  RowDefinitions="Auto, Auto, Auto">
+					  ColumnDefinitions="Auto, Auto, Auto"
+					  RowDefinitions="Auto, Auto">
 					<CheckBox Grid.Column="0"
 							  Grid.Row="0"
 							  Content="Utilize SWAT"
@@ -135,16 +135,11 @@
 							  Content="Utilize Crime Unit"
 							  Margin="15, 0, 0, 0"
 							  IsChecked="{Binding CrimeUnitChecked}" />
-					<CheckBox Grid.Column="0"
-							  Grid.Row="1"
+					<CheckBox Grid.Column="2"
+							  Grid.Row="0"
 							  Content="Request to Seal"
 							  Margin="15, 0, 0, 0"
 							  IsChecked="{Binding SealChecked}" />
-					<CheckBox Grid.Column="1"
-							  Grid.Row="1"
-							  Content="Request to Delay Notification"
-							  Margin="15, 0, 0, 0"
-							  IsChecked="{Binding DelayChecked}" />
 					<TextBlock Grid.Column="0"
 							   Grid.Row="2"
 							   Text="Telephonic Warrant?"

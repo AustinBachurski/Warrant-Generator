@@ -22,7 +22,6 @@ public partial class DocumentGenerator
         _utilizeSWAT = model.SWATChecked;
         _utilizeCrimeUnit = model.CrimeUnitChecked;
         _requestToSeal = model.SealChecked;
-        _requestToDelayNotification = model.DelayChecked;
         _telephonic = model.TelephonicChecked;
         _residenceAddress = model.ResidenceAddressText;
         _residenceDescription = RemoveTrailingPunctuation(model.ResidenceDescriptionText);

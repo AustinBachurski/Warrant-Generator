@@ -101,9 +101,6 @@ public partial class ResidenceContentViewModel : ObservableObject, IHasOfficerRa
     private bool _crimeUnitChecked = false;
 
     [ObservableProperty]
-    private bool _DelayChecked = false;
-
-    [ObservableProperty]
     private bool _SealChecked = false;
 
     [ObservableProperty]
