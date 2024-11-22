@@ -15,8 +15,7 @@ public partial class DocumentGenerator
         _officerRank = GetOfficerRank(model);
         _officerSubjectivePronoun = SubjectivePronoun(model.OfficerGenderSelection);
         _officerPosessivePronoun = PosessivePronoun(model.OfficerGenderSelection);
-        _employmentDuration = ((decimal)model.EmploymentDurationValue).ToString("N0")
-            ?? throw new UnreachableException("EmploymentDurationValue converted to null string.");
+        _employmentDuration = ((decimal)model.EmploymentDurationValue).ToString("N0");
         _employmentDurationType = model.DurationTypeSelection;
         _courtDistrict = model.CourtDistrictSelection;
         _utilizeSWAT = model.SWATChecked;
