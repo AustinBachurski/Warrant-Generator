@@ -36,55 +36,6 @@ public partial class DocumentGenerator
         AppendText("followed by the account URL:");
     }
 
-    private void FacebookRecords()
-    {
-        string recordsURL = "https://www.facebook.com/records";
-        var linkRelationship = _document.AddHyperlinkRelationship(new Uri(recordsURL), true);
-
-        var paragraph = new Paragraph();
-        var runBeforeLink = new Run();
-        runBeforeLink.Append(new Text(
-            $"I make this affidavit in support of an application for a search warrant for information associated with {_certainAccounts} stored at premises controlled by {SocialMedia.MetaCompany}, "
-            ) { Space = SpaceProcessingModeValues.Preserve });
-        paragraph.Append(runBeforeLink);
-
-        var linkRun = new Run(new Text(recordsURL));
-        linkRun.PrependChild(new RunProperties(new RunStyle() { Val = Doc.Styles.Hyperlink }));
-        Hyperlink link = new(linkRun) { Id = linkRelationship.Id, };
-        paragraph.Append(link);
-
-        var runAfterLink = new Run(new Text(".  The information to be searched is described as:"));
-        paragraph.Append(runAfterLink);
-        _body.Append(paragraph);
-    }
-
-    private void FiledUnderSeal()
-    {
-        AppendFormattedLine("\t\t\t\t\t\t\t\t\tFiled Under Seal");
-    }
-
-    private void DistrictBoilerplate(string text)
-    {
-        DistrictBoilerplate(string.Empty, text);
-    }
-
-    private void DistrictBoilerplate(string option1 = "", string option2 = "")
-    {
-        var boilerplate = new[]
-        {
-            $"IN THE {_courtDistrict}, COUNTY OF FLATHEAD, STATE OF MONTANA",
-            "STATE OF MONTANA\t\t\t\t\t\t)",
-            $"\t\t\tPlaintiff,\t\t\t\t)\t\t{option1}",
-            $"\t\t\t\t-vs-\t\t\t\t\t)\t\t{option2}",
-            "\t\t\tDefendant,\t\t\t\t)",
-        };
-
-        foreach (var line in boilerplate)
-        {
-            AppendFormattedLine(line);
-        }
-    }
-
     private void OfficerDeposesAndSays()
     {
         AppendIndentedText(
@@ -144,40 +95,6 @@ public partial class DocumentGenerator
             );
     }
 
-    private void StateOfMontanaCountyOfFlathead()
-    {
-        var boilerplate = new[]
-        {
-            "STATE OF MONTANA\t\t)",
-            "\t\t\t\t:ss",
-            "COUNTY OF FLATHEAD\t\t)",
-        };
-
-        foreach (var line in boilerplate)
-        {
-            AppendFormattedLine(line);
-        }
-    }
-
-    private string UtilizeSWAT()
-    {
-        if (!_utilizeSWAT)
-        {
-            return string.Empty;
-        }
-
-        return "  Affiant may use the services of the Flathead County Special Weapons and Tactics (SWAT) team acting under affiant's direction to conduct a search of said area and to seize any evidence indicated in the issued search warrant.";
-    }
-
-    private string UtilizeCrimeUnit()
-    {
-        if (!_utilizeCrimeUnit)
-        {
-            return string.Empty;
-        }
-
-        return "  Affiant may use the services of the designated Crime Scene Team Leader acting under affiant's direction to process any evidence that may be seized in connection with the issued search warrant.";
-    }
 
 }
 
