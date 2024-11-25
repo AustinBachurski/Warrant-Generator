@@ -10,7 +10,7 @@ namespace WarrantGenerator.DocumentGeneration;
 
 public partial class DocumentGenerator
 {
-    private string SocialMediaDocument()
+    public string GenerateDocuments()
     {
         List<string> documents = [];
 

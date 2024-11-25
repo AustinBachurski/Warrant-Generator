@@ -9,7 +9,7 @@ using System;
 
 namespace WarrantGenerator.WarrantDocument;
 
-public class DocxDocument
+public class DocxDocument : IDisposable
 {
     public DocxDocument(string filePath)
     {
@@ -20,14 +20,10 @@ public class DocxDocument
         InitializeDocument();
     }
 
-    ~DocxDocument()
+    public void Dispose()
     {
         _file?.Dispose();
-    }
-
-    public Body DocumentBody()
-    {
-        return _body;
+        GC.SuppressFinalize(this);
     }
 
     public void AppendContent(Paragraph[] paragraphs)
@@ -36,6 +32,25 @@ public class DocxDocument
         {
             _body.Append(paragraph);
         }
+    }
+
+    public void AppendMultilineText(string text)
+    {
+        foreach (var content in text.Split(Environment.NewLine))
+        {
+            _body.Append(
+                new Paragraph(
+                    new Run(
+                        new Text(content) { Space = SpaceProcessingModeValues.Preserve}
+                    )
+                )
+            );
+        }
+    }
+
+    public void AppendText()
+    {
+        _body.Append(new Paragraph());
     }
 
     public void AppendText(string text, params IDocxFormatOption[] options)
@@ -56,15 +71,37 @@ public class DocxDocument
         _body.Append(paragraph);
     }
 
-    public void AppendMultilineText(string text)
+    public void AppendInlineUrl(string preText, string url, string postText)
     {
-        foreach (var content in text.Split(Environment.NewLine))
+        var paragraph = new Paragraph();
+
+        if (!string.IsNullOrEmpty(preText))
         {
-            _body.Append(
-                new Paragraph(
-                    new Run(
-                        new Text(content) { Space = SpaceProcessingModeValues.Preserve}
-                    )
+            paragraph.Append(
+                new Run(
+                    new Text(preText)
+                    { Space = SpaceProcessingModeValues.Preserve }
+                )
+            );
+        }
+
+        paragraph.Append(
+            new Hyperlink(
+                new Run(
+                    new RunProperties(
+                        new RunStyle() { Val = DocxStyle.Hyperlink }
+                    ),
+                    new Text(url)
+                )
+            )
+            { Id = _document.AddHyperlinkRelationship(new Uri(url), true).Id }
+        );
+
+        if (!string.IsNullOrEmpty(postText))
+        {
+            paragraph.Append(
+                new Run(
+                    new Text(postText)
                 )
             );
         }
@@ -87,31 +124,22 @@ public class DocxDocument
         );
     }
 
-    protected const string _utilizeSWAT =
-        "  Affiant may use the services of the Flathead County Special Weapons and Tactics (SWAT) "
-        + "team acting under affiant's direction to conduct a search of said area and to seize any "
-        + "evidence indicated in the issued search warrant.";
-    protected const string _utilizeCrimeUnit =
-        "  Affiant may use the services of the designated Crime Scene Team Leader acting under "
-        + "affiant's direction to process any evidence that may be seized in connection with "
-        + "the issued search warrant.";
+    private readonly WordprocessingDocument _file;
+    private readonly MainDocumentPart _document;
+    private readonly Body _body;
 
-    protected readonly WordprocessingDocument _file;
-    protected readonly MainDocumentPart _document;
-    protected readonly Body _body;
-
-    protected static class DocxColor
+    private static class DocxColor
     {
         public static string Blue { get; } = "0000FF";
     }
 
-    protected static class DocxFont
+    private static class DocxFont
     {
         public static string CourierNew { get; } = "Courier New";
         public static string Symbol { get; } = "Symbol";
     }
 
-    protected static class DocxStyle
+    private static class DocxStyle
     {
         public static string Normal { get; } = "Normal";
         public static string Hyperlink { get; } = "HyperLink";
