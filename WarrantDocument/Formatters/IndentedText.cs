@@ -4,7 +4,7 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using System.Linq;
 
 
-namespace WarrantGenerator.DocumentGeneration.Formatters;
+namespace WarrantGenerator.WarrantDocument.Formatters;
 
 public class IndentedText(int tabs = 1) : IDocxFormatOption
 {

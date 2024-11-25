@@ -3,7 +3,7 @@
 using DocumentFormat.OpenXml.Wordprocessing;
 
 
-namespace WarrantGenerator.DocumentGeneration.Formatters;
+namespace WarrantGenerator.WarrantDocument.Formatters;
 
 public class AlignCenter : IDocxFormatOption
 {

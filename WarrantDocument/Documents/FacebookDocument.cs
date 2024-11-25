@@ -1,9 +1,13 @@
-﻿using DocumentFormat.OpenXml.Wordprocessing;
+﻿using WarrantGenerator.WarrantDocument;
+using WarrantGenerator.WarrantDocument.Formatters;
+
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Wordprocessing;
 
 using System;
 
 
-namespace WarrantGenerator.DocumentGeneration.DocxDocument;
+namespace WarrantGenerator.WarrantDocument.Documents;
 
 public class FacebookDocument(string filePath) : DocxDocument(filePath)
 {
@@ -74,23 +78,32 @@ public class FacebookDocument(string filePath) : DocxDocument(filePath)
     private void FacebookRecords()
     {
         string recordsURL = "https://www.facebook.com/records";
-        var linkRelationship = _document.AddHyperlinkRelationship(new Uri(recordsURL), true);
 
-        var paragraph = new Paragraph();
-        var runBeforeLink = new Run();
-        runBeforeLink.Append(new Text(
-            $"I make this affidavit in support of an application for a search warrant for information associated with {_certainAccounts} stored at premises controlled by {SocialMedia.MetaCompany}, "
-            ) { Space = SpaceProcessingModeValues.Preserve });
-        paragraph.Append(runBeforeLink);
-
-        var linkRun = new Run(new Text(recordsURL));
-        linkRun.PrependChild(new RunProperties(new RunStyle() { Val = DocxStyle.Hyperlink }));
-        Hyperlink link = new(linkRun) { Id = linkRelationship.Id, };
-        paragraph.Append(link);
-
-        var runAfterLink = new Run(new Text(".  The information to be searched is described as:"));
-        paragraph.Append(runAfterLink);
-        _body.Append(paragraph);
+        _body.Append(
+            new Paragraph(
+                new Run(
+                    new Text(
+                           "I make this affidavit in support of an application for a search warrant "
+                        + $"for information associated with {_certainAccounts} stored at premises "
+                        + "controlled by Meta Platforms, Inc., a Social Media provider headquartered "
+                        + "at 1 Meta Way, Menlo Park, CA 94025, "
+                    )
+                    { Space = SpaceProcessingModeValues.Preserve }
+                ),
+                new Hyperlink(
+                    new Run(
+                        new RunProperties(
+                            new RunStyle() { Val = DocxStyle.Hyperlink }
+                        ),
+                        new Text(recordsURL)
+                    )
+                )
+                { Id = _document.AddHyperlinkRelationship(new Uri(recordsURL), true).Id },
+                new Run(
+                    new Text(".  The information to be searched is described as:")
+                )
+            )
+        );
     }
 
 }

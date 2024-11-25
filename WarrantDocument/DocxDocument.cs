@@ -30,7 +30,7 @@ public class DocxDocument
         return _body;
     }
 
-    public void AppendLines(Paragraph[] paragraphs)
+    public void AppendContent(Paragraph[] paragraphs)
     {
         foreach (var paragraph in paragraphs)
         {
@@ -51,7 +51,7 @@ public class DocxDocument
         }
 
         paragraph.Append(paragraphProperties);
-        run.Append(new Text(text));
+        run.Append(new Text(text) { Space = SpaceProcessingModeValues.Preserve});
         paragraph.Append(run);
         _body.Append(paragraph);
     }
@@ -63,7 +63,7 @@ public class DocxDocument
             _body.Append(
                 new Paragraph(
                     new Run(
-                        new Text(content)
+                        new Text(content) { Space = SpaceProcessingModeValues.Preserve}
                     )
                 )
             );
