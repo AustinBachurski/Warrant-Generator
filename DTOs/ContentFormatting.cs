@@ -66,7 +66,7 @@ public static class FormatContent
         };
     }
 
-    private static string LowercaseStartAndRemoveTrailingPunctuation(string text)
+    public static string LowercaseStartAndRemoveTrailingPunctuation(string text)
     {
 
         var chars = text.ToCharArray();
@@ -91,7 +91,7 @@ public static class FormatContent
         return "his";
     }
 
-    private static string RemoveTrailingPunctuation(string text)
+    public static string RemoveTrailingPunctuation(string text)
     {
         var chars = text.ToCharArray();
 
@@ -129,16 +129,16 @@ public static class FormatContent
         return path + fileName;
     }
 
-    private static string CrimeCodesAsString(ObservableCollection<MCACrime> crimesList)
+    public static string CrimeCodesAsString(MCACrime[] crimesList)
     {
-        if (crimesList.Count == 2)
+        if (crimesList.Length == 2)
         {
             return string.Join(" and ", crimesList.Select(crime => crime.Code));
         }
 
         string combined = string.Join(", ", crimesList.Select(crime => crime.Code));
 
-        if (crimesList.Count > 1)
+        if (crimesList.Length > 1)
         {
             return InsertCoordinatingConjunction(combined);
         }
