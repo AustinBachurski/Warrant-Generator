@@ -6,3 +6,4 @@ public struct SocialMediaProfile(string name, string url)
     public string URL { get; set; } = url;
 
 }
+

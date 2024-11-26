@@ -1,7 +1,7 @@
 ﻿using WarrantGenerator.Constants;
-using WarrantGenerator.DocumentGeneration;
 using WarrantGenerator.DTOs;
 using WarrantGenerator.Interfaces;
+using WarrantGenerator.WarrantDocument.Documents;
 
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -367,8 +367,8 @@ public partial class SocialMediaContentViewModel : ObservableObject, IHasOfficer
 
         try
         {
-          var document = new DocumentGenerator(this);
-          var outfile = document.GenerateDocument();
+            var document = new FacebookDocument(new FacebookData(this));
+          var outfile = document.GenerateDocuments();
           FlyoutMessage = ConstantData.DocumentGeneratedAs + outfile;
         }
         catch (IOException)

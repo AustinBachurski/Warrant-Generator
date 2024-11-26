@@ -1,10 +1,12 @@
 ﻿using WarrantGenerator.Constants;
-using WarrantGenerator.DocumentGeneration;
+using WarrantGenerator.DTOs;
 using WarrantGenerator.Interfaces;
+using WarrantGenerator.WarrantDocument.Documents;
 
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+
 using System;
 using System.IO;
 
@@ -193,8 +195,8 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
 
         try
         {
-            var document = new DocumentGenerator(this);
-            var outfile = document.GenerateDocument();
+            var document = new ReturnInventoryDocument(new ReturnInventoryData(this));
+            var outfile = document.GenerateDocuments();
             FlyoutMessage = ConstantData.DocumentGeneratedAs + outfile;
         }
         catch (IOException)
