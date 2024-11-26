@@ -6,13 +6,13 @@ using System.Linq;
 
 namespace WarrantGenerator.WarrantDocument.Formatters;
 
-public class IndentedText(int tabs = 1) : IDocxFormatOption
+public class IndentedText(int tabs = 1) : IDocxFormatOptions
 {
-    public void Apply(ParagraphProperties paragraphProperties, RunProperties runProperties)
+    public void Apply(Paragraph paragraph, Run run)
     {
         foreach (var _ in Enumerable.Range(0, tabs))
         {
-            runProperties.Append(new TabChar());
+            run.Append(new TabChar());
         }
     }
 }

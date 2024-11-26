@@ -3,8 +3,8 @@
 
 namespace WarrantGenerator.Interfaces;
 
-public interface IDocxFormatOption
+public interface IDocxFormatOptions
 {
-    void Apply(ParagraphProperties paragraphProperties, RunProperties runProperties);
+    void Apply(Paragraph paragraph, Run run);
 }
 

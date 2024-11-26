@@ -5,11 +5,11 @@ using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace WarrantGenerator.WarrantDocument.Formatters;
 
-public class BoldText : IDocxFormatOption
+public class BoldText : IDocxFormatOptions
 {
-    public void Apply(ParagraphProperties paragraphProperties, RunProperties runProperties)
+    public void Apply(Paragraph paragraph, Run run)
     {
-        runProperties.Append(new Bold());
+        run.RunProperties.Append(new Bold());
     }
 }
 

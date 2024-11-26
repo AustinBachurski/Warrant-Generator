@@ -53,22 +53,36 @@ public class DocxDocument : IDisposable
         _body.Append(new Paragraph());
     }
 
-    public void AppendText(string text, params IDocxFormatOption[] options)
+    public void AppendText(string text, params IDocxFormatOptions[] options)
     {
-        var paragraph = new Paragraph();
-        var run = new Run();
-        var paragraphProperties = new ParagraphProperties();
-        var runProperties = new RunProperties();
+        var paragraph = new Paragraph(new ParagraphProperties());
+        var run = new Run(new RunProperties());
 
         foreach (var option in options)
         {
-            option.Apply(paragraphProperties, runProperties);
+            option.Apply(paragraph, run);
         }
 
-        paragraph.Append(paragraphProperties);
-        run.Append(new Text(text) { Space = SpaceProcessingModeValues.Preserve});
         paragraph.Append(run);
         _body.Append(paragraph);
+    }
+
+    public void AppendIndentedUrl(string url)
+    {
+        _body.Append(
+            new Paragraph(
+                new Hyperlink(
+                    new Run(
+                        new RunProperties(
+                            new RunStyle() { Val = DocxStyle.Hyperlink }
+                        ),
+                        new TabChar(),
+                        new Text(url)
+                    )
+                )
+                { Id = _document.AddHyperlinkRelationship(new Uri(url), true).Id }
+            )
+        );
     }
 
     public void AppendInlineUrl(string preText, string url, string postText)

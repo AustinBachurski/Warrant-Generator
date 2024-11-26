@@ -146,16 +146,16 @@ public static class FormatContent
         return combined;
     }
 
-    private static string CrimeDescriptionsAsString(ObservableCollection<MCACrime> crimesList)
+    public static string CrimeDescriptionsAsString(MCACrime[] crimesList)
     {
-        if (crimesList.Count == 2)
+        if (crimesList.Length == 2)
         {
             return string.Join(" and ", crimesList.Select(crime => crime.Description));
         }
 
         string combined = string.Join(", ", crimesList.Select(crime => crime.Description));
 
-        if (crimesList.Count > 1)
+        if (crimesList.Length > 1)
         {
             return InsertCoordinatingConjunction(combined);
         }

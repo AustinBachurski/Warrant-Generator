@@ -5,11 +5,11 @@ using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace WarrantGenerator.WarrantDocument.Formatters;
 
-public class UnderlinedText : IDocxFormatOption
+public class UnderlinedText : IDocxFormatOptions
 {
-    public void Apply(ParagraphProperties paragraphProperties, RunProperties runProperties)
+    public void Apply(Paragraph paragraph, Run run)
     {
-        runProperties.Append(new Underline() { Val = UnderlineValues.Single });
+        run.RunProperties.Append(new Underline() { Val = UnderlineValues.Single });
     }
 }
 

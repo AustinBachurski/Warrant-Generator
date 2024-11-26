@@ -5,11 +5,11 @@ using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace WarrantGenerator.WarrantDocument.Formatters;
 
-public class BulletedText : IDocxFormatOption
+public class BulletedText : IDocxFormatOptions
 {
-    public void Apply(ParagraphProperties paragraphProperties, RunProperties runProperties)
+    public void Apply(Paragraph paragraph, Run run)
     {
-        paragraphProperties.Append(
+        paragraph.ParagraphProperties.Append(
             new NumberingProperties(
                 new NumberingLevelReference() { Val = 0 },
                 new NumberingId() { Val = 1 }

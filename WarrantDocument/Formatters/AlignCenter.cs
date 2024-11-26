@@ -5,11 +5,12 @@ using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace WarrantGenerator.WarrantDocument.Formatters;
 
-public class AlignCenter : IDocxFormatOption
+public class AlignCenter : IDocxFormatOptions
 {
-    public void Apply(ParagraphProperties paragraphProperties, RunProperties runProperties)
+    public void Apply(Paragraph paragraph, Run run)
     {
-        paragraphProperties.Append(new Justification() { Val = JustificationValues.Center });
+        paragraph.ParagraphProperties.Append(
+            new Justification() { Val = JustificationValues.Center });
     }
 }
 
