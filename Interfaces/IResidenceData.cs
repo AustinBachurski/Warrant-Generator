@@ -1,8 +1,9 @@
 using WarrantGenerator.DTOs;
 
+
 namespace WarrantGenerator.Interfaces;
 
-internal interface IResidenceData
+public interface IResidenceData
 {
     public string OutputFile { get; }
     public string OfficerName { get; }

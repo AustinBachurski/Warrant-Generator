@@ -38,7 +38,7 @@ public class FacebookDocument(FacebookData data)
         /* Document Content
         ****************************************/
 
-        doc.AppendContent(DocxBoilerplate.DistrictBoilerplate("APPLICATION FOR", "SEARCH WARRANT"));
+        doc.AppendContent(DocxBoilerplate.DistrictBoilerplate(_data.CourtDistrict, "APPLICATION FOR", "SEARCH WARRANT"));
         if (_data.RequestToSeal) { doc.AppendContent(DocxBoilerplate.FiledUnderSeal); }
         doc.AppendText("Facebook and Facebook messenger for ");
         doc.AppendText($"the following {_data.Individual} and user");
@@ -52,8 +52,8 @@ public class FacebookDocument(FacebookData data)
         doc.AppendContent(DocxBoilerplate.StateOfMontanaBoilerplate);
         doc.AppendText();
         doc.AppendText(
-            $"On this {_data.TodaysDate}, {_data.OfficerRank} {_data.OfficerName}, "
-           + "of the {ConstantData.KPD}, being first duly sworn and upon oath, deposes and says:",
+             $"On this {_data.TodaysDate}, {_data.OfficerRank} {_data.OfficerName}, "
+           + $"of the {ConstantData.KPD}, being first duly sworn and upon oath, deposes and says:",
             new IndentedText()
             );
         doc.AppendText();
@@ -135,7 +135,7 @@ public class FacebookDocument(FacebookData data)
         /* Document Content
         *****************************************/
 
-        doc.AppendContent(DocxBoilerplate.DistrictBoilerplate("SEARCH WARRANT"));
+        doc.AppendContent(DocxBoilerplate.DistrictBoilerplate(_data.CourtDistrict, "SEARCH WARRANT"));
         doc.AppendText("Facebook and Facebook messenger for ");
         doc.AppendText($"the following {_data.Individual} and user");
         doc.AppendText($"{_data.Account} identified by their name");
@@ -246,7 +246,7 @@ public class FacebookDocument(FacebookData data)
             +  "date of this warrant:"
             );
         doc.AppendText();
-        doc.AppendText("A.  Basic Subscriber Information:", new BoldText());
+        doc.AppendText("A.  Basic Subscriber Information", new BoldText());
         doc.AppendText();
         doc.AppendText("User Identification Number;", new BulletedText());
         doc.AppendText(
@@ -271,7 +271,7 @@ public class FacebookDocument(FacebookData data)
             + "verified, and other numbers added to the account for security purposes;",
             new BulletedText());
         doc.AppendText();
-        doc.AppendText("B.  User Photos:", new BoldText());
+        doc.AppendText("B.  User Photos", new BoldText());
         doc.AppendText();
         doc.AppendText(
               "All photos uploaded by the user including EXIF data, META Data, date uploaded, IP "
@@ -413,7 +413,7 @@ public class FacebookDocument(FacebookData data)
               $"I, {ConstantData.SignHere}, attest, under penalties of perjury by the laws "
             +  "of the United States of America pursuant to 28 U.S.C. § 1746, that the "
             +  "information contained in this certification is true and correct.  I am "
-            +  "employed by {_socialMediaPlatform}, Inc., and my title is "
+            +  "employed by Facebook, Inc., and my title is "
             + $"{ConstantData.SignHere}.  I am qualified to authenticate the records attached "
             +  "hereto because I am familiar with how the records were created, managed, stored, "
             +  "and retrieved.  I state that the records attached hereto are true duplicates of "
@@ -503,6 +503,7 @@ public class FacebookDocument(FacebookData data)
         {
             doc.AppendText(profile.Name);
             doc.AppendIndentedUrl(profile.URL);
+            doc.AppendText();
         }
         
     }

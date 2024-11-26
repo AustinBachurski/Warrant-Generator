@@ -7,9 +7,9 @@ using WarrantGenerator.WarrantDocument.Formatters;
 using System.Collections.Generic;
 
 
-namespace WarrantGenerator.DocumentGeneration;
+namespace WarrantGenerator.WarrantDocument.Documents;
 
-public partial class ResidenceDocument(ResidenceData data)
+public class ResidenceDocument(ResidenceData data)
 {
     public string GenerateDocuments()
     {
@@ -37,7 +37,7 @@ public partial class ResidenceDocument(ResidenceData data)
         /* Document Content
         *****************************************/
 
-        doc.AppendContent(DocxBoilerplate.DistrictBoilerplate("APPLICATION FOR", "SEARCH WARRANT"));
+        doc.AppendContent(DocxBoilerplate.DistrictBoilerplate(_data.CourtDistrict, "APPLICATION FOR", "SEARCH WARRANT"));
         doc.AppendText();
         doc.AppendText($"Address: {_data.ResidenceAddress}");
         doc.AppendText($"Description: {_data.ResidenceDescription}.");
@@ -136,7 +136,7 @@ public partial class ResidenceDocument(ResidenceData data)
         /* Document Content
         *****************************************/
 
-        doc.AppendContent(DocxBoilerplate.DistrictBoilerplate("SEARCH WARRANT"));
+        doc.AppendContent(DocxBoilerplate.DistrictBoilerplate(_data.CourtDistrict, "SEARCH WARRANT"));
         doc.AppendText();
         doc.AppendText(_data.ResidenceDescription);
         doc.AppendText();
@@ -178,6 +178,6 @@ public partial class ResidenceDocument(ResidenceData data)
         return _data.OutputFile + suffix + Extension.Docx;
     }
 
-    private ResidenceData _data= data;
+    private readonly ResidenceData _data= data;
 }
 

@@ -1,11 +1,12 @@
 ﻿using WarrantGenerator.Constants;
-using WarrantGenerator.DocumentGeneration;
 using WarrantGenerator.DTOs;
 using WarrantGenerator.Interfaces;
+using WarrantGenerator.WarrantDocument.Documents;
 
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -285,8 +286,8 @@ public partial class ResidenceContentViewModel : ObservableObject, IHasOfficerRa
 
         try
         {
-            var document = new DocumentGenerator(this);
-            var outfile = document.GenerateDocument();
+            var document = new ResidenceDocument(new ResidenceData(this));
+            var outfile = document.GenerateDocuments();
             FlyoutMessage = ConstantData.DocumentGeneratedAs + outfile;
         }
         catch (IOException)

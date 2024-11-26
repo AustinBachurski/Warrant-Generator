@@ -2,7 +2,7 @@
 
 namespace WarrantGenerator.Interfaces;
 
-internal interface IFacebookData
+public interface IFacebookData
 {
     public string CourtDistrict { get; }
     public string EmploymentDuration { get; }

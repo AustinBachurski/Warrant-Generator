@@ -63,6 +63,7 @@ public class DocxDocument : IDisposable
             option.Apply(paragraph, run);
         }
 
+        run.Append(new Text(text));
         paragraph.Append(run);
         _body.Append(paragraph);
     }
@@ -71,12 +72,12 @@ public class DocxDocument : IDisposable
     {
         _body.Append(
             new Paragraph(
+                new Run(new TabChar()),
                 new Hyperlink(
                     new Run(
                         new RunProperties(
                             new RunStyle() { Val = DocxStyle.Hyperlink }
                         ),
-                        new TabChar(),
                         new Text(url)
                     )
                 )
@@ -116,9 +117,12 @@ public class DocxDocument : IDisposable
             paragraph.Append(
                 new Run(
                     new Text(postText)
+                    { Space = SpaceProcessingModeValues.Preserve }
                 )
             );
         }
+
+        _body.Append(paragraph);
     }
 
     public void FinalizeDocument()
@@ -251,10 +255,10 @@ public class DocxDocument : IDisposable
                     new Justification() { Val = JustificationValues.Center }
                 ),
                 new Run(
-                    new FieldCode(" PAGE ")
+                    new FieldChar() { FieldCharType = FieldCharValues.Begin }
                 ),
                 new Run(
-                    new FieldChar() { FieldCharType = FieldCharValues.Begin }
+                    new FieldCode(" PAGE ")
                 ),
                 new Run(
                     new FieldChar() { FieldCharType = FieldCharValues.Separate }

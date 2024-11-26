@@ -1,9 +1,11 @@
 ﻿using WarrantGenerator.Constants;
-using WarrantGenerator.DocumentGeneration;
+using WarrantGenerator.DTOs;
+using WarrantGenerator.WarrantDocument.Documents;
 
 using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+
 using System;
 using System.IO;
 
@@ -103,7 +105,7 @@ public partial class AdministrativeContentViewModel : ObservableObject
 
         try
         {
-            var document = new DocumentGenerator(this);
+            var document = new AdministrativeDocument(new AdministrativeData(this));
             var outfile = document.GenerateDocument();
             FlyoutMessage = ConstantData.DocumentGeneratedAs + outfile;
         }

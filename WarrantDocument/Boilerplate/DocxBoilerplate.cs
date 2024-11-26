@@ -121,11 +121,13 @@ public static class DocxBoilerplate
     {
         return [
             new Paragraph(
+                new ParagraphProperties(
+                    new Justification() { Val = JustificationValues.Center }
+                ),
                 new Run(
                     new RunProperties(
                         new Bold(),
-                        new Underline() { Val = UnderlineValues.Single },
-                        new Justification() { Val = JustificationValues.Center }
+                        new Underline() { Val = UnderlineValues.Single }
                     ),
                     new Text("REQUEST TO DELAY NOTIFICATION")
                 )
@@ -256,11 +258,13 @@ public static class DocxBoilerplate
     {
         get => [
             new Paragraph(
+                new RunProperties(
+                    new Justification() { Val = JustificationValues.Center }
+                ),
                 new Run(
                     new RunProperties(
                         new Bold(),
-                        new Underline() { Val = UnderlineValues.Single },
-                        new Justification() { Val = JustificationValues.Center }
+                        new Underline() { Val = UnderlineValues.Single }
                     ),
                     new Text("REQUEST TO SEAL")
                 )

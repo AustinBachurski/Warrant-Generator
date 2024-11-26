@@ -46,7 +46,7 @@ public static class ConstantData
     public static string OfficerRanksOther { get; } = "Other";
 
     public static string[] Platforms { get; } = [
-        SocialMedia.Facebook, SocialMedia.SnapChat,
+        "Facebook", "SnapChat",
         ];
 
     public static char Separator { get; } = '|';
