@@ -55,6 +55,9 @@
     <Compile Update="Views\ReturnInventoryContent.axaml.cs">
       <DependentUpon>ReturnInventoryContent.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\SetupWindow.axaml.cs">
+      <DependentUpon>SetupWindow.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
 

@@ -29,21 +29,21 @@ public class ResidenceData(ResidenceContentViewModel model) : IResidenceData
     public bool GenerateWarrantDocument => _generateWarrantDocument;
 
 #pragma warning disable CS8629  // model values are checked for null prior to construction call.
-    private readonly string _outputFile = FormatContent.ValidFileName(model.OutputFileNameText);
+    private readonly string _outputFile = FormattedContent.ValidFileName(model.OutputFileNameText);
     private readonly string _officerName = model.OfficerNameText;
-    private readonly string _officerRank = FormatContent.GetOfficerRank(model);
-    private readonly string _officerSubjectivePronoun = FormatContent.SubjectivePronoun(model.OfficerGenderSelection);
-    private readonly string _officerPosessivePronoun = FormatContent.PosessivePronoun(model.OfficerGenderSelection);
+    private readonly string _officerRank = FormattedContent.GetOfficerRank(model);
+    private readonly string _officerSubjectivePronoun = FormattedContent.SubjectivePronoun(model.OfficerGenderSelection);
+    private readonly string _officerPosessivePronoun = FormattedContent.PosessivePronoun(model.OfficerGenderSelection);
     private readonly string _employmentDuration = ((decimal)model.EmploymentDurationValue).ToString("N0");
     private readonly string _employmentDurationType = model.DurationTypeSelection;
     private readonly string _courtDistrict = model.CourtDistrictSelection;
     private readonly string _residenceAddress = model.ResidenceAddressText;
-    private readonly string _residenceDescription = FormatContent.RemoveTrailingPunctuation(model.ResidenceDescriptionText);
+    private readonly string _residenceDescription = FormattedContent.RemoveTrailingPunctuation(model.ResidenceDescriptionText);
     private readonly MCACrime[] _crimes = [.. model.Crimes];
     private readonly string _crimeGrammar = model.Crimes.Count > 1 ? "crimes" : "crime";
     private readonly string _probableCause = model.ProbableCauseText;
-    private readonly string _seizableProperty = FormatContent.LowercaseStartAndRemoveTrailingPunctuation(model.SeizablePropertyText);
-    private readonly string _todaysDate = FormatContent.FormattedDateString();
+    private readonly string _seizableProperty = FormattedContent.LowercaseStartAndRemoveTrailingPunctuation(model.SeizablePropertyText);
+    private readonly string _todaysDate = FormattedContent.FormattedDateString();
     private readonly bool _utilizeSWAT = model.SWATChecked;
     private readonly bool _utilizeCrimeUnit = model.CrimeUnitChecked;
     private readonly bool _requestToSeal = model.SealChecked;

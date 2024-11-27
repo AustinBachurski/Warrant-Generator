@@ -1,0 +1,85 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="335" d:DesignHeight="385"
+        xmlns:views="using:WarrantGenerator.Views"
+        x:Class="WarrantGenerator.Views.AboutWindow"
+        Icon="/Assets/logo.ico"
+        Title="About"
+		Width="335" Height="385">
+
+	<ScrollViewer>
+
+		<StackPanel Margin="15"
+					Spacing="10">
+
+			<TextBlock Text="KPD Warrant Generator"
+					   FontSize="24"
+					   FontWeight="Bold" />
+
+			<TextBlock Text="Project Source Code"
+					   Foreground="Blue"
+					   Cursor="Hand"
+					   TextDecorations="Underline"
+					   PointerPressed="OpenGitHubRepository"
+					   Margin="0, 0, 0, 15" />
+
+			<TextBlock Text="Powered by Open Source Software"
+					   FontSize="18"
+					   FontWeight="Bold" />
+
+			<TextBlock Text="C# Programming Language"
+					   Foreground="Blue"
+					   Cursor="Hand"
+					   TextDecorations="Underline"
+					   PointerPressed="OpenCSharpWebsite" />
+
+			<TextBlock Text="AvaloniaUI"
+					   Foreground="Blue"
+					   Cursor="Hand"
+					   TextDecorations="Underline"
+					   PointerPressed="OpenAvaloniaWebsite" />
+
+			<TextBlock Text="Avalonia Spell Checker"
+					   Foreground="Blue"
+					   Cursor="Hand"
+					   TextDecorations="Underline"
+					   PointerPressed="OpenAvaloniaSpellCheckerWebsite" />
+
+			<TextBlock Text="Community MVVM Toolkit"
+					   Foreground="Blue"
+					   Cursor="Hand"
+					   TextDecorations="Underline"
+					   PointerPressed="OpenCommunityMVVMToolkitWebsite" />
+
+			<TextBlock Text="Open-XML-SDK"
+					   Foreground="Blue"
+					   Cursor="Hand"
+					   TextDecorations="Underline"
+					   PointerPressed="OpenOpenXMLSDKWebsite" />
+
+			<TextBlock Text=""
+					   Margin="0, 0, 0, 15" />
+
+			<TextBlock Text="Copyright © 2025 Austin Bachurski" />
+
+			<StackPanel>
+				<TextBlock Text="This application is free and open-source" />
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="software licensed under the " />
+					<TextBlock Text="MIT License"
+						   Foreground="Blue"
+						   Cursor="Hand"
+						   TextDecorations="Underline"
+						   PointerPressed="OpenMITLicenseWebsite" />
+					<TextBlock Text="." />
+				</StackPanel>
+			</StackPanel>
+
+		</StackPanel>
+
+	</ScrollViewer>
+
+</Window>
+

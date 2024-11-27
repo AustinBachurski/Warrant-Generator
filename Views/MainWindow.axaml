@@ -1,19 +1,19 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:WarrantGenerator.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:views="using:WarrantGenerator.Views"
         mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+        xmlns:views="using:WarrantGenerator.Views"
+        xmlns:vm="using:WarrantGenerator.ViewModels"
         x:Class="WarrantGenerator.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/logo.ico"
-        Title="WarrantGenerator"
+        Title="KPD Warrant Generator"
 		Width="1200" Height="800">
 
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+             to set the actual DataContext for runtime, set the DataContext property in code. -->
 		<vm:MainWindowViewModel/>
 	</Design.DataContext>
 
@@ -47,20 +47,14 @@
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
 			<MenuItem Header="_File">
-				<MenuItem Header="_New Warrant" />
-				<Separator/>
-				<MenuItem Header="_Continue Existing Warrant" />
-				<Separator/>
-				<MenuItem Header="_Exit" />
-			</MenuItem>
-			<MenuItem Header="_Edit">
-				<MenuItem Header="Copy" />
-				<MenuItem Header="Cut" />
-				<MenuItem Header="Paste" />
+				<MenuItem Header="_Exit"
+						  Command="{Binding ExitCommand}" />
 			</MenuItem>
 			<MenuItem Header="_Help">
-				<MenuItem Header="_About" />
-				<MenuItem Header="_Help" />
+				<MenuItem Header="_About"
+						  Command="{Binding SpawnAboutWindowCommand}"/>
+				<MenuItem Header="_Setup"
+						  Command="{Binding SpawnSetupWindowCommand}"/>
 			</MenuItem>
 		</Menu>
 

@@ -1,0 +1,117 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        xmlns:views="using:WarrantGenerator.Views"
+        x:Class="WarrantGenerator.Views.SetupWindow"
+        Icon="/Assets/logo.ico"
+        Title="Setup"
+		Width="800" Height="600">
+
+	<ScrollViewer>
+
+		<StackPanel Margin="15"
+					Spacing="10">
+
+			<TextBlock Text="KPD Warrant Generator Setup"
+					   FontSize="24"
+					   FontWeight="Bold"
+					   Margin="0, 0, 0, 5" />
+
+			<TextBlock Text="The folling environment variables can be set to improve the user experience." />
+
+			<TextBlock Text="Click a button to copy the environment variable name." />
+
+			<Separator></Separator>
+
+			<StackPanel Orientation="Horizontal"
+						Spacing="15">
+				<Button Click="CopyDocumentOutPath">
+					<TextBlock x:Name="DocumentOutPathButton" />
+				</Button>
+				<StackPanel Spacing="5">
+					<TextBlock Text="Sets the output path for the generated documents." />
+					<TextBlock Text="Variable Value Example:  C:/Temp" />
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Current Value:  " />
+						<TextBlock x:Name="CurrentDocumentOutPathValue" />
+					</StackPanel>
+				</StackPanel>
+			</StackPanel>
+
+			<Separator></Separator>
+
+			<StackPanel Orientation="Horizontal"
+						Spacing="15">
+				<Button Click="CopyOfficerName">
+					<TextBlock x:Name="OfficerNameButton" />
+				</Button>
+				<StackPanel Spacing="5">
+					<TextBlock Text="Name as you want it displayed in the documents." />
+					<TextBlock Text="Variable Value Example:  Doofy McDooferson" />
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Current Value:  " />
+						<TextBlock x:Name="CurrentOfficerNameValue" />
+					</StackPanel>
+				</StackPanel>
+			</StackPanel>
+
+			<Separator></Separator>
+
+			<StackPanel Orientation="Horizontal"
+						Spacing="15">
+				<Button Click="CopyOfficerGender">
+					<TextBlock x:Name="OfficerGenderButton" />
+				</Button>
+				<StackPanel Spacing="5">
+					<TextBlock Text="Used for posissive and subjective pronouns in the document i.e. 'in his experience'." />
+					<TextBlock Text="Variable Value Example:  Male" />
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Current Value:  " />
+						<TextBlock x:Name="CurrentOfficerGenderValue" />
+					</StackPanel>
+				</StackPanel>
+			</StackPanel>
+
+			<Separator></Separator>
+
+			<StackPanel Orientation="Horizontal"
+						Spacing="15">
+				<Button Click="CopyOfficerRank">
+					<TextBlock x:Name="OfficerRankButton" />
+				</Button>
+				<StackPanel Spacing="5">
+					<TextBlock Text="Rank as you want it displayed in the documents." />
+					<TextBlock Text="Variable Value Example:  Detective" />
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Current Value:  " />
+						<TextBlock x:Name="CurrentOfficerRankValue" />
+					</StackPanel>
+				</StackPanel>
+			</StackPanel>
+
+			<Separator></Separator>
+
+			<StackPanel Orientation="Horizontal"
+						Spacing="15">
+				<Button Click="CopyHireDate">
+					<TextBlock x:Name="HireDateButton" />
+				</Button>
+				<StackPanel Spacing="5">
+					<TextBlock Text="The date you joined KPD, used to calculate duration of employment." />
+					<TextBlock Text="Variable Value Example:  01/31/2012" />
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Current Value:  " />
+						<TextBlock x:Name="CurrentHireDateValue" />
+					</StackPanel>
+				</StackPanel>
+			</StackPanel>
+
+			<Separator></Separator>
+
+		</StackPanel>
+
+	</ScrollViewer>
+
+</Window>
