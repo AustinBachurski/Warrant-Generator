@@ -1,7 +1,8 @@
+using WarrantGenerator.Constants;
+
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
-using WarrantGenerator.Constants;
 
 
 namespace WarrantGenerator.Views;
@@ -17,11 +18,11 @@ public partial class SetupWindow : Window
         OfficerRankButton.Text = EnVars.OfficerRank;
         HireDateButton.Text = EnVars.HireDate;
 
-        CurrentDocumentOutPathValue.Text = Environment.GetEnvironmentVariable(EnVars.DocumentOutPath) ?? "NOT SET";
-        CurrentOfficerNameValue.Text = Environment.GetEnvironmentVariable(EnVars.OfficerName) ?? "NOT SET";
-        CurrentOfficerRankValue.Text = Environment.GetEnvironmentVariable(EnVars.OfficerRank) ?? "NOT SET";
-        CurrentOfficerGenderValue.Text = Environment.GetEnvironmentVariable(EnVars.OfficerGender) ?? "NOT SET";
-        CurrentHireDateValue.Text = Environment.GetEnvironmentVariable(EnVars.HireDate) ?? "NOT SET";
+        CurrentDocumentOutPathValue.Text = Environment.GetEnvironmentVariable(EnVars.DocumentOutPath) ?? ConstantData.NotSet;
+        CurrentOfficerNameValue.Text = Environment.GetEnvironmentVariable(EnVars.OfficerName) ?? ConstantData.NotSet;
+        CurrentOfficerRankValue.Text = Environment.GetEnvironmentVariable(EnVars.OfficerRank) ?? ConstantData.NotSet;
+        CurrentOfficerGenderValue.Text = Environment.GetEnvironmentVariable(EnVars.OfficerGender) ?? ConstantData.NotSet;
+        CurrentHireDateValue.Text = Environment.GetEnvironmentVariable(EnVars.HireDate) ?? ConstantData.NotSet;
     }
 
     public void CopyDocumentOutPath (object sender, RoutedEventArgs _)
