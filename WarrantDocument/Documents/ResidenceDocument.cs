@@ -70,7 +70,7 @@ public class ResidenceDocument(ResidenceData data)
         doc.AppendText();
         doc.AppendText(
               $"Affiant, {_data.OfficerRank} {_data.OfficerName}, hereinafter referred to as I, is "
-            + $"{FormatContent.IndefiniteArticle(_data.OfficerRank[0])} {_data.OfficerRank} with "
+            + $"{FormattedContent.IndefiniteArticle(_data.OfficerRank[0])} {_data.OfficerRank} with "
             + $"the {ConstantData.KPD} and has been a Law Enforcement Officer for the "
             + $"{ConstantData.KPD} for {_data.EmploymentDuration} {_data.EmploymentDurationType}."
             );
@@ -87,7 +87,7 @@ public class ResidenceDocument(ResidenceData data)
         doc.AppendText(
                "Based on my training and experience and the facts as set forth in this affidavit, there "
             +  "is probable cause to believe that violations of Montana Code Annotated "
-            + $"{FormatContent.CrimesCombinedAsString(_data.Crimes)} have been committed by "
+            + $"{FormattedContent.CrimesCombinedAsString(_data.Crimes)} have been committed by "
             +  "suspects or unknown person(s)."
             );
         doc.AppendText();
@@ -100,9 +100,9 @@ public class ResidenceDocument(ResidenceData data)
         doc.AppendText(
                "Wherefore, Affiant verily believes there is located within the above-described area, "
             + $"evidence of the {_data.CrimeGrammar} of "
-            + $"{FormatContent.CrimeDescriptionsAsString(_data.Crimes)}, including but not limited "
+            + $"{FormattedContent.CrimeDescriptionsAsString(_data.Crimes)}, including but not limited "
             + $"to, {_data.SeizableProperty}, contrary to the provisions of "
-            + $"{FormatContent.CrimeCodesAsString(_data.Crimes)}, Montana Code Annotated.  "
+            + $"{FormattedContent.CrimeCodesAsString(_data.Crimes)}, Montana Code Annotated.  "
             + $"Affiant requests a Search Warrant be issued authoring a search of said area and to "
             + $"seize any evidence of the {_data.CrimeGrammar} observed therein."
             );
@@ -147,7 +147,7 @@ public class ResidenceDocument(ResidenceData data)
             + $"{_data.OfficerName}, with the {ConstantData.KPD}, that {_data.OfficerSubjectivePronoun} "
             +  "has reason to believe that in the above described area, namely, "
             + $"{_data.ResidenceDescription}, there is now located evidence of the crime of "
-            + $"{FormatContent.CrimeDescriptionsAsString(_data.Crimes)}, namely, {_data.SeizableProperty}.",
+            + $"{FormattedContent.CrimeDescriptionsAsString(_data.Crimes)}, namely, {_data.SeizableProperty}.",
             new IndentedText()
             );
         doc.AppendText(
@@ -159,7 +159,7 @@ public class ResidenceDocument(ResidenceData data)
                "You are hereby commanded to serve this Warrant and search said area for, including, "
             + $"but not limited to, {_data.SeizableProperty}.  If said evidence is found there, to "
             + $"seize it, together with any other evidence of the {_data.CrimeGrammar} of "
-            + $"{FormatContent.CrimeDescriptionsAsString(_data.Crimes)}, give a receipt for the same, "
+            + $"{FormattedContent.CrimeDescriptionsAsString(_data.Crimes)}, give a receipt for the same, "
             +  "prepare a written inventory verified by you and the evidence seized and bring said "
             +  "evidence before me, all in the manner provided and required by law.",
             new IndentedText()

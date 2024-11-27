@@ -38,6 +38,8 @@ public static class ConstantData
 
     public static string NormalUrlTitleText { get; } = "URL for Account";
 
+    public static string NotSet { get; } = "NOT SET";
+
     public static string[] OfficerRanks { get; } = [
         "Captain", "Chief", "Detective", "Detective Sergeant", "Lieutenant",
         "Master Patrol Officer", "Officer", "Sergeant", "Other",

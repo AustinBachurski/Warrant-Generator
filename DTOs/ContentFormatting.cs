@@ -2,25 +2,14 @@
 using WarrantGenerator.Interfaces;
 
 using System;
-using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 
 
 namespace WarrantGenerator.DTOs;
 
-public static class FormatContent
+public static class FormattedContent
 {
-    private static string AccountDataCombinedAsString(ObservableCollection<SocialMediaProfile> accounts)
-    {
-        return string.Join(Environment.NewLine, accounts.Select(
-            data => $"{data.Name}{ConstantData.Separator}{data.URL}"));
-    }
-
-    private static string AccountURLsCombinedAsString(ObservableCollection<SocialMediaProfile> accounts)
-    {
-        return string.Join(Environment.NewLine, accounts.Select(data => data.URL));
-    }
-
     public static string FormattedDateString()
     {
         DateTimeOffset now = DateTime.Now;
@@ -115,18 +104,12 @@ public static class FormatContent
 
     public static string ValidFileName(string fileName)
     {
-        string path = Environment.GetEnvironmentVariable(EnVars.DocumentOutPath) ?? "./";
-
-        if (fileName.EndsWith(Extension.Docx))
+        if (fileName.Contains('.'))
         {
-            return path + fileName.Remove(fileName.Length - Extension.Docx.Length).Trim();
-        }
-        else if (fileName.EndsWith(Extension.Doc))
-        {
-            return path + fileName.Remove(fileName.Length - Extension.Doc.Length).Trim();
+            return Path.Combine(DefaultPath(), fileName.Remove(fileName.LastIndexOf('.')));
         }
 
-        return path + fileName;
+        return Path.Combine(DefaultPath(), fileName);
     }
 
     public static string CrimeCodesAsString(MCACrime[] crimesList)
@@ -178,6 +161,18 @@ public static class FormatContent
         }
 
         return combined;
+    }
+
+    private static string DefaultPath()
+    {
+        string? path = Environment.GetEnvironmentVariable(EnVars.DocumentOutPath);
+
+        if (path == null)
+        {
+            return "./";
+        }
+
+        return path.TrimEnd('.', '/', '\\');
     }
 
     private static string InsertCoordinatingConjunction(string text)

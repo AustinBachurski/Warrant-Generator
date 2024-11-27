@@ -1,9 +1,14 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using WarrantGenerator.Views;
+
+using Avalonia;
+using Avalonia.Controls;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 
 namespace WarrantGenerator.ViewModels;
 
-public partial class MainWindowViewModel : ObservableObject
+public partial class MainWindowViewModel(MainWindow window) : ObservableObject
 {
     public AdministrativeContentViewModel AdministrativeTab { get; } = new();
     public ReturnInventoryContentViewModel ReturnInventoryTab { get; } = new();
@@ -13,6 +18,28 @@ public partial class MainWindowViewModel : ObservableObject
     public GsrContentViewModel GsrTab { get; } = new();
     public SubpoenaContentViewModel SubpoenaTab { get; } = new();
     public SocialMediaContentViewModel SocialMediaTab { get; } = new();
+
+    [RelayCommand]
+    public void Exit()
+    {
+        _application.Close();
+    }
+
+    [RelayCommand]
+    public static void SpawnAboutWindow()
+    {
+        var window = new AboutWindow();
+        window.Show();
+    }
+
+    [RelayCommand]
+    public static void SpawnSetupWindow()
+    {
+        var window = new SetupWindow();
+        window.Show();
+    }
+
+    private readonly MainWindow _application = window;
 
 }
 

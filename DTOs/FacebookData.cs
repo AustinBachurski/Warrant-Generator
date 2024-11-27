@@ -37,13 +37,13 @@ public class FacebookData(SocialMediaContentViewModel model) : IFacebookData
     private readonly string _employmentDuration = ((decimal)model.EmploymentDurationValue).ToString("N0");
     private readonly string _employmentDurationType = model.DurationTypeSelection;
     private readonly string _officerName = model.OfficerNameText;
-    private readonly string _officerRank = FormatContent.GetOfficerRank(model);
-    private readonly string _officerSubjectivePronoun = FormatContent.SubjectivePronoun(model.OfficerGenderSelection);
-    private readonly string _officerPosessivePronoun = FormatContent.PosessivePronoun(model.OfficerGenderSelection);
-    private readonly string _outputFile = FormatContent.ValidFileName(model.OutputFileNameText);
-    private readonly string _startDate = FormatContent.FormattedDateString(model.StartDateSelection
+    private readonly string _officerRank = FormattedContent.GetOfficerRank(model);
+    private readonly string _officerSubjectivePronoun = FormattedContent.SubjectivePronoun(model.OfficerGenderSelection);
+    private readonly string _officerPosessivePronoun = FormattedContent.PosessivePronoun(model.OfficerGenderSelection);
+    private readonly string _outputFile = FormattedContent.ValidFileName(model.OutputFileNameText);
+    private readonly string _startDate = FormattedContent.FormattedDateString(model.StartDateSelection
         ?? throw new UnreachableException("model.StartDateSelection was null."));
-    private readonly string _todaysDate = FormatContent.FormattedDateString();
+    private readonly string _todaysDate = FormattedContent.FormattedDateString();
     private readonly string _individual = model.Accounts.Count > 1 ? "individuals" : "individual";
     private readonly string _account = model.Accounts.Count > 1 ? "accounts" : "account";
     private readonly string _isOrAre = model.Accounts.Count > 1 ? "are" : "is";

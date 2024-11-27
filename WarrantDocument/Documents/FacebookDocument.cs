@@ -59,7 +59,7 @@ public class FacebookDocument(FacebookData data)
         doc.AppendText();
         doc.AppendText(
               $"Affiant, {_data.OfficerRank} {_data.OfficerName}, hereinafter referred to as I, is "
-            + $"{FormatContent.IndefiniteArticle(_data.OfficerRank[0])} {_data.OfficerRank} with "
+            + $"{FormattedContent.IndefiniteArticle(_data.OfficerRank[0])} {_data.OfficerRank} with "
             + $"the {ConstantData.KPD} and has been a Law Enforcement Officer for the "
             + $"{ConstantData.KPD} for {_data.EmploymentDuration} {_data.EmploymentDurationType}."
             );
@@ -161,7 +161,7 @@ public class FacebookDocument(FacebookData data)
         AppendSocialMediaAccounts(doc);
         doc.AppendText(
                "and those records which may be evidence of the crimes of "
-            + $"{FormatContent.CrimesCombinedAsString(_data.Crimes)}, "
+            + $"{FormattedContent.CrimesCombinedAsString(_data.Crimes)}, "
             +  "namely the items listed in Attachment A.",
             new IndentedText()
             );
@@ -325,7 +325,7 @@ public class FacebookDocument(FacebookData data)
                "All information described in Section I above, including correspondence, records, "
             +  "documents, photographs, videos, electronic mail, chat logs, and electronic "
             +  "messages that constitutes fruits, evidence, and instrumentalities of violations of "
-            + $"{FormatContent.CrimesCombinedAsString(_data.Crimes)}, "
+            + $"{FormattedContent.CrimesCombinedAsString(_data.Crimes)}, "
             +  "for each account or identifier listed as:",
             new BulletedText()
             );
@@ -352,7 +352,7 @@ public class FacebookDocument(FacebookData data)
         doc.AppendText(
                "and any of the suspects, associates, or victims in this investigation, the "
             + "identification of other possible victims, and/or suspects of "
-            + $"{FormatContent.CrimeDescriptionsAsString(_data.Crimes)}.",
+            + $"{FormattedContent.CrimeDescriptionsAsString(_data.Crimes)}.",
             new BulletedText()
             );
         doc.AppendText();

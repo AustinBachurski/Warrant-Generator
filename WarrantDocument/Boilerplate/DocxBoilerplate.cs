@@ -24,7 +24,7 @@ public static class DocxBoilerplate
                     new Text(
                           "Based on my training and experience and the facts as set forth in "
                        +  "this affidavit, there is probable cause to believe that violations "
-                       + $"of {FormatContent.CrimesCombinedAsString(crimes)} have been committed "
+                       + $"of {FormattedContent.CrimesCombinedAsString(crimes)} have been committed "
                        + "by suspects or unknown person(s)."
                     )
                 )
