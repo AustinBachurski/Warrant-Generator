@@ -6,5 +6,216 @@
              xmlns:vm="using:WarrantGenerator.ViewModels"
              x:Class="WarrantGenerator.Views.SubpoenaContentTab"
 			 x:DataType="vm:SubpoenaContentViewModel">
-    <TextBlock Text="SUBPOENA" />
+
+	<ScrollViewer>
+		<Grid ColumnDefinitions="*, 10, *"
+			  RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
+
+			<!-- Date Trapped -->
+			<StackPanel Grid.Column="0"
+						Grid.Row="0"
+						Margin="0, 0, 0, 10">
+				<TextBlock Text="Call Trapped On"
+						   VerticalAlignment="Center"
+						   Margin="5, 0, 0, 0" />
+				<Border BorderBrush="{Binding TrappedDateBorder}"
+						BorderThickness="2"
+						HorizontalAlignment="Left">
+					<DatePicker SelectedDate="{Binding TrappedDateSelection}" />
+				</Border>
+			</StackPanel>
+			<!-- /Date Trapped -->
+
+			<!-- Time Frame -->
+			<StackPanel Grid.Column="0"
+						Grid.Row="1"
+						Margin="0, 0, 0, 10">
+				<TextBlock Text="Time Frame for Trapped Call" />
+				<StackPanel Spacing="5">
+					<StackPanel Orientation="Horizontal">
+						<Border BorderBrush="{Binding StartTimeBorder}"
+								BorderThickness="2">
+							<TimePicker SelectedTime="{Binding StartTimeSelection}" />
+						</Border>
+						<TextBlock Text="- Start"
+								   VerticalAlignment="Center"
+								   Margin="0, 0, 3, 0" />
+					</StackPanel>
+
+					<StackPanel Orientation="Horizontal">
+						<Border BorderBrush="{Binding EndTimeBorder}"
+								BorderThickness="2">
+							<TimePicker SelectedTime="{Binding EndTimeSelection}" />
+						</Border>
+						<TextBlock Text="- End"
+								   VerticalAlignment="Center"
+								   Margin="0, 0, 0, 0" />
+					</StackPanel>
+				</StackPanel>
+			</StackPanel>
+			<!-- /Time Frame -->
+
+			<!-- Phone Number -->
+			<StackPanel Grid.Column="0"
+						Grid.Row="2"
+						Orientation="Horizontal"
+						Spacing="15"
+						Margin="0, 0, 0, 10">
+				<StackPanel>
+					<TextBlock Text="Phone Number"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding PhoneNumberBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding PhoneNumberText}"
+								 HorizontalAlignment="Left"
+								 Width="200" />
+					</Border>
+				</StackPanel>
+				<!-- /Phone Number -->
+
+				<!-- Report Number -->
+				<StackPanel>
+					<TextBlock Text="Report Number"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding ReportNumberBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding ReportNumberText}"
+								 HorizontalAlignment="Left"
+								 Width="200" />
+					</Border>
+				</StackPanel>
+			</StackPanel>
+			<!-- /Report Number -->
+
+			<!-- Attourney Name -->
+			<StackPanel Grid.Column="0"
+						Grid.Row="4"
+						Orientation="Horizontal"
+						Margin="0, 0, 0, 10">
+				<StackPanel>
+					<TextBlock Text="Attourney Name"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding AttourneyNameBorder}"
+							BorderThickness="2">
+						<TextBox Text="{Binding AttourneyNameText}"
+								 Width="300" />
+					</Border>
+				</StackPanel>
+				<!-- /Attourney Name -->
+
+				<!-- Attourney Gender -->
+				<StackPanel>
+					<TextBlock Text="Gender"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding AttourneyGenderBorder}"
+							BorderThickness="2">
+						<StackPanel Orientation="Horizontal"
+									Spacing="10">
+							<ComboBox ItemsSource="{Binding AttourneyGender}"
+									  SelectedItem="{Binding AttourneyGenderSelection}">
+							</ComboBox>
+						</StackPanel>
+					</Border>
+				</StackPanel>
+			</StackPanel>
+			<!-- /Attourney Gender -->
+
+
+			<!-- Company Name -->
+			<StackPanel Grid.Column="0"
+						Grid.Row="5"
+						Margin="0, 0, 0, 10">
+				<TextBlock Text="Company Name for Subpoena"
+						   VerticalAlignment="Center"
+						   Margin="5, 0, 0, 0" />
+				<Border BorderBrush="{Binding CompanyNameBorder}"
+						BorderThickness="2">
+					<TextBox Text="{Binding CompanyNameText}" />
+				</Border>
+			</StackPanel>
+			<!-- /Company Name -->
+
+			<!-- Company Address -->
+			<StackPanel Grid.Column="0"
+						Grid.Row="6"
+						Margin="0, 0, 0, 10">
+				<TextBlock Text="Company Address"
+						   VerticalAlignment="Center"
+						   Margin="5, 0, 0, 0" />
+				<Border BorderBrush="{Binding CompanyAddressBorder}"
+						BorderThickness="2">
+					<TextBox Text="{Binding CompanyAddressText}" />
+				</Border>
+			</StackPanel>
+			<!-- /Company Address -->
+
+			<!-- City, State, Zip -->
+			<StackPanel Grid.Column="0"
+						Grid.Row="7"
+						Margin="0, 0, 0, 10">
+				<TextBlock Text="City, State, Zip"
+						   VerticalAlignment="Center"
+						   Margin="5, 0, 0, 0" />
+				<Border BorderBrush="{Binding CityStateZipBorder}"
+						BorderThickness="2">
+					<TextBox Text="{Binding CityStateZipText}" />
+				</Border>
+			</StackPanel>
+			<!-- /City, State, Zip -->
+
+			<!-- Document Types -->
+			<Border Grid.Column="0"
+					Grid.Row="8"
+					BorderBrush="{Binding DocumentTypeCheckboxesBorder}"
+					BorderThickness="2">
+				<Grid Grid.Column="0"
+					  ColumnDefinitions="Auto, Auto, Auto, Auto">
+					<TextBlock Grid.Column="0"
+							   Text="Documents to Generate:"
+							   VerticalAlignment="Center"
+							   Margin="3, 0, 0, 0" />
+					<CheckBox Grid.Column="1"
+							  Content="Search Warrant Application"
+							  Margin="15, 0, 0, 0"
+							  IsChecked="{Binding SearchWarrantApplicationChecked}" />
+					<CheckBox Grid.Column="2"
+							  Content="Search Warrant"
+							  Margin="15, 0, 0, 0"
+							  IsChecked="{Binding SearchWarrantChecked}" />
+				</Grid>
+			</Border>
+			<!-- /Document Types -->
+
+			<!-- Output File -->
+			<StackPanel Grid.Column="0"
+						Grid.Row="9"
+						Margin="0, 10, 0, 0">
+				<TextBlock Text="Output File Name"
+						   VerticalAlignment="Center"
+						   Margin="5, 0, 0, 0" />
+				<Border BorderBrush="{Binding OutputFileNameBorder}"
+						BorderThickness="2">
+					<TextBox Text="{Binding OutputFileNameText}" />
+				</Border>
+				<Button Command="{Binding GenerateDocument}"
+						Margin="0, 10, 0, 0"
+						Content="Generate Document">
+					<Button.Flyout>
+						<Flyout Placement="RightEdgeAlignedTop">
+							<StackPanel>
+								<TextBlock Text="{Binding FlyoutMessage}" />
+							</StackPanel>
+						</Flyout>
+					</Button.Flyout>
+				</Button>
+			</StackPanel>
+			<!-- /Output File -->
+
+		</Grid>
+	</ScrollViewer>
+
 </UserControl>
+
