@@ -15,7 +15,7 @@ namespace WarrantGenerator.ViewModels;
 
 public partial class SubpoenaContentViewModel : ObservableObject
 {
-    public string[] AttourneyGender { get; } = ConstantData.Genders;
+    public string[] AttorneyGender { get; } = ConstantData.Genders;
 
     [ObservableProperty]
     private IBrush _trappedDateBorder = Brushes.Transparent;
@@ -51,25 +51,25 @@ public partial class SubpoenaContentViewModel : ObservableObject
     }
 
     [ObservableProperty]
-    private IBrush _attourneyNameBorder = Brushes.Transparent;
+    private IBrush _attorneyNameBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _attourneyNameText = string.Empty;
+    private string _attorneyNameText = string.Empty;
 
-    partial void OnAttourneyNameTextChanged(string value)
+    partial void OnAttorneyNameTextChanged(string value)
     {
-        AttourneyNameBorder = Brushes.Transparent;
+        AttorneyNameBorder = Brushes.Transparent;
     }
 
     [ObservableProperty]
-    private IBrush _attourneyGenderBorder = Brushes.Transparent;
+    private IBrush _attorneyGenderBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _attourneyGenderSelection = string.Empty;
+    private string _attorneyGenderSelection = string.Empty;
 
-    partial void OnAttourneyGenderSelectionChanged(string value)
+    partial void OnAttorneyGenderSelectionChanged(string value)
     {
-        AttourneyGenderBorder = Brushes.Transparent;
+        AttorneyGenderBorder = Brushes.Transparent;
     }
 
     [ObservableProperty]
@@ -178,7 +178,7 @@ public partial class SubpoenaContentViewModel : ObservableObject
         try
         {
             var document = new SubpoenaDocument(new SubpoenaData(this));
-            var outfile = document.GenerateDocument();
+            var outfile = document.GenerateDocuments();
             FlyoutMessage = ConstantData.DocumentGeneratedAs + outfile;
         }
         catch (IOException)
@@ -213,16 +213,16 @@ public partial class SubpoenaContentViewModel : ObservableObject
             EndTimeBorder = Brushes.Red;
         }
 
-        if (AttourneyNameText == string.Empty)
+        if (AttorneyNameText == string.Empty)
         {
             result = false;
-            AttourneyNameBorder = Brushes.Red;
+            AttorneyNameBorder = Brushes.Red;
         }
 
-        if (AttourneyGenderSelection == string.Empty)
+        if (AttorneyGenderSelection == string.Empty)
         {
             result = false;
-            AttourneyGenderBorder = Brushes.Red;
+            AttorneyGenderBorder = Brushes.Red;
         }
 
         if (PhoneNumberText == string.Empty)

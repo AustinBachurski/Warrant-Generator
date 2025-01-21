@@ -67,7 +67,8 @@
 							   Margin="5, 0, 0, 0" />
 					<Border BorderBrush="{Binding PhoneNumberBorder}"
 							BorderThickness="2">
-						<TextBox Text="{Binding PhoneNumberText}"
+						<MaskedTextBox Text="{Binding PhoneNumberText}"
+								 Mask="000-000-0000"
 								 HorizontalAlignment="Left"
 								 Width="200" />
 					</Border>
@@ -89,39 +90,39 @@
 			</StackPanel>
 			<!-- /Report Number -->
 
-			<!-- Attourney Name -->
+			<!-- Attorney Name -->
 			<StackPanel Grid.Column="0"
 						Grid.Row="4"
 						Orientation="Horizontal"
 						Margin="0, 0, 0, 10">
 				<StackPanel>
-					<TextBlock Text="Attourney Name"
+					<TextBlock Text="Attorney Name"
 							   Margin="5, 0, 0, 0" />
-					<Border BorderBrush="{Binding AttourneyNameBorder}"
+					<Border BorderBrush="{Binding AttorneyNameBorder}"
 							BorderThickness="2">
-						<TextBox Text="{Binding AttourneyNameText}"
+						<TextBox Text="{Binding AttorneyNameText}"
 								 Width="300" />
 					</Border>
 				</StackPanel>
-				<!-- /Attourney Name -->
+				<!-- /Attorney Name -->
 
-				<!-- Attourney Gender -->
+				<!-- Attorney Gender -->
 				<StackPanel>
 					<TextBlock Text="Gender"
 							   VerticalAlignment="Center"
 							   Margin="5, 0, 0, 0" />
-					<Border BorderBrush="{Binding AttourneyGenderBorder}"
+					<Border BorderBrush="{Binding AttorneyGenderBorder}"
 							BorderThickness="2">
 						<StackPanel Orientation="Horizontal"
 									Spacing="10">
-							<ComboBox ItemsSource="{Binding AttourneyGender}"
-									  SelectedItem="{Binding AttourneyGenderSelection}">
+							<ComboBox ItemsSource="{Binding AttorneyGender}"
+									  SelectedItem="{Binding AttorneyGenderSelection}">
 							</ComboBox>
 						</StackPanel>
 					</Border>
 				</StackPanel>
 			</StackPanel>
-			<!-- /Attourney Gender -->
+			<!-- /Attorney Gender -->
 
 
 			<!-- Company Name -->

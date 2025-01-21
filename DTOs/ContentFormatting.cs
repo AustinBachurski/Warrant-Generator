@@ -163,6 +163,17 @@ public static class FormattedContent
         return combined;
     }
 
+    public static string ShortDateString(DateTimeOffset date)
+    {
+        return $"{date:M/d/yyyy}";
+    }
+
+    public static string TimeString(TimeSpan time)
+    {
+        var dateTime = DateTime.Today.Add(time);
+        return $"{dateTime:h:mm tt}";
+    }
+
     private static string DefaultPath()
     {
         string? path = Environment.GetEnvironmentVariable(EnVars.DocumentOutPath);

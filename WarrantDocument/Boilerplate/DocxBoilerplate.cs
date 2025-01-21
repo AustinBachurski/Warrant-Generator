@@ -254,6 +254,130 @@ public static class DocxBoilerplate
         ];
     }
 
+    public static Paragraph[] SubpoenaHeaderBoilerplate(string attorney)
+    {
+        return [
+            new Paragraph(
+                new Run(
+                    new Text(attorney)
+                )
+            ),
+            new Paragraph(
+                new Run(
+                    new Text("OFFICE OF THE COUNTY ATTORNEY")
+                )
+            ),
+            new Paragraph(
+                new Run(
+                    new Text("Flathead County, Montana")
+                )
+            ),
+            new Paragraph(
+                new Run(
+                    new Text("P.O. Box 1516")
+                )
+            ),
+            new Paragraph(
+                new Run(
+                    new Text("Kalispell, MT 59903-1516")
+                )
+            ),
+            new Paragraph(
+                new Run(
+                    new Text("Telephone 406-758-5630")
+                )
+            ),
+            new Paragraph(
+                new Run(
+                    new Text("Attorney for Plaintiff")
+                )
+            ),
+            new Paragraph( ),
+            new Paragraph(
+                new Run(
+                    new Text(
+                          "IN THE DISTRICT COURT OF THE ELEVENTH JUDICIAL DISTRICT OF "
+                        + "THE STATE OF MONTANA, IN AND FOR THE COUNTY OF FLATHEAD"
+                    )
+                )
+            ),
+            new Paragraph(
+                new Run(
+                    new Text("IN RE: APPLICATION FOR"),
+                    new TabChar(),
+                    new TabChar(),
+                    new Text(")")
+                )
+            ),
+            new Paragraph(
+                new Run(
+                    new Text("INVESTIGATIVE SUBPOENA"),
+                    new TabChar(),
+                    new TabChar(),
+                    new Text(")")
+                )
+            ),
+            new Paragraph(
+                new Run(
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new Text(")"),
+                    new TabChar(),
+                    new Text("APPLICATION FOR")
+                )
+            ),
+            new Paragraph(
+                new Run(
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new Text(")"),
+                    new TabChar(),
+                    new Text("INVESTIGATIVE SUBPOENA")
+                )
+            ),
+            new Paragraph(
+                new ParagraphProperties(
+                    new Justification()
+                    { Val = JustificationValues.Center }
+                ),
+                new Run(
+                    new Text("* * * * * * * * * * * * *")
+                )
+            ),
+            new Paragraph(
+                new Run(
+                    new Text("STATE OF MONTANA"),
+                    new TabChar(),
+                    new Text(")")
+                )
+            ),
+            new Paragraph(
+                new Run(
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new Text(":ss")
+                )
+            ),
+            new Paragraph(
+                new Run(
+                    new Text("COUNTY OF FLATHEAD"),
+                    new TabChar(),
+                    new Text(")")
+                )
+            ),
+        ];
+    }
+
     public static Paragraph[] RequestToSeal
     {
         get => [
