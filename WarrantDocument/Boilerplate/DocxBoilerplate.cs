@@ -254,7 +254,7 @@ public static class DocxBoilerplate
         ];
     }
 
-    public static Paragraph[] SubpoenaHeaderBoilerplate(string attorney)
+    public static Paragraph[] SubpoenaHeaderApplicationBoilerplate(string attorney)
     {
         return [
             new Paragraph(
@@ -352,9 +352,26 @@ public static class DocxBoilerplate
                     new Text("* * * * * * * * * * * * *")
                 )
             ),
+        ];
+    }
+
+    public static Paragraph[] SubpoenaHeaderWarrantBoilerplate(string attorney)
+    {
+        return [
             new Paragraph(
                 new Run(
-                    new Text("STATE OF MONTANA"),
+                    new Text(
+                          "IN THE DISTRICT COURT OF THE ELEVENTH JUDICIAL DISTRICT OF "
+                        + "THE STATE OF MONTANA, IN AND FOR THE COUNTY OF FLATHEAD"
+                    )
+                )
+            ),
+            new Paragraph(),
+            new Paragraph(
+                new Run(
+                    new Text("IN RE: APPLICATION FOR"),
+                    new TabChar(),
+                    new TabChar(),
                     new TabChar(),
                     new Text(")")
                 )
@@ -365,14 +382,69 @@ public static class DocxBoilerplate
                     new TabChar(),
                     new TabChar(),
                     new TabChar(),
-                    new Text(":ss")
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new Text(")"),
+                    new TabChar(),
+                    new Text("INVESTIGATIVE SUBPOENA")
                 )
             ),
             new Paragraph(
                 new Run(
-                    new Text("COUNTY OF FLATHEAD"),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
                     new TabChar(),
                     new Text(")")
+                )
+            ),
+            new Paragraph(
+                new ParagraphProperties(
+                    new Justification()
+                    { Val = JustificationValues.Center }
+                ),
+                new Run(
+                    new Text("* * * * * * * * * * * * *")
+                )
+            ),
+        ];
+    }
+
+    public static Paragraph[] StateOfMontanaTo(string companyName, string companyAddress, string cityStateZip)
+    {
+        return [
+            new Paragraph(
+                new Run(
+                    new Text("THE STATE OF MONTANA TO:"),
+                    new TabChar(),
+                    new TabChar(),
+                    new Text(companyName)
+                )
+            ),
+            new Paragraph(
+                new Run(
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new Text(companyAddress)
+                )
+            ),
+            new Paragraph(
+                new Run(
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new TabChar(),
+                    new Text(cityStateZip)
                 )
             ),
         ];

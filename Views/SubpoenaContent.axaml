@@ -153,11 +153,11 @@
 			</StackPanel>
 			<!-- /Company Address -->
 
-			<!-- City, State, Zip -->
+			<!-- City, State Zip -->
 			<StackPanel Grid.Column="0"
 						Grid.Row="7"
 						Margin="0, 0, 0, 10">
-				<TextBlock Text="City, State, Zip"
+				<TextBlock Text="City, State Zip"
 						   VerticalAlignment="Center"
 						   Margin="5, 0, 0, 0" />
 				<Border BorderBrush="{Binding CityStateZipBorder}"
@@ -165,7 +165,7 @@
 					<TextBox Text="{Binding CityStateZipText}" />
 				</Border>
 			</StackPanel>
-			<!-- /City, State, Zip -->
+			<!-- /City, State Zip -->
 
 			<!-- Document Types -->
 			<Border Grid.Column="0"
