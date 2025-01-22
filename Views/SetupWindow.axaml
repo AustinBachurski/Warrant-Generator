@@ -32,7 +32,7 @@
 				</Button>
 				<StackPanel Spacing="5">
 					<TextBlock Text="Sets the output path for the generated documents." />
-					<TextBlock Text="Variable Value Example:  C:/Temp" />
+					<TextBlock Text="Variable Value Example:  C:\Warrants\Examples" />
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="Current Value:  " />
 						<TextBlock x:Name="CurrentDocumentOutPathValue" />
