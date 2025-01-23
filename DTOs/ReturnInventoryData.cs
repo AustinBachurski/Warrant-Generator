@@ -1,5 +1,4 @@
-﻿using WarrantGenerator.Constants;
-using WarrantGenerator.Interfaces;
+﻿using WarrantGenerator.Interfaces;
 using WarrantGenerator.ViewModels;
 
 using System.Diagnostics;
@@ -44,3 +43,4 @@ public class ReturnInventoryData(ReturnInventoryContentViewModel model) : IRetur
     private readonly bool _generateOrderDocument = model.OrderChecked;
 
 }
+
