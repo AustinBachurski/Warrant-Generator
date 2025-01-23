@@ -12,7 +12,6 @@ using System.IO;
 using System.Linq;
 
 
-
 namespace WarrantGenerator.ViewModels;
 
 public partial class SocialMediaContentViewModel : ObservableObject, IHasOfficerRank

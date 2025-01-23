@@ -1,5 +1,6 @@
 ﻿using WarrantGenerator.Constants;
 using WarrantGenerator.DTOs;
+using WarrantGenerator.Interfaces;
 using WarrantGenerator.WarrantDocument.Boilerplate;
 using WarrantGenerator.WarrantDocument.Formatters;
 
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 
 namespace WarrantGenerator.WarrantDocument.Documents;
 
-public class ReturnInventoryDocument(ReturnInventoryData data)
+public class ReturnInventoryDocument(IReturnInventoryData data)
 {
     public string GenerateDocuments()
     {
@@ -180,7 +181,7 @@ public class ReturnInventoryDocument(ReturnInventoryData data)
         return _data.OutputFile + suffix + Extension.Docx;
     }
 
-    private readonly ReturnInventoryData _data = data;
+    private readonly IReturnInventoryData _data = data;
 
 }
 

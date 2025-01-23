@@ -1,11 +1,12 @@
 ﻿using WarrantGenerator.Constants;
 using WarrantGenerator.DTOs;
+using WarrantGenerator.Interfaces;
 using WarrantGenerator.WarrantDocument.Formatters;
 
 
 namespace WarrantGenerator.WarrantDocument.Documents;
 
-public class AdministrativeDocument(AdministrativeData data)
+public class AdministrativeDocument(IAdministrativeData data)
 {
     public string GenerateDocument()
     {
@@ -81,7 +82,7 @@ public class AdministrativeDocument(AdministrativeData data)
         return _data.OutputFile + Extension.Docx;
     }
 
-    private readonly AdministrativeData _data = data;
+    private readonly IAdministrativeData _data = data;
 
 }
 

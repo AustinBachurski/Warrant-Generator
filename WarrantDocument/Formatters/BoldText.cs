@@ -11,5 +11,6 @@ public class BoldText : IDocxFormatOptions
     {
         run.RunProperties.Append(new Bold());
     }
+
 }
 

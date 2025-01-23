@@ -1,6 +1,5 @@
 ﻿using WarrantGenerator.Constants;
 using WarrantGenerator.DTOs;
-using WarrantGenerator.Interfaces;
 using WarrantGenerator.WarrantDocument.Documents;
 
 using Avalonia.Media;
@@ -271,3 +270,4 @@ public partial class SubpoenaContentViewModel : ObservableObject
     }
 
 }
+

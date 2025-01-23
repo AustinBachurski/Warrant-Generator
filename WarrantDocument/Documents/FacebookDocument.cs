@@ -1,5 +1,6 @@
 ﻿using WarrantGenerator.Constants;
 using WarrantGenerator.DTOs;
+using WarrantGenerator.Interfaces;
 using WarrantGenerator.WarrantDocument.Boilerplate;
 using WarrantGenerator.WarrantDocument.Formatters;
 
@@ -10,7 +11,7 @@ using System.Collections.Generic;
 
 namespace WarrantGenerator.WarrantDocument.Documents;
 
-public class FacebookDocument(FacebookData data)
+public class FacebookDocument(IFacebookData data)
 {
     public string GenerateDocuments()
     {
@@ -469,7 +470,7 @@ public class FacebookDocument(FacebookData data)
         return _data.OutputFile + suffix + Extension.Docx;
     }
 
-    private readonly FacebookData _data = data;
+    private readonly IFacebookData _data = data;
 
     private static Paragraph[] FacebookAddress
     {
@@ -518,3 +519,4 @@ public class FacebookDocument(FacebookData data)
     }
 
 }
+

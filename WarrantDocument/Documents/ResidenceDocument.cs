@@ -1,6 +1,6 @@
 ﻿using WarrantGenerator.Constants;
 using WarrantGenerator.DTOs;
-using WarrantGenerator.WarrantDocument;
+using WarrantGenerator.Interfaces;
 using WarrantGenerator.WarrantDocument.Boilerplate;
 using WarrantGenerator.WarrantDocument.Formatters;
 
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace WarrantGenerator.WarrantDocument.Documents;
 
-public class ResidenceDocument(ResidenceData data)
+public class ResidenceDocument(IResidenceData data)
 {
     public string GenerateDocuments()
     {
@@ -63,8 +63,8 @@ public class ResidenceDocument(ResidenceData data)
         doc.AppendText(ConstantData.KPD, new IndentedText());
         doc.AppendText();
         doc.AppendText(
-            $"On this {_data.TodaysDate}, {_data.OfficerRank} {_data.OfficerName}, "
-           + "of the {ConstantData.KPD}, being first duly sworn and upon oath, deposes and says:",
+             $"On this {_data.TodaysDate}, {_data.OfficerRank} {_data.OfficerName}, "
+            + "of the {ConstantData.KPD}, being first duly sworn and upon oath, deposes and says:",
             new IndentedText()
             );
         doc.AppendText();
@@ -178,6 +178,7 @@ public class ResidenceDocument(ResidenceData data)
         return _data.OutputFile + suffix + Extension.Docx;
     }
 
-    private readonly ResidenceData _data= data;
+    private readonly IResidenceData _data= data;
+
 }
 

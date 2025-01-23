@@ -15,5 +15,6 @@ public class IndentedText(int tabs = 1) : IDocxFormatOptions
             run.Append(new TabChar());
         }
     }
+
 }
 

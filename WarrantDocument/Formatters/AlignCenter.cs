@@ -12,5 +12,6 @@ public class AlignCenter : IDocxFormatOptions
         paragraph.ParagraphProperties.Append(
             new Justification() { Val = JustificationValues.Center });
     }
+
 }
 

@@ -11,5 +11,6 @@ public class UnderlinedText : IDocxFormatOptions
     {
         run.RunProperties.Append(new Underline() { Val = UnderlineValues.Single });
     }
+
 }
 
