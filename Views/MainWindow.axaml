@@ -2,14 +2,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="820"
         xmlns:views="using:WarrantGenerator.Views"
         xmlns:vm="using:WarrantGenerator.ViewModels"
         x:Class="WarrantGenerator.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/logo.ico"
         Title="KPD Warrant Generator"
-		Width="1200" Height="800">
+		Width="1200" Height="820">
 
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
@@ -52,9 +52,9 @@
 			</MenuItem>
 			<MenuItem Header="_Help">
 				<MenuItem Header="_About"
-						  Command="{Binding SpawnAboutWindowCommand}"/>
+						  Command="{Binding SpawnAboutWindowCommand}" />
 				<MenuItem Header="_Setup"
-						  Command="{Binding SpawnSetupWindowCommand}"/>
+						  Command="{Binding SpawnSetupWindowCommand}" />
 			</MenuItem>
 		</Menu>
 

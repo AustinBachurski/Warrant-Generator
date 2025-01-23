@@ -117,9 +117,9 @@ public partial class SocialMediaContentViewModel : ObservableObject, IHasOfficer
     private IBrush _startDateBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private DateTimeOffset? _startDateSelection = null;
+    private DateTime? _startDateSelection = null;
 
-    partial void OnStartDateSelectionChanged(DateTimeOffset? value)
+    partial void OnStartDateSelectionChanged(DateTime? value)
     {
         StartDateBorder = Brushes.Transparent;
     }

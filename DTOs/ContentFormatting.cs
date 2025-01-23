@@ -12,16 +12,16 @@ public static class FormattedContent
 {
     public static string FormattedDateString()
     {
-        DateTimeOffset now = DateTime.Now;
+        DateTime now = DateTime.Now;
         return $"{now.Day}{GetDayOrdinal(now)} day of {now:MMMM, yyyy}";
     }
 
-    public static string FormattedDateString(DateTimeOffset date)
+    public static string FormattedDateString(DateTime date)
     {
         return $"{date.Day}{GetDayOrdinal(date)} day of {date:MMMM, yyyy}";
     }
 
-    private static string GetDayOrdinal(DateTimeOffset date)
+    private static string GetDayOrdinal(DateTime date)
     {
         return date.Day switch
         {
@@ -163,7 +163,7 @@ public static class FormattedContent
         return combined;
     }
 
-    public static string ShortDateString(DateTimeOffset date)
+    public static string ShortDateString(DateTime date)
     {
         return $"{date:M/d/yyyy}";
     }

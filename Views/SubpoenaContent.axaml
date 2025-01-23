@@ -2,7 +2,7 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+			 mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="820"
              xmlns:vm="using:WarrantGenerator.ViewModels"
              x:Class="WarrantGenerator.Views.SubpoenaContentTab"
 			 x:DataType="vm:SubpoenaContentViewModel">
@@ -21,7 +21,8 @@
 				<Border BorderBrush="{Binding TrappedDateBorder}"
 						BorderThickness="2"
 						HorizontalAlignment="Left">
-					<DatePicker SelectedDate="{Binding TrappedDateSelection}" />
+					<CalendarDatePicker SelectedDate="{Binding TrappedDateSelection}"
+										Width="150" />
 				</Border>
 			</StackPanel>
 			<!-- /Date Trapped -->
@@ -67,8 +68,7 @@
 							   Margin="5, 0, 0, 0" />
 					<Border BorderBrush="{Binding PhoneNumberBorder}"
 							BorderThickness="2">
-						<MaskedTextBox Text="{Binding PhoneNumberText}"
-								 Mask="000-000-0000"
+						<TextBox Text="{Binding PhoneNumberText}"
 								 HorizontalAlignment="Left"
 								 Width="200" />
 					</Border>
@@ -116,7 +116,8 @@
 						<StackPanel Orientation="Horizontal"
 									Spacing="10">
 							<ComboBox ItemsSource="{Binding AttorneyGender}"
-									  SelectedItem="{Binding AttorneyGenderSelection}">
+									  SelectedItem="{Binding AttorneyGenderSelection}"
+									  Width="100">
 							</ComboBox>
 						</StackPanel>
 					</Border>

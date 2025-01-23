@@ -2,7 +2,7 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+			 mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="820"
              xmlns:vm="using:WarrantGenerator.ViewModels"
              x:Class="WarrantGenerator.Views.ReturnInventoryContentTab"
 			 x:DataType="vm:ReturnInventoryContentViewModel">
@@ -38,7 +38,8 @@
 							BorderThickness="2">
 						<StackPanel Orientation="Horizontal" Spacing="10">
 							<ComboBox ItemsSource="{Binding OfficerGender}"
-									  SelectedItem="{Binding OfficerGenderSelection}">
+									  SelectedItem="{Binding OfficerGenderSelection}"
+									  Width="100">
 							</ComboBox>
 						</StackPanel>
 					</Border>
@@ -124,28 +125,33 @@
 			<!-- Signed Date -->
 			<StackPanel Grid.Column="0"
 						Grid.Row="2"
-						Margin="15">
-				<TextBlock Text="Warrant Signed Date"
-						   VerticalAlignment="Center"
-						   Margin="5, 0, 0, 0" />
-				<Border BorderBrush="{Binding SignedDateBorder}"
-						BorderThickness="2">
-					<DatePicker SelectedDate="{Binding SignedDateSelection}" />
-				</Border>
-			</StackPanel>
-			<!-- /Signed Date -->
+						Margin="0, 10, 0, 10"
+						Orientation="Horizontal">
+				<StackPanel>
+					<TextBlock Text="Warrant Signed Date"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding SignedDateBorder}"
+							BorderThickness="2">
+						<CalendarDatePicker SelectedDate="{Binding SignedDateSelection}"
+											Width="150" />
+					</Border>
+				</StackPanel>
+				<!-- /Signed Date -->
 
-			<!-- Served Date -->
-			<StackPanel Grid.Column="2"
-						Grid.Row="2"
-						Margin="15">
-				<TextBlock Text="Warrant Served Date"
-						   VerticalAlignment="Center"
-						   Margin="5, 0, 0, 0" />
-				<Border BorderBrush="{Binding ServedDateBorder}"
-						BorderThickness="2">
-					<DatePicker SelectedDate="{Binding ServedDateSelection}" />
-				</Border>
+				<!-- Served Date -->
+				<StackPanel Grid.Column="2"
+							Grid.Row="2"
+							Margin="15, 0, 0, 0">
+					<TextBlock Text="Warrant Served Date"
+							   VerticalAlignment="Center"
+							   Margin="5, 0, 0, 0" />
+					<Border BorderBrush="{Binding ServedDateBorder}"
+							BorderThickness="2">
+						<CalendarDatePicker SelectedDate="{Binding ServedDateSelection}"
+											Width="150" />
+					</Border>
+				</StackPanel>
 			</StackPanel>
 			<!-- /Served Date -->
 

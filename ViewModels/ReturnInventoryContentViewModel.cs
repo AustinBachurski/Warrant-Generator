@@ -105,9 +105,9 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
     private IBrush _signedDateBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private DateTimeOffset? _signedDateSelection = null;
+    private DateTime? _signedDateSelection = null;
 
-    partial void OnSignedDateSelectionChanged(DateTimeOffset? value)
+    partial void OnSignedDateSelectionChanged(DateTime? value)
     {
         SignedDateBorder = Brushes.Transparent;
     }
@@ -116,9 +116,9 @@ public partial class ReturnInventoryContentViewModel : ObservableObject, IHasOff
     private IBrush _servedDateBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private DateTimeOffset? _servedDateSelection = null;
+    private DateTime? _servedDateSelection = null;
 
-    partial void OnServedDateSelectionChanged(DateTimeOffset? value)
+    partial void OnServedDateSelectionChanged(DateTime? value)
     {
         ServedDateBorder = Brushes.Transparent;
     }

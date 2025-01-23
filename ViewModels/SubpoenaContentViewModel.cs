@@ -21,9 +21,9 @@ public partial class SubpoenaContentViewModel : ObservableObject
     private IBrush _trappedDateBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private DateTimeOffset? _trappedDateSelection = null;
+    private DateTime? _trappedDateSelection = null;
 
-    partial void OnTrappedDateSelectionChanged(DateTimeOffset? value)
+    partial void OnTrappedDateSelectionChanged(DateTime? value)
     {
         TrappedDateBorder = Brushes.Transparent;
     }
@@ -120,7 +120,7 @@ public partial class SubpoenaContentViewModel : ObservableObject
     private IBrush _cityStateZipBorder = Brushes.Transparent;
 
     [ObservableProperty]
-    private string _cityStateZipText = string.Empty;
+    private string _cityStateZipText = "Kalispell, MT 59901";
 
     partial void OnCityStateZipTextChanged(string value)
     {
